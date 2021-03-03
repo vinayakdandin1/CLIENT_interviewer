@@ -1,15 +1,23 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage";
+import React, { Component } from 'react'
+import { Route, Switch, withRouter } from 'react-router-dom';
+import MainPage from './components/MainPage'
 
-function App() {
-  return (
-    <div className="App">
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-      </Switch>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <div>
+        
+
+        
+        { <Switch>
+            <Route exact path="/" render={() => {
+                return <MainPage />
+            }} />
+           
+        </Switch> }
+      </div>
+    )
+  }
 }
 
-export default App;
+export default withRouter(App)
