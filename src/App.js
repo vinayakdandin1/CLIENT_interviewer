@@ -1,14 +1,24 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage";
+import React, { Component } from 'react'
+import { Route, Switch } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import JobDescription from './components/JobDescription'
+import EditJob from './components/EditJob'
 
-function App() {
-  return (
-    <div className="App">
-      <Switch>
-      </Switch>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <Switch>
+          <Route path="/api/home/:jobId" render={(routeProps) => {
+            return <JobDescription />
+          }}/>
+          <Route path="/api/home/:jobId" render={(routeProps) => {
+            return <EditJob />
+          }} />
+        </Switch>
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App
