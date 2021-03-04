@@ -1,13 +1,17 @@
-import React, {Component} from "react";
-import { Switch, Route } from "react-router-dom";
+import React, { Component } from 'react'
+import { Route, Switch, withRouter } from 'react-router-dom';
+import LoadPage from './components/LoadPage'
+import Navigation from './components/Navigation';
+import axios from 'axios';
+import config from './config'
+import MainPage from './components/MainPage';
 import Landing from "./components/Landing";
-import axios from "axios";
-import config from "./config";
 
-export default class App extends Component {
+class App extends Component {
 
   state = {
-    jobDetails:[]
+    jobDetails: [],
+    loggedInUser: null,
   }
 
 
@@ -28,7 +32,7 @@ export default class App extends Component {
       jobLocation: event.target.jobLocation.value,
     };
 
-    axios.post(`${config.API_URL}/api/create-status`, newJobDetails)
+    axios.post(`${config.API_URL}/api/create`, newJobDetails)
       .then((response) => {
         this.setState({
           jobDetails: response.data,
@@ -40,13 +44,65 @@ export default class App extends Component {
 
   };
 
+  handleSignUp = (event) => {
+    event.preventDefault()
+    let user = {
+      emailId: event.target.emailId.value,
+      password: event.target.password.value,
+      firstName: event.target.firstName.value,
+      lastName: event.target.lastName.value,
+    } 
 
+  
+    axios.post(`${config.API_URL}/api/signup`, user)
+      .then((response) => {
+        this.setState({
+          loggedInUser: response.data
+        }, () => {
+          this.props.history.push('/home')
+          console.log(this.props.history);
+          console.log("Sign in successful")
+        })
+      })
+      .catch((err) => {          
+        this.setState({
+          error: err.response.data
+        })
+      })
+  }
 
+  handleSignIn = (event) => {
+    event.preventDefault()
+    let user = {
+      emailId: event.target.emailId.value,
+      password: event.target.password.value
+    } 
+  
+    axios.post(`${config.API_URL}/api/signin`, user, {withCredentials: true})
+      .then((response) => {
+          console.log(response.data);
+          this.setState({
+            loggedInUser: response.data
+          }, () => {
+            this.props.history.push('/home')
+          })
+      })
+      .catch((err) => {
+          console.log('Something went wrong', err)
+      })
+   }
 
   render() {
     return (
       <div>
-        <Switch>
+        <Navigation />
+        { <Switch>
+          <Route exact path="/"  render={(routeProps) => {
+              return  <LoadPage onSignIn={this.handleSignIn} onSignUp={this.handleSignUp} {...routeProps}  />
+            }}/>
+          <Route  path="/home"  render={(routeProps) => {
+            return  <MainPage />
+          }}/>
           <Route
             exact
             path="/dashboard"
@@ -54,12 +110,11 @@ export default class App extends Component {
               return <Landing onAdd={this.addJobDetails} {...routeProps} />;
             }}
           />
-        </Switch>
+           
+        </Switch> }
       </div>
-    );
+    )
   }
 }
 
-
-
-
+export default withRouter(App)
