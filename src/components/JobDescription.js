@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+//import axios from 'axios'
 import '../styles/JobDescription.css'
 import CreateSteps from './CreateSteps'
 import ShowSteps from './ShowSteps'
-import config from '../config'
+//import config from '../config'
 
 class JobDescription extends Component {
 

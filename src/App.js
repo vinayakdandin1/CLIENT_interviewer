@@ -40,7 +40,7 @@ class App extends Component {
     })
       .then((response) => {
         this.setState({
-          steps: [response.data, ... this.state.steps]
+          steps: [response.data, ...this.state.steps]
         }, () => {
           this.props.history.push('/home/:jobId')
         })
@@ -146,6 +146,12 @@ class App extends Component {
           }}/>
           <Route path="/home/:jobId" render={(routeProps) => {
             return <EditJob />
+          }} />
+          <Route path="/steps" render={(routeProps) => {
+            return <ShowSteps user={this.state.loggedInUser} {...routeProps}/>
+          }} />
+          <Route path="/create-step" render={(routeProps) => {
+            return <CreateSteps user={this.state.loggedInUser} {...routeProps}/>
           }} />
            
         </Switch> }
