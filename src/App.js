@@ -28,7 +28,6 @@ class App extends Component {
           loggedInUser: response.data
         }, () => {
           this.props.history.push('/home')
-          console.log(this.props.history);
           console.log("Sign in successful")
         })
       })
@@ -48,28 +47,44 @@ class App extends Component {
   
     axios.post(`${config.API_URL}/api/signin`, user, {withCredentials: true})
       .then((response) => {
-          console.log(response.data);
+          console.log(response.data)
+          
           this.setState({
             loggedInUser: response.data
           }, () => {
             this.props.history.push('/home')
-          })
+          })  
+          
       })
       .catch((err) => {
           console.log('Something went wrong', err)
       })
    }
 
+   handleLogout = () => {
+    axios.post(`${config.API_URL}/api/logout`, {}, {withCredentials: true})
+      .then(() => {
+        this.setState({
+          loggedInUser: null
+        }, () => {
+          this.props.history.push('/')
+        })
+      })
+      .catch(() => {
+  
+      })
+   }
+
   render() {
     return (
       <div>
-        <Navigation />
+        <Navigation onLogout={this.handleLogout} />
         { <Switch>
           <Route exact path="/"  render={(routeProps) => {
               return  <LoadPage onSignIn={this.handleSignIn} onSignUp={this.handleSignUp} {...routeProps}  />
             }}/>
           <Route  path="/home"  render={(routeProps) => {
-            return  <MainPage />
+            return  <MainPage user={this.state.loggedInUser} {...routeProps}  />
           }}/>
            
         </Switch> }

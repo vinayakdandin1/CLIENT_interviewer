@@ -12,7 +12,7 @@ class Navigation extends Component {
                     <Nav className="ml-auto navigation-links">
                     <Nav.Link href="/about">About</Nav.Link>
                     {/* <Nav.Link href="/"></Nav.Link> */}
-                    <Nav.Link href="/logout">Log out</Nav.Link>
+                    <Nav.Link onClick={this.props.onLogout}>Log out</Nav.Link>
                     </Nav>
                 </Navbar>
             </div>
