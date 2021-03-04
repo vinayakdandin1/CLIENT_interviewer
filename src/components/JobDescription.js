@@ -69,7 +69,7 @@ class JobDescription extends Component {
                 </div>
             </div>
             <div className="editJobDesc">
-              <button className="submit">Edit</button>
+              <button className="submit1">Edit</button>
             </div>
          </div>
         </div>

@@ -1,21 +1,25 @@
 import React, { Component } from 'react'
-import { Route, Switch } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import JobDescription from './components/JobDescription'
 import EditJob from './components/EditJob'
-import axios from 'axios'
 import CreateSteps from './components/CreateSteps'
 import ShowSteps from './components/ShowSteps'
 import config from './config'
+import { Route, Switch, withRouter } from 'react-router-dom';
+import LoadPage from './components/LoadPage'
+import Navigation from './components/Navigation';
+import axios from 'axios';
+import MainPage from './components/MainPage';
 
 class App extends Component {
 
   state = {
-    steps: []
+    steps: [],
+    loggedInUser: null,
   }
 
   componentDidMount(){
-    axios.get(`${config.API_URL}/api/home/steps`)
+    axios.get(`${config.API_URL}/api/steps`)
       .then((response) => {
         console.log(response.data)
         this.setState({steps: response.data})
@@ -30,7 +34,7 @@ class App extends Component {
     let date = event.target.date.value
     let description = event.target.description.value
 
-    axios.post(`${config.API_URL}/api/home/create-steps`, {
+    axios.post(`${config.API_URL}/api/create-steps`, {
       date: date,
       description: description,
     })
@@ -38,7 +42,7 @@ class App extends Component {
         this.setState({
           steps: [response.data, ... this.state.steps]
         }, () => {
-          this.props.history.push('/api/')
+          this.props.history.push('/home/:jobId')
         })
       })
       .catch((err) => {
@@ -46,7 +50,7 @@ class App extends Component {
       })
   }
 
-  handleDelete = (stepId) => {
+  handleDeleteStep = (stepId) => {
     axios.delete(`${config.API_URL}/api/steps/${stepId}`)
       .then(() => {
         let filteredSteps = this.state.steps.filter((step) => {
@@ -55,7 +59,7 @@ class App extends Component {
         TouchList.setState({
           steps: filteredSteps
         }, () => {
-          this.props.history.push('/')
+          this.props.history.push('/home/:jobId')
         }) 
       })
       .catch((err) => {
@@ -63,20 +67,76 @@ class App extends Component {
       })
   }
 
+  handleSignUp = (event) => {
+    event.preventDefault()
+    let user = {
+      emailId: event.target.emailId.value,
+      password: event.target.password.value,
+      firstName: event.target.firstName.value,
+      lastName: event.target.lastName.value,
+    } 
+
+  
+    axios.post(`${config.API_URL}/api/signup`, user)
+      .then((response) => {
+        this.setState({
+          loggedInUser: response.data
+        }, () => {
+          this.props.history.push('/home')
+          console.log(this.props.history);
+          console.log("Sign in successful")
+        })
+      })
+      .catch((err) => {          
+        this.setState({
+          error: err.response.data
+        })
+      })
+  }
+
+  handleSignIn = (event) => {
+    event.preventDefault()
+    let user = {
+      emailId: event.target.emailId.value,
+      password: event.target.password.value
+    } 
+  
+    axios.post(`${config.API_URL}/api/signin`, user, {withCredentials: true})
+      .then((response) => {
+          console.log(response.data);
+          this.setState({
+            loggedInUser: response.data
+          }, () => {
+            this.props.history.push('/home')
+          })
+      })
+      .catch((err) => {
+          console.log('Something went wrong', err)
+      })
+   }
+
   render() {
     return (
-      <div className="App">
-        <Switch>
+      <div>
+        <Navigation />
+        { <Switch>
+          <Route exact path="/"  render={(routeProps) => {
+              return  <LoadPage onSignIn={this.handleSignIn} onSignUp={this.handleSignUp} {...routeProps}  />
+            }}/>
+          <Route exact path="/home"  render={(routeProps) => {
+            return  <MainPage />
+          }}/>
           <Route path="/home/:jobId" render={(routeProps) => {
-            return <JobDescription />
+            return <JobDescription  />
           }}/>
           <Route path="/home/:jobId" render={(routeProps) => {
             return <EditJob />
           }} />
-        </Switch>
+           
+        </Switch> }
       </div>
     )
   }
 }
 
-export default App
+export default withRouter(App)
