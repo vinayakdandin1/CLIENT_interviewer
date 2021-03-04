@@ -141,3 +141,42 @@
     max-height: 180px;
     overflow-y: scroll;
 }
+
+@media screen and (max-width : 1000px){
+    .mainContainer {
+        width: auto;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0 auto;
+        margin-top: 1em;
+        padding: 10px 5px;
+        background: linear-gradient(to bottom right, #fff 0%, #fff 50%,  #457B9D 50%,  #457B9D 100%);
+    
+    }
+    .leftSide {
+        padding: 1em 2em;
+        margin: auto;
+        width: 85%;
+        background-color: #A8DADC;
+        border: solid 5px white;
+        border-radius: 7% 7%;
+    }
+    .rightSide {
+        padding: 1em 2em;
+        margin: auto;
+        margin-top: 1em;
+        width: 85%;
+        background-color: #F1FAEE;
+        border: solid 5px white;
+        border-radius: 7% 7%;
+        box-shadow: black;
+    
+    }
+    .editJobDesc {
+        display: flex;
+        justify-content: center;
+        width: auto;
+    }
+}

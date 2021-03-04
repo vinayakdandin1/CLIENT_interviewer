@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import '../styles/JobDescription.css'
-
+import CreateSteps from './CreateSteps'
+import ShowSteps from './ShowSteps'
+import config from '../config'
 
 class JobDescription extends Component {
 
@@ -60,24 +62,9 @@ class JobDescription extends Component {
                       <h6>Satus:</h6>
                       <p>applied / in interview process/ negotiations / received offer / not received</p>
                   </div>
-                    <div className="card">
-                      <form className="addStep">
-                        <input className="un" name="date" type="date" />
-                        <input className="un" name="text" type="text" placeholder="Enter a step" />
-                        <button className="stepButton" type="submit">Submit</button>
-                      </form>
-                    </div>
+                    <CreateSteps />
                   <div>
-                    <div className="card1">
-                     <div>
-                       <h4>Your steps</h4>
-                        <div className="scrollDown">
-                          <p className="un">I called the HR to set-up an interview  03/03/2021 <button className="deleteStep">Delete</button></p>
-                          <p className="un">I called the HR to set-up an interview  03/03/2021 <button className="deleteStep">Delete</button></p>
-                          <p className="un">I called the HR to set-up an interview  03/03/2021 <button className="deleteStep">Delete</button></p>
-                      </div>
-                     </div>
-                    </div>
+                    <ShowSteps />
                   </div>
                 </div>
             </div>
