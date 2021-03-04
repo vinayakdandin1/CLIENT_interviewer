@@ -6,23 +6,29 @@
     justify-content: center;
     margin: 0 auto;
     margin-top: 4em;
+    padding: 10px 5px;
+    background: linear-gradient(to bottom right, #fff 0%, #fff 50%,  #457B9D 50%,  #457B9D 100%);
+
 }
 
 .leftSide {
     padding: 1em 2em;
+    margin-right: 1em;
     width: 40%;
-    background-color: #d7f1fa;
+    background-color: #A8DADC;
     border: solid 5px white;
     border-radius: 5% 5%;
 }
 
 .rightSide {
     padding: 1em 2em;
+    margin-left: 1em;
     width: 40%;
-    background-color: #c1f5e3;
+    background-color: #F1FAEE;
     border: solid 5px white;
     border-radius: 5% 5%;
     box-shadow: black;
+
 }
 
 .addStep {
@@ -38,14 +44,15 @@
 .submit {
     cursor: pointer;
     border-radius: 5em;
-    color: black;
-    background: linear-gradient(to right,  #d7f1fa, #c1f5e3);
+    color: white;
+    background-color: #457B9D;
     border: 0;
     padding-left: 40px;
     padding-right: 40px;
     padding-bottom: 10px;
     padding-top: 10px;
     font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
     margin: 10px;
     font-size: 13px;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04)
@@ -86,14 +93,15 @@
 .stepButton {
     cursor: pointer;
     border-radius: 5em;
-    color: black;
-    background: linear-gradient(to right,  #d7f1fa, #c1f5e3);
+    color: white;
+    background-color: #457B9D;
     border: 0;
     padding-left: 40px;
     padding-right: 40px;
     padding-bottom: 10px;
     padding-top: 10px;
     font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
     margin-top: 20px;
     font-size: 13px;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04)
@@ -102,8 +110,8 @@
 .deleteStep {
     cursor: pointer;
     border-radius: 5em;
-    color: black;
-    background: linear-gradient(to right,  #d7f1fa, #c1f5e3);
+    color: white;
+    background-color: #457B9D;
     border: 0;
     padding-left: 20px;
     padding-right: 20px;
@@ -112,6 +120,7 @@
     font-family: 'Ubuntu', sans-serif;
     margin-top: 20px;
     font-size: 13px;
+    font-weight: bold;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04)
 }
 
@@ -120,10 +129,15 @@
     justify-content: center;
     background-color: white;
     flex-direction: column;
-    padding: 2em;
+    padding: 1em;
     margin-top: 10px;
     margin-bottom: 10px;
     border: none;
     border-radius: 20px;
     text-align: center;
+}
+
+.scrollDown {
+    max-height: 180px;
+    overflow-y: scroll;
 }

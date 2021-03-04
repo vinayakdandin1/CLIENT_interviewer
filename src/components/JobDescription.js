@@ -4,19 +4,12 @@ import '../styles/JobDescription.css'
 
 
 class JobDescription extends Component {
-/*
-    state = {
-        jobDescription: {}
-    }
 
-    componentDidMount(){
-        let jobDescriptionId = this.props.match.params.jobDescriptionId
-        axios.get(`${congig.API_URL}/api/home/${jobDescriptionId}`)
-    }
-*/
+
     render() {
         return (
         <div>
+         <div className="topLeft">
             <div className="mainContainer">
                 <div className="leftSide">
                   <div>
@@ -76,10 +69,14 @@ class JobDescription extends Component {
                     </div>
                   <div>
                     <div className="card1">
-                      <h4>Your steps</h4>
-                      <div>
-                        <p className="un">I called the HR to set-up an interview  03/03/2021 <button className="deleteStep">Delete</button></p>
+                     <div>
+                       <h4>Your steps</h4>
+                        <div className="scrollDown">
+                          <p className="un">I called the HR to set-up an interview  03/03/2021 <button className="deleteStep">Delete</button></p>
+                          <p className="un">I called the HR to set-up an interview  03/03/2021 <button className="deleteStep">Delete</button></p>
+                          <p className="un">I called the HR to set-up an interview  03/03/2021 <button className="deleteStep">Delete</button></p>
                       </div>
+                     </div>
                     </div>
                   </div>
                 </div>
@@ -87,6 +84,7 @@ class JobDescription extends Component {
             <div className="editJobDesc">
               <button className="submit">Edit</button>
             </div>
+         </div>
         </div>
         )
     }
