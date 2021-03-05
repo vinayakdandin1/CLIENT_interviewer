@@ -175,6 +175,7 @@ class App extends Component {
               }}
             />
             <Route
+              exact
               path="/home"
               render={(routeProps) => {
                 return (
@@ -196,7 +197,21 @@ class App extends Component {
                 );
               }}
             />
-
+            <Route
+              
+              path={"/dashboard/:jobId"}
+              render={(routeProps) => {
+                return (
+                  <Landing
+                    jobDetails={jobDetails}
+                    loggedInUser={loggedInUser}
+                    onAdd={this.addJobDetails}
+                    {...routeProps}
+                    isJobPreview
+                  />
+                );
+              }}
+            />
           </Switch>
         }
       </div>
