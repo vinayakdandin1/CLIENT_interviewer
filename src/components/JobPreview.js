@@ -34,8 +34,6 @@ class JobPreview extends Component {
     }
 
     render() {
-<<<<<<< HEAD
-=======
         const {
           singleJob: {
             companyName,
@@ -46,7 +44,6 @@ class JobPreview extends Component {
             _id
           },
         } = this.state;
->>>>>>> origin/zelimhan
         return (
           <div>
             <div>
