@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class CreateSteps extends Component {
+class CreateStep extends Component {
 
 
     render() {
@@ -18,4 +18,4 @@ class CreateSteps extends Component {
     }
 }
 
-export default CreateSteps
+export default CreateStep

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import JobDescription from './components/JobDescription'
 import EditJob from './components/EditJob'
-import CreateSteps from './components/CreateSteps'
+import CreateStep from './components/CreateStep'
 import ShowSteps from './components/ShowSteps'
 import config from './config'
 import { Route, Switch, withRouter } from 'react-router-dom';
@@ -14,11 +14,10 @@ import MainPage from './components/MainPage';
 class App extends Component {
 
   state = {
-    steps: [],
     loggedInUser: null,
   }
 
-  componentDidMount(){
+ /* componentDidMount(){
     axios.get(`${config.API_URL}/api/steps`)
       .then((response) => {
         console.log(response.data)
@@ -28,6 +27,7 @@ class App extends Component {
         console.log('Fetching failed')
       })
   }
+  */
 
   handleSubmitStep = (event) => {
     event.preventDefault()
@@ -134,27 +134,27 @@ class App extends Component {
     return (
       <div>
         <Navigation onLogout={this.handleLogout} />
-        { <Switch>
+         <Switch>
           <Route exact path="/"  render={(routeProps) => {
               return  <LoadPage onSignIn={this.handleSignIn} onSignUp={this.handleSignUp} {...routeProps}  />
             }}/>
-          <Route  path="/home"  render={(routeProps) => {
+          <Route exact path="/home"  render={(routeProps) => {
             return  <MainPage user={this.state.loggedInUser} {...routeProps}  />
           }}/>
           <Route path="/home/:jobId" render={(routeProps) => {
-            return <JobDescription  />
+            return <JobDescription user={this.state.loggedInUser} {...routeProps} />
           }}/>
-          <Route path="/home/:jobId" render={(routeProps) => {
+          <Route path="/home/:jobId/edit" render={(routeProps) => {
             return <EditJob />
           }} />
-          <Route path="/steps" render={(routeProps) => {
-            return <ShowSteps user={this.state.loggedInUser} {...routeProps}/>
+          <Route path="/home/:jobId/steps" render={(routeProps) => {
+            return <ShowSteps />
           }} />
-          <Route path="/create-step" render={(routeProps) => {
-            return <CreateSteps user={this.state.loggedInUser} {...routeProps}/>
+          <Route path="/home/:jobId/create-step" render={(routeProps) => {
+            return <CreateStep />
           }} />
            
-        </Switch> }
+        </Switch> 
       </div>
     )
   }

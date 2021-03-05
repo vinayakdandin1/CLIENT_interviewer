@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 //import axios from 'axios'
 import '../styles/JobDescription.css'
-import CreateSteps from './CreateSteps'
+import CreateStep from './CreateStep'
 import ShowSteps from './ShowSteps'
 //import config from '../config'
 
@@ -62,7 +62,7 @@ class JobDescription extends Component {
                       <h6>Satus:</h6>
                       <p>applied / in interview process/ negotiations / received offer / not received</p>
                   </div>
-                    <CreateSteps />
+                    <CreateStep />
                   <div>
                     <ShowSteps />
                   </div>
