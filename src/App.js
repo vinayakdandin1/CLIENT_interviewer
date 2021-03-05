@@ -186,7 +186,10 @@ class App extends Component {
                 );
               }}
             />
-            <Route exact path="/home" render={(routeProps) => {
+            <Route
+              exact
+              path="/home"
+              render={(routeProps) => {
                 return (
                   <MainPage user={this.state.loggedInUser} {...routeProps} />
                 );
@@ -207,6 +210,21 @@ class App extends Component {
             <Route exact path="/dashboard" render={(routeProps) => {
                 return (
                   <Landing jobDetails={jobDetails} loggedInUser={loggedInUser} onAdd={this.addJobDetails} {...routeProps}/>
+                );
+              }}
+            />
+            <Route
+              
+              path={"/dashboard/:jobId"}
+              render={(routeProps) => {
+                return (
+                  <Landing
+                    jobDetails={jobDetails}
+                    loggedInUser={loggedInUser}
+                    onAdd={this.addJobDetails}
+                    {...routeProps}
+                    isJobPreview
+                  />
                 );
               }}
             />
