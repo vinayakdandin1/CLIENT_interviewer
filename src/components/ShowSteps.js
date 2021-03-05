@@ -9,7 +9,7 @@ class ShowSteps extends Component {
     getStep = () => {
         let id = this.props.match.params.stepId
         axios.get(`${config.API_URL}/api/steps/${stepid}`)
-          .then((response) {
+          .then((response) => {
               let step = {
                   date: date,
                   description: description
@@ -18,12 +18,10 @@ class ShowSteps extends Component {
                   step: step
               })
           })
-          .catch(() {
+          .catch(() => {
             console.log('Fetching failed')
           })
     }
-
-
 
     componentDidMount(){
         this.getStep()
