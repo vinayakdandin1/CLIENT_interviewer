@@ -1,0 +1,29 @@
+.home-page-main {
+    background: url('../images/8.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 82vh;
+    
+}
+
+.home-page-buttons {
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-right: 25rem;
+    margin-left: 25rem;
+    padding-top: 10rem;
+}
+
+.home-page-links {
+    display: block;
+    width: 9rem;
+    height: 2.5rem;
+    background: #1b202e;
+    text-align: center;
+    border-radius: 1rem;
+    color: white;
+    font-weight: bold;
+    line-height: 25px;
+}

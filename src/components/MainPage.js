@@ -1,21 +1,23 @@
+import { Navbar, Nav  } from 'react-bootstrap';
 import React, { Component } from 'react'
 import {Redirect} from 'react-router-dom'
-import axios from 'axios';
-import config from '../config'
+import '../styles/MainPage.css'
+
 
 class MainPage extends Component {
 
     render() {
 
-        if(!this.props.user) {
-            return <Redirect to={'/'} />
-        }
+        // if(!this.props.user) {
+        //     return <Redirect to={'/'} />
+        // }
 
         return (
-            <div>
-                This is main Page
-               
-                
+            
+            <div className="home-page-main">
+                {
+                    console.log(this.props.user)
+                }
             </div>
         )
     }

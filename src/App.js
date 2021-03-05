@@ -5,6 +5,7 @@ import Navigation from './components/Navigation';
 import axios from 'axios';
 import config from './config'
 import MainPage from './components/MainPage';
+import Footer from './components/Footer';
 
 class App extends Component {
 
@@ -78,8 +79,10 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Navigation onLogout={this.handleLogout} />
+        <Navigation  onLogout={this.handleLogout} user={this.state.loggedInUser} />
+        
         { <Switch>
+
           <Route exact path="/"  render={(routeProps) => {
               return  <LoadPage onSignIn={this.handleSignIn} onSignUp={this.handleSignUp} {...routeProps}  />
             }}/>
@@ -88,6 +91,7 @@ class App extends Component {
           }}/>
            
         </Switch> }
+        <Footer />
       </div>
     )
   }
