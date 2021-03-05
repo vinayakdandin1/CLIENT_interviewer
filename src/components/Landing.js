@@ -19,7 +19,10 @@ class Landing extends Component {
 
   render() {
     const { jobDetails } = this.props;
+<<<<<<< HEAD
     // console.log(jobDetails)
+=======
+>>>>>>> origin/zelimhan
     return (
       <div>
         <Container>
@@ -98,7 +101,10 @@ class Landing extends Component {
             </Col>
             <br></br>
           </Row>
+        </Container>
+        <Container>
           <div>
+<<<<<<< HEAD
             {/* <Route
               exact
               path={"/dashboard/:jobId"}
@@ -106,6 +112,9 @@ class Landing extends Component {
             /> */}
 
             
+=======
+            {this.props.isJobPreview && <JobPreview {...this.props}/>}
+>>>>>>> origin/zelimhan
           </div>
         </Container>
       </div>
