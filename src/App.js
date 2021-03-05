@@ -163,21 +163,7 @@ class App extends Component {
     const { jobDetails, loggedInUser } = this.state;
     return (
       <div>
-        <Navigation onLogout={this.handleLogout} />
-         <Switch>
-          <Route exact path="/"  render={(routeProps) => {
-              return  <LoadPage onSignIn={this.handleSignIn} onSignUp={this.handleSignUp} {...routeProps}  />
-            }}/>
-          <Route exact path="/home"  render={(routeProps) => {
-            return  <MainPage user={this.state.loggedInUser} {...routeProps}  />
-          }}/>
-          
-          <Route exact path="/dashboard" render={(routeProps) => {
-              return <Landing jobDetails={jobDetails} onAdd={this.addJobDetails} {...routeProps} />;
-            }}
-          />
-           
-        </Switch> 
+        <Navigation onLogout={this.handleLogout} /> 
         {
           <Switch>
             <Route exact path="/" render={(routeProps) => {
@@ -204,7 +190,7 @@ class App extends Component {
           <Route path="/home/:jobId/steps" render={(routeProps) => {
             return <ShowSteps  {...routeProps}/>
           }} />
-          <Route path="/home/:jobId/create-step" render={(routeProps) => {
+          <Route path="/home/:jobId/create-steps" render={(routeProps) => {
             return <CreateStep  {...routeProps} />
           }} />
             <Route exact path="/dashboard" render={(routeProps) => {

@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 
 class CreateStep extends Component {
 
+  /*
   state = {
     steps: []
   }
 
   componentDidMount(){
-    axios.get(`${config.API_URL}/api/steps`)
+    let jobId = this.props.match.params.jobId
+    axios.get(`${config.API_URL}/api/home/${jobId}`)
       .then((response) => {
         console.log(response.data)
         this.setState({steps: response.data})
@@ -37,13 +39,15 @@ class CreateStep extends Component {
           console.log('create failed', err)
         })
     }
+    */
 
 
     render() {
+      //console.log(this.props.steps)
         return (
             <div>
                 <div className="card">
-                  <form className="addStep">
+                  <form onSubmit={this.props.handleSubmitStep} className="addStep">
                     <input className="un" name="date" type="date" />
                     <input className="un" name="description" type="text" placeholder="Enter a step" />
                     <button className="stepButton" type="submit">Submit</button>

@@ -41,7 +41,7 @@ class JobPreview extends Component {
             jobTitle,
             contactPerson,
             contactDetail,
-            _id
+            _id,
           },
         } = this.state;
         return (

@@ -3,9 +3,9 @@ import React, { Component } from 'react'
 class ShowSteps extends Component {
 
     state = {
-        step: {}
+        stepsArray: []
     }
-
+/*
     getStep = () => {
         let id = this.props.match.params.stepId
         axios.get(`${config.API_URL}/api/steps/${stepid}`)
@@ -22,13 +22,15 @@ class ShowSteps extends Component {
             console.log('Fetching failed')
           })
     }
-
+*/
     componentDidMount(){
-        this.getStep()
+        this.setState({
+            stepsArray:  [...this.props.steps]
+        })
     }
     
 
-    handleDeleteStep = (stepId) => {
+/*    handleDeleteStep = (stepId) => {
         axios.delete(`${config.API_URL}/api/steps/${stepId}`)
           .then(() => {
             let filteredSteps = this.state.steps.filter((step) => {
@@ -44,16 +46,16 @@ class ShowSteps extends Component {
             console.log('delete failed', err)
           })
       }
+      */
   
     render() {
+        console.log(this.state.stepsArray)
         return (
             <div>
                 <div className="card1">
                     <div>
                       <h4>Your steps</h4>
                         <div className="scrollDown">
-                          <p className="un">I called the HR to set-up an interview  03/03/2021 <button className="deleteStep">Delete</button></p>
-                          <p className="un">I called the HR to set-up an interview  03/03/2021 <button className="deleteStep">Delete</button></p>
                           <p className="un">I called the HR to set-up an interview  03/03/2021 <button className="deleteStep">Delete</button></p>
                         </div>
                     </div>

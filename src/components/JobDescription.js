@@ -1,21 +1,66 @@
 import React, { Component } from 'react'
-//import axios from 'axios'
+import axios from 'axios'
 import '../styles/JobDescription.css'
 import CreateStep from './CreateStep'
 import ShowSteps from './ShowSteps'
-//import config from '../config'
+import config from '../config'
 
 class JobDescription extends Component {
 
+    state = {
+        oneJob: {},
+        steps: []
+    }
+
+    getOneJob = () => {
+        let jobId = this.props.match.params.jobId
+        axios.get(`${config.API_URL}/api/home/${jobId}`, {withCredentials: true})
+            .then((response) => {
+                this.setState({
+                    oneJob: response.data
+                })
+            })
+            .catch((err) => {
+                console.log('Fetching data failed', err)
+            })
+    } 
+
+    handleSubmitStep = (event) => {
+      event.preventDefault()
+      let date = event.target.date.value
+      let description = event.target.description.value
+
+      let jobId = this.state.oneJob._id
+      axios.post(`${config.API_URL}/api/home/${jobId}/create-steps`, {
+        date: date,
+        description: description,
+      }, {withCredentials:true})
+        .then((response) => {
+          this.setState({
+            steps: [response.data, ...this.state.steps]
+          }, () => {
+            this.props.history.push(`/home/${jobId}`)
+          })
+        })
+        .catch((err) => {
+          console.log('create failed', err)
+        })
+    }
+
+    componentDidMount(){
+        this.getOneJob()
+    }
+
 
     render() {
+        const {oneJob, steps} = this.state
         return (
         <div>
          <div className="topLeft">
             <div className="mainContainer">
                 <div className="leftSide">
                   <div>
-                      <h1>Job Title</h1> 
+                      <h1>{oneJob.jobTitle}</h1> 
                       <h3>Company Name</h3>
                       <h6>Application Date</h6>
                   </div>
@@ -62,9 +107,9 @@ class JobDescription extends Component {
                       <h6>Satus:</h6>
                       <p>applied / in interview process/ negotiations / received offer / not received</p>
                   </div>
-                    <CreateStep />
+                    <CreateStep handleSubmitStep={this.handleSubmitStep}/>
                   <div>
-                    <ShowSteps />
+                    <ShowSteps steps={steps}/>
                   </div>
                 </div>
             </div>
