@@ -6,12 +6,57 @@ import axios from 'axios';
 import config from './config'
 import MainPage from './components/MainPage';
 import Footer from './components/Footer';
+import Landing from "./components/Landing";
 
 class App extends Component {
 
   state = {
+    jobDetails: [],
     loggedInUser: null,
   }
+
+  componentDidMount() {
+    axios.get(`${config.API_URL}/api/dashboard`, { withCredentials: true })
+      .then((response) => {
+        console.log(response.data);
+        this.setState({
+          
+          jobDetails: response.data
+        })
+      })
+      .catch((err) => {
+        console.log('Fetching data failed', err)
+      })
+  }
+
+  addJobDetails = (event) => {
+    event.preventDefault()
+    let newJobDetails = {
+      jobTitle: event.target.jobTitle.value,
+      companyName: event.target.companyName.value,
+      applicationDate: event.target.applicationDate.value,
+      contactPerson: event.target.contactPerson.value,
+      contactDetail: event.target.contactDetail.value,
+      jobDescription: event.target.jobDescription.value,
+      // companyRating: event.target.companyRating.value,
+      applicationLink: event.target.applicationLink.value,
+      sourceOfApplication: event.target.sourceOfApplication.value,
+      salary: event.target.salary.value,
+      // interviewDate: event.target.interviewDate.value,
+      jobLocation: event.target.jobLocation.value,
+    };
+    // console.log(event.target.applicationDate.value);
+    axios.post(`${config.API_URL}/api/create`, newJobDetails,{withCredentials: true})
+      .then((response) => {
+        this.setState({
+          jobDetails: response.data,
+        });
+      })
+      .catch (() => {
+        console.log("Fetching Failed!!!")
+      })
+
+  };
 
   handleSignUp = (event) => {
     event.preventDefault()
@@ -77,6 +122,7 @@ class App extends Component {
    }
 
   render() {
+    const { jobDetails } = this.state
     return (
       <div>
         <Navigation  onLogout={this.handleLogout} user={this.state.loggedInUser} />
@@ -89,6 +135,13 @@ class App extends Component {
           <Route  path="/home"  render={(routeProps) => {
             return  <MainPage user={this.state.loggedInUser} {...routeProps}  />
           }}/>
+          <Route
+            exact
+            path="/dashboard"
+            render={(routeProps) => {
+              return <Landing jobDetails={jobDetails}onAdd={this.addJobDetails} {...routeProps} />;
+            }}
+          />
            
         </Switch> }
         <Footer />
