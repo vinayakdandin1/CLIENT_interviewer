@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Navbar, Nav, NavDropdown, Form, FormControl, Button  } from 'react-bootstrap';
+import { Navbar, Nav  } from 'react-bootstrap';
+import {Link} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Navigation extends Component {
@@ -11,25 +12,25 @@ class Navigation extends Component {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ml-auto navigation-links">
-                            <Nav.Link to="/about">About</Nav.Link>
+                            <Link to="/about">About</Link>
                             {
                                 this.props.user ? (
                                     <div className="conditionalNav">
-                                    <Nav.Link to="/dashboard">Dashboard</Nav.Link>
+                                    <Link to="/dashboard">Dashboard</Link>
                                     </div>
                                     ) : null
                             }  
                             {
                                 this.props.user ? (
                                     <div className="conditionalNav">
-                                    <Nav.Link to="/profile">Profile</Nav.Link>  
+                                    <Link to="/profile">Profile</Link>  
                                     </div>
                                     ) : null
                             }
                             {
                                 this.props.user ? (
                                     <div className="conditionalNav">
-                                    <Nav.Link onClick={this.props.onLogout}>Log out</Nav.Link>
+                                    <Link onClick={this.props.onLogout}>Log out</Link>
                                     </div>
                                     ) : null
                             }  

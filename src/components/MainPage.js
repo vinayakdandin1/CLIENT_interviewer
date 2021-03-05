@@ -15,9 +15,7 @@ class MainPage extends Component {
         return (
             
             <div className="home-page-main">
-                {
-                    console.log(this.props.user)
-                }
+                Main page works
             </div>
         )
     }

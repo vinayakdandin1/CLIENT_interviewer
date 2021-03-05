@@ -48,7 +48,7 @@ class App extends Component {
   };
   componentDidMount() {
     this.getInitialDetails();
-    this.loggedIn();
+    this.loggedIn()
   }
 
   addJobDetails = (event) => {
@@ -123,7 +123,7 @@ class App extends Component {
     axios
       .post(`${config.API_URL}/api/signin`, user, { withCredentials: true })
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
 
         this.setState(
           {
@@ -159,7 +159,6 @@ class App extends Component {
     const { jobDetails, loggedInUser } = this.state;
     return (
       <div>
-<<<<<<< HEAD
         <Navigation  onLogout={this.handleLogout} user={this.state.loggedInUser} />
         
         { <Switch>
@@ -170,59 +169,16 @@ class App extends Component {
           <Route  path="/home"  render={(routeProps) => {
             return  <MainPage user={this.state.loggedInUser} {...routeProps}  />
           }}/>
-          <Route
-            exact
-            path="/dashboard"
-            render={(routeProps) => {
-              return <Landing jobDetails={jobDetails}onAdd={this.addJobDetails} {...routeProps} />;
-            }}
-          />
+          <Route path="/dashboard" render={(routeProps) => {
+            return <Landing jobDetails={jobDetails} loggedInUser={loggedInUser} onAdd={this.addJobDetails} {...routeProps} />     
+          }}/>
+          <Route path="/dashboard/:jobId" render={(routeProps) => {
+            return <JobPreview loggedInUser={loggedInUser} />     
+          }}/>
            
         </Switch> }
         <Footer />
-=======
-        <Navigation onLogout={this.handleLogout} />
-        {
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={(routeProps) => {
-                return (
-                  <LoadPage
-                    onSignIn={this.handleSignIn}
-                    onSignUp={this.handleSignUp}
-                    {...routeProps}
-                  />
-                );
-              }}
-            />
-            <Route
-              path="/home"
-              render={(routeProps) => {
-                return (
-                  <MainPage user={this.state.loggedInUser} {...routeProps} />
-                );
-              }}
-            />
-            <Route
-              exact
-              path="/dashboard"
-              render={(routeProps) => {
-                return (
-                  <Landing
-                    jobDetails={jobDetails}
-                    loggedInUser={loggedInUser}
-                    onAdd={this.addJobDetails}
-                    {...routeProps}
-                  />
-                );
-              }}
-            />
-
-          </Switch>
-        }
->>>>>>> origin/zelimhan
+        
       </div>
     );
   }

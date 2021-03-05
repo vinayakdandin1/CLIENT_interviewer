@@ -19,7 +19,7 @@ class Landing extends Component {
 
   render() {
     const { jobDetails } = this.props;
-    console.log(jobDetails)
+    // console.log(jobDetails)
     return (
       <div>
         <Container>
@@ -99,12 +99,13 @@ class Landing extends Component {
             <br></br>
           </Row>
           <div>
-            <Route
+            {/* <Route
               exact
               path={"/dashboard/:jobId"}
-              jobDetails={jobDetails}
               component={JobPreview}
-            />
+            /> */}
+
+            
           </div>
         </Container>
       </div>
