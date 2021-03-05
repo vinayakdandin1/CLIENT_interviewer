@@ -19,55 +19,7 @@ class App extends Component {
     loggedInUser: null,
   }
 
- /* componentDidMount(){
-    axios.get(`${config.API_URL}/api/steps`)
-      .then((response) => {
-        console.log(response.data)
-        this.setState({steps: response.data})
-      })
-      .catch(() => {
-        console.log('Fetching failed')
-      })
-  }
-  */
 
-  handleSubmitStep = (event) => {
-    event.preventDefault()
-    let date = event.target.date.value
-    let description = event.target.description.value
-
-    axios.post(`${config.API_URL}/api/create-steps`, {
-      date: date,
-      description: description,
-    })
-      .then((response) => {
-        this.setState({
-          steps: [response.data, ...this.state.steps]
-        }, () => {
-          this.props.history.push('/home/:jobId')
-        })
-      })
-      .catch((err) => {
-        console.log('create failed', err)
-      })
-  }
-
-  handleDeleteStep = (stepId) => {
-    axios.delete(`${config.API_URL}/api/steps/${stepId}`)
-      .then(() => {
-        let filteredSteps = this.state.steps.filter((step) => {
-          return step._id !==stepId
-        })
-        TouchList.setState({
-          steps: filteredSteps
-        }, () => {
-          this.props.history.push('/home/:jobId')
-        }) 
-      })
-      .catch((err) => {
-        console.log('delete failed', err)
-      })
-  }
   componentDidMount() {
     axios.get(`${config.API_URL}/api/dashboard`, { withCredentials: true })
       .then((response) => {
@@ -193,10 +145,10 @@ class App extends Component {
             return <EditJob />
           }} />
           <Route path="/home/:jobId/steps" render={(routeProps) => {
-            return <ShowSteps onDeleteStep={this.handleDeleteStep} {...routeProps}/>
+            return <ShowSteps  {...routeProps}/>
           }} />
           <Route path="/home/:jobId/create-step" render={(routeProps) => {
-            return <CreateStep onSubmitStep={this.handleSubmitStep} {...routeProps} />
+            return <CreateStep  {...routeProps} />
           }} />
           <Route exact path="/dashboard" render={(routeProps) => {
               return <Landing jobDetails={jobDetails} onAdd={this.addJobDetails} {...routeProps} />;
