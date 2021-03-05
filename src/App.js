@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import JobDescription from './components/JobDescription'
+import EditJob from './components/EditJob'
+import CreateStep from './components/CreateStep'
+import ShowSteps from './components/ShowSteps'
+import config from './config'
 import { Route, Switch, withRouter } from 'react-router-dom';
 import LoadPage from './components/LoadPage'
 import Navigation from './components/Navigation';
 import axios from 'axios';
-import config from './config'
 import MainPage from './components/MainPage';
 import Footer from './components/Footer';
 import Landing from "./components/Landing";
@@ -159,19 +164,12 @@ class App extends Component {
     const { jobDetails, loggedInUser } = this.state;
     return (
       <div>
-        <Navigation onLogout={this.handleLogout} />
+        <Navigation onLogout={this.handleLogout} /> 
         {
           <Switch>
-            <Route
-              exact
-              path="/"
-              render={(routeProps) => {
+            <Route exact path="/" render={(routeProps) => {
                 return (
-                  <LoadPage
-                    onSignIn={this.handleSignIn}
-                    onSignUp={this.handleSignUp}
-                    {...routeProps}
-                  />
+                  <LoadPage onSignIn={this.handleSignIn} onSignUp={this.handleSignUp} {...routeProps} />
                 );
               }}
             />
@@ -184,17 +182,21 @@ class App extends Component {
                 );
               }}
             />
-            <Route
-              exact
-              path="/dashboard"
-              render={(routeProps) => {
+            <Route path="/home/:jobId" render={(routeProps) => {
+            return <JobDescription user={this.state.loggedInUser} {...routeProps} />
+          }}/>
+          <Route path="/home/:jobId/edit" render={(routeProps) => {
+            return <EditJob />
+          }} />
+          <Route path="/home/:jobId/steps" render={(routeProps) => {
+            return <ShowSteps  {...routeProps}/>
+          }} />
+          <Route path="/home/:jobId/create-steps" render={(routeProps) => {
+            return <CreateStep  {...routeProps} />
+          }} />
+            <Route exact path="/dashboard" render={(routeProps) => {
                 return (
-                  <Landing
-                    jobDetails={jobDetails}
-                    loggedInUser={loggedInUser}
-                    onAdd={this.addJobDetails}
-                    {...routeProps}
-                  />
+                  <Landing jobDetails={jobDetails} loggedInUser={loggedInUser} onAdd={this.addJobDetails} {...routeProps}/>
                 );
               }}
             />

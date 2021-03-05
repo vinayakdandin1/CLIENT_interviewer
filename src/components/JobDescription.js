@@ -1,0 +1,125 @@
+import React, { Component } from 'react'
+import axios from 'axios'
+import '../styles/JobDescription.css'
+import CreateStep from './CreateStep'
+import ShowSteps from './ShowSteps'
+import config from '../config'
+
+class JobDescription extends Component {
+
+    state = {
+        oneJob: {},
+        steps: []
+    }
+
+    getOneJob = () => {
+        let jobId = this.props.match.params.jobId
+        axios.get(`${config.API_URL}/api/home/${jobId}`, {withCredentials: true})
+            .then((response) => {
+                this.setState({
+                    oneJob: response.data
+                })
+            })
+            .catch((err) => {
+                console.log('Fetching data failed', err)
+            })
+    } 
+
+    handleSubmitStep = (event) => {
+      event.preventDefault()
+      let date = event.target.date.value
+      let description = event.target.description.value
+
+      let jobId = this.state.oneJob._id
+      axios.post(`${config.API_URL}/api/home/${jobId}/create-steps`, {
+        date: date,
+        description: description,
+      }, {withCredentials:true})
+        .then((response) => {
+          this.setState({
+            steps: [response.data, ...this.state.steps]
+          }, () => {
+            this.props.history.push(`/home/${jobId}`)
+          })
+        })
+        .catch((err) => {
+          console.log('create failed', err)
+        })
+    }
+
+    componentDidMount(){
+        this.getOneJob()
+    }
+
+
+    render() {
+        const {oneJob, steps} = this.state
+        return (
+        <div>
+         <div className="topLeft">
+            <div className="mainContainer">
+                <div className="leftSide">
+                  <div>
+                      <h1>{oneJob.jobTitle}</h1> 
+                      <h3>Company Name</h3>
+                      <h6>Application Date</h6>
+                  </div>
+                  <div>
+                      <h6>Job description:</h6>
+                      <p>Maecenas at consequat dolor. Donec pretium mollis sapien. Morbi nec sem tincidunt est bibendum consectetur. 
+                      Vivamus suscipit lorem sed sollicitudin mattis. Proin egestas facilisis leo, et ultrices leo porta ac. 
+                      .</p>
+                  </div>
+                  <div>
+                      <h6>Point of contact:</h6>
+                      <p>Name</p>
+                  </div>
+                  <div>
+                      <h6>Contact number:</h6>
+                      <p>Number</p>
+                  </div>
+                  <div>
+                      <h6>Contact email:</h6>
+                      <p>Email</p>
+                  </div>
+                  <div>
+                      <h6>Rate your interview process:</h6>
+                  </div>
+                  <div>
+                      <h6>Application link:</h6>
+                      <p>www.linkedin.com</p>
+                  </div>
+                  <div>
+                      <h6>Salary:</h6>
+                      <p>40 000$</p>
+                  </div>
+                </div>
+                <div className="rightSide">
+                  <div>
+                      <h6>Interview date:</h6>
+                      <p>10/03/2021</p>
+                  </div>
+                  <div>
+                      <h6>Job location:</h6>
+                      <p>Paris</p>
+                  </div>
+                  <div>
+                      <h6>Satus:</h6>
+                      <p>applied / in interview process/ negotiations / received offer / not received</p>
+                  </div>
+                    <CreateStep handleSubmitStep={this.handleSubmitStep}/>
+                  <div>
+                    <ShowSteps steps={steps}/>
+                  </div>
+                </div>
+            </div>
+            <div className="editJobDesc">
+              <button className="submit1">Edit</button>
+            </div>
+         </div>
+        </div>
+        )
+    }
+}
+
+export default JobDescription

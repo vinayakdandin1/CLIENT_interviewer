@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import {Redirect} from 'react-router-dom'
 import '../styles/MainPage.css'
 
+//import axios from 'axios';
+//import config from '../config'
 
 class MainPage extends Component {
 

@@ -1,0 +1,182 @@
+.mainContainer {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 4em;
+    padding: 10px 5px;
+    background: linear-gradient(to bottom right, #fff 0%, #fff 50%,  #457B9D 50%,  #457B9D 100%);
+
+}
+
+.leftSide {
+    padding: 1em 2em;
+    margin-right: 1em;
+    width: 40%;
+    background-color: #A8DADC;
+    border: solid 5px white;
+    border-radius: 5% 5%;
+}
+
+.rightSide {
+    padding: 1em 2em;
+    margin-left: 1em;
+    width: 40%;
+    background-color: #F1FAEE;
+    border: solid 5px white;
+    border-radius: 5% 5%;
+    box-shadow: black;
+
+}
+
+.addStep {
+    display: flex;
+    flex-direction: column;
+}
+
+.editJobDesc {
+    display: flex;
+    justify-content: center;
+}
+
+.submit1 {
+    cursor: pointer;
+    border-radius: 5em;
+    color: white;
+    background-color: #457B9D;
+    border: 0;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    margin: 10px;
+    font-size: 13px;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04)
+}
+
+
+
+.card {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    flex-direction: column;
+    padding: 1em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 20px;
+    text-align: center;
+    align-items: center;
+}
+
+.un {
+    color: rgb(38, 50, 56);
+    margin: 10px 0;
+    font-size: 14px;
+    background: rgba(136, 126, 126, 0.04);
+    padding: 8px 20px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.02);
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+
+.stepButton {
+    cursor: pointer;
+    border-radius: 5em;
+    color: white;
+    background-color: #457B9D;
+    border: 0;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    margin-top: 20px;
+    font-size: 13px;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04)
+}
+
+.deleteStep {
+    cursor: pointer;
+    border-radius: 5em;
+    color: white;
+    background-color: #457B9D;
+    border: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    margin-top: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04)
+}
+
+.card1 {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    flex-direction: column;
+    padding: 1em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.scrollDown {
+    max-height: 180px;
+    overflow-y: scroll;
+}
+
+@media screen and (max-width : 1000px){
+    .mainContainer {
+        width: auto;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0 auto;
+        margin-top: 1em;
+        padding: 10px 5px;
+        background: linear-gradient(to bottom right, #fff 0%, #fff 50%,  #457B9D 50%,  #457B9D 100%);
+    
+    }
+    .leftSide {
+        padding: 1em 2em;
+        margin: auto;
+        width: 85%;
+        background-color: #A8DADC;
+        border: solid 5px white;
+        border-radius: 7% 7%;
+    }
+    .rightSide {
+        padding: 1em 2em;
+        margin: auto;
+        margin-top: 1em;
+        width: 85%;
+        background-color: #F1FAEE;
+        border: solid 5px white;
+        border-radius: 7% 7%;
+        box-shadow: black;
+    
+    }
+    .editJobDesc {
+        display: flex;
+        justify-content: center;
+        width: auto;
+    }
+}
