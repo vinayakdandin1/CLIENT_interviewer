@@ -8,8 +8,7 @@ import config from '../config'
 class JobDescription extends Component {
 
     state = {
-        oneJob: {},
-        steps: []
+        oneJob: {}
     }
 
     getOneJob = () => {
@@ -23,29 +22,7 @@ class JobDescription extends Component {
             .catch((err) => {
                 console.log('Fetching data failed', err)
             })
-    } 
-
-    handleSubmitStep = (event) => {
-      event.preventDefault()
-      let date = event.target.date.value
-      let description = event.target.description.value
-
-      let jobId = this.state.oneJob._id
-      axios.post(`${config.API_URL}/api/home/${jobId}/create-steps`, {
-        date: date,
-        description: description,
-      }, {withCredentials:true})
-        .then((response) => {
-          this.setState({
-            steps: [response.data, ...this.state.steps]
-          }, () => {
-            this.props.history.push(`/home/${jobId}`)
-          })
-        })
-        .catch((err) => {
-          console.log('create failed', err)
-        })
-    }
+    }     
 
     componentDidMount(){
         this.getOneJob()
@@ -54,6 +31,7 @@ class JobDescription extends Component {
 
     render() {
         const {oneJob, steps} = this.state
+        
         return (
         <div>
          <div className="topLeft">
@@ -107,9 +85,9 @@ class JobDescription extends Component {
                       <h6>Satus:</h6>
                       <p>applied / in interview process/ negotiations / received offer / not received</p>
                   </div>
-                    <CreateStep handleSubmitStep={this.handleSubmitStep}/>
+                    <CreateStep handleSubmitStep={this.props.handleSubmitStep} jobId={this.state.oneJob._id} />
                   <div>
-                    <ShowSteps steps={steps}/>
+                    <ShowSteps steps={this.props.steps} jobId={this.state.oneJob._id}/>
                   </div>
                 </div>
             </div>
