@@ -87,6 +87,7 @@ class JobDescription extends Component {
             </div>
             <div className="editJobDesc">
               <button className="submit1">Edit</button>
+              <button onClick={() => {this.props.handleDeleteAllJobSteps(oneJob._id); this.props.handleDeleteJob(oneJob._id); }} className="submit1">Delete</button>
             </div>
          </div>
         </div>

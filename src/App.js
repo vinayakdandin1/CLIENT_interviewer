@@ -40,6 +40,7 @@ class App extends Component {
       })
       .catch(() => {});
   };
+
   getInitialDetails = () => {
     axios
       .get(`${config.API_URL}/api/dashboard`, { withCredentials: true })
@@ -188,6 +189,7 @@ class App extends Component {
         this.setState({
           steps: [response.data, ...this.state.steps]
         }, () => {
+          this.clearValues()
           this.props.history.push(`/home/${response.data.jobId}`)
         })
       })
@@ -196,8 +198,8 @@ class App extends Component {
       })
   }
 
-  handleDeleteStep = (stepsId, jobId) => (
-    axios.delete(`${config.API_URL}/api/home/${stepsId}`)
+  handleDeleteStep = (stepsId, jobId) => {
+    axios.delete(`${config.API_URL}/api/home/${stepsId}`, { withCredentials: true })
       .then(() => {
         let filteredSteps = this.state.steps.filter((step) => {
           return step._id !== stepsId
@@ -212,7 +214,43 @@ class App extends Component {
       .catch((err) => {
         console.log('delete failed', err)
       })
-  )
+  }
+
+  handleDeleteAllJobSteps = (jobId) => {
+    console.log(jobId);
+    axios.delete(`${config.API_URL}/api/home/steps/${jobId}`, { withCredentials: true })
+      .then(() => {
+        let filteredSteps = this.state.steps.filter((step) => {
+          return step.jobId !== jobId
+        })
+        this.setState({
+          steps: filteredSteps
+        })
+      })
+      .catch((err) => {
+        console.log('delete failed', err)
+      })
+  
+  }
+
+  handleDeleteJob = (jobId) => {
+    
+    axios.delete(`${config.API_URL}/api/home/job/${jobId}`, { withCredentials: true })
+      .then(() => {
+        let filteredJobs = this.state.jobDetails.filter((job) => {
+          return job._id !== jobId
+        })
+        this.setState({
+          jobDetails: filteredJobs
+        }, () => {
+          this.props.history.push(`/dashboard`)
+        })
+
+      })
+      .catch((err) => {
+        console.log('delete failed', err)
+      })
+  }
 
   componentDidMount() {
     this.loggedIn();
@@ -248,7 +286,8 @@ class App extends Component {
               }}
             />
             <Route path="/home/:jobId" render={(routeProps) => {
-            return <JobDescription handleDeleteStep={this.handleDeleteStep} handleSubmitStep={this.handleSubmitStep} steps={this.state.steps} user={loggedInUser} {...routeProps} />
+            return <JobDescription handleDeleteAllJobSteps={this.handleDeleteAllJobSteps}  handleDeleteJob={this.handleDeleteJob} handleDeleteStep={this.handleDeleteStep} 
+            handleSubmitStep={this.handleSubmitStep} steps={this.state.steps} user={loggedInUser} {...routeProps} />
           }}/>
           <Route path="/home/:jobId/edit" render={(routeProps) => {
             return <EditJob />
