@@ -18,7 +18,6 @@ class Landing extends Component {
   }
 
   render() {
-    console.log(this.props.jobDetails)
     const { jobDetails } = this.props;
     return (
       <div>
