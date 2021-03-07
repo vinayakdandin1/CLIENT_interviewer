@@ -198,8 +198,8 @@ class App extends Component {
 
   componentDidMount() {
     this.loggedIn();
-    this.getInitialDetails();
     this.getStates()
+    this.getInitialDetails()
   }
 
 
