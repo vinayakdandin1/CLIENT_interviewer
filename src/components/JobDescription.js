@@ -39,47 +39,41 @@ class JobDescription extends Component {
                 <div className="leftSide">
                   <div>
                       <h1>{oneJob.jobTitle}</h1> 
-                      <h3>Company Name</h3>
-                      <h6>Application Date</h6>
+                      <h3>{oneJob.companyName}</h3>
+                      <h6>{oneJob.applicationDate}</h6>
                   </div>
                   <div>
                       <h6>Job description:</h6>
-                      <p>Maecenas at consequat dolor. Donec pretium mollis sapien. Morbi nec sem tincidunt est bibendum consectetur. 
-                      Vivamus suscipit lorem sed sollicitudin mattis. Proin egestas facilisis leo, et ultrices leo porta ac. 
-                      .</p>
+                      <p>{oneJob.jobDescription}</p>
                   </div>
                   <div>
                       <h6>Point of contact:</h6>
-                      <p>Name</p>
+                      <p>{oneJob.contactPerson}</p>
                   </div>
                   <div>
-                      <h6>Contact number:</h6>
-                      <p>Number</p>
-                  </div>
-                  <div>
-                      <h6>Contact email:</h6>
-                      <p>Email</p>
+                      <h6>Contact Detail:</h6>
+                      <p>{oneJob.contactDetail}</p>
                   </div>
                   <div>
                       <h6>Rate your interview process:</h6>
                   </div>
                   <div>
                       <h6>Application link:</h6>
-                      <p>www.linkedin.com</p>
+                      <p>{oneJob.jobTitle}</p>
                   </div>
                   <div>
                       <h6>Salary:</h6>
-                      <p>40 000$</p>
+                      <p>{oneJob.jobTitle}</p>
                   </div>
                 </div>
                 <div className="rightSide">
                   <div>
                       <h6>Interview date:</h6>
-                      <p>10/03/2021</p>
+                      <p>{oneJob.interviewDate}</p>
                   </div>
                   <div>
                       <h6>Job location:</h6>
-                      <p>Paris</p>
+                      <p>{oneJob.jobLocation}</p>
                   </div>
                   <div>
                       <h6>Satus:</h6>
@@ -87,7 +81,7 @@ class JobDescription extends Component {
                   </div>
                     <CreateStep handleSubmitStep={this.props.handleSubmitStep} jobId={this.state.oneJob._id} />
                   <div>
-                    <ShowSteps steps={this.props.steps} jobId={this.state.oneJob._id}/>
+                    <ShowSteps handleDeleteStep={this.props.handleDeleteStep} steps={this.props.steps} jobId={this.state.oneJob._id}/>
                   </div>
                 </div>
             </div>
