@@ -7,7 +7,8 @@ import JobPreview from './JobPreview'
 class Landing extends Component {
 
   state = {
-    showPrev: false
+    showPrev: false,
+
   }
 
   showPreview = () => {
@@ -15,9 +16,9 @@ class Landing extends Component {
       showPrev: true
     })
   }
- 
 
   render() {
+    console.log(this.props.jobDetails)
     const { jobDetails } = this.props;
     return (
       <div>
