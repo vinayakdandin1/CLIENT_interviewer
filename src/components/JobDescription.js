@@ -81,7 +81,7 @@ class JobDescription extends Component {
                   </div>
                     <CreateStep handleSubmitStep={this.props.handleSubmitStep} jobId={this.state.oneJob._id} />
                   <div>
-                    <ShowSteps steps={this.props.steps} jobId={this.state.oneJob._id}/>
+                    <ShowSteps handleDeleteStep={this.props.handleDeleteStep} steps={this.props.steps} jobId={this.state.oneJob._id}/>
                   </div>
                 </div>
             </div>

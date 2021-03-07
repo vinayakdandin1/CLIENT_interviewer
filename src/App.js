@@ -196,6 +196,24 @@ class App extends Component {
       })
   }
 
+  handleDeleteStep = (stepsId, jobId) => (
+    axios.delete(`${config.API_URL}/api/home/${stepsId}`)
+      .then(() => {
+        let filteredSteps = this.state.steps.filter((step) => {
+          return step._id !== stepsId
+        })
+        this.setState({
+          steps: filteredSteps
+        }, () => {
+          this.props.history.push(`/home/${jobId}`)
+        })
+
+      })
+      .catch((err) => {
+        console.log('delete failed', err)
+      })
+  )
+
   componentDidMount() {
     this.loggedIn();
     this.getInitialDetails();
@@ -230,7 +248,7 @@ class App extends Component {
               }}
             />
             <Route path="/home/:jobId" render={(routeProps) => {
-            return <JobDescription handleSubmitStep={this.handleSubmitStep} steps={this.state.steps} user={loggedInUser} {...routeProps} />
+            return <JobDescription handleDeleteStep={this.handleDeleteStep} handleSubmitStep={this.handleSubmitStep} steps={this.state.steps} user={loggedInUser} {...routeProps} />
           }}/>
           <Route path="/home/:jobId/edit" render={(routeProps) => {
             return <EditJob />

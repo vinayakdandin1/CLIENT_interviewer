@@ -30,6 +30,7 @@ class ShowSteps extends Component {
   
   render() {
     const {stepsArray} = this.state 
+    const {handleDeleteStep, jobId} = this.props
     
       return (
           <div>
@@ -39,11 +40,11 @@ class ShowSteps extends Component {
                     
                     stepsArray.map((ele) => {  
                       return (
-                        (ele.jobId === this.props.jobId) ?
+                        (ele.jobId === jobId) ?
                           (<div>
                         <p className="un">{ele.description} </p>
                         <p className="un">{ele.date}</p>
-                        <button className="deleteStep">Delete</button>
+                        <button onClick={() => {handleDeleteStep(ele._id, jobId)}} className="deleteStep">Delete</button>
                         </div>) : null
                       )                                       
                     })
