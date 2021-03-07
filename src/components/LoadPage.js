@@ -9,10 +9,8 @@ class LoadPage extends Component {
         classes: "cont"
     }
 
-    classToggle = () => {
-        
+    classToggle = () => {    
         this.state.hasClass ? this.setState({ classes: "cont s--signup", hasClass: false}) : this.setState({ classes: "cont", hasClass: true})
-  
     }
 
     render() {

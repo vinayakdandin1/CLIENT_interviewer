@@ -10,6 +10,7 @@ import LoadPage from './components/LoadPage'
 import Navigation from './components/Navigation';
 import axios from 'axios';
 import MainPage from './components/MainPage';
+import Footer from './components/Footer';
 import Landing from "./components/Landing";
 import JobPreview from './components/JobPreview';
 
@@ -17,6 +18,7 @@ class App extends Component {
   state = {
     jobDetails: [],
     loggedInUser: null,
+    steps: []
   };
 
   clearValues = () => {
@@ -50,9 +52,17 @@ class App extends Component {
         console.log("Fetching data failed", err);
       });
   };
-  componentDidMount() {
-    this.getInitialDetails();
-    this.loggedIn();
+
+  getStates = () => {
+    axios.get(`${config.API_URL}/api/home/steps`, {withCredentials: true})
+          .then((response) => {
+              this.setState({
+                steps: [...response.data]
+              })
+          })
+          .catch((err) => {
+              console.log('Fetching data failed', err)
+          })
   }
 
   addJobDetails = (event) => {
@@ -127,7 +137,7 @@ class App extends Component {
     axios
       .post(`${config.API_URL}/api/signin`, user, { withCredentials: true })
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
 
         this.setState(
           {
@@ -159,11 +169,40 @@ class App extends Component {
       .catch(() => {});
   };
 
+  handleSubmitStep = (event) => {
+    event.preventDefault()
+    let date = event.target.date.value
+    let description = event.target.description.value
+    let jobId = event.target.jobId.value
+
+    axios.post(`${config.API_URL}/api/home/create-steps`, {
+      date: date,
+      description: description,
+      jobId: jobId
+    }, {withCredentials:true})
+      .then((response) => {
+        this.setState({
+          steps: [response.data, ...this.state.steps]
+        }, () => {
+          this.props.history.push(`/home/${response.data.jobId}`)
+        })
+      })
+      .catch((err) => {
+        console.log('create failed', err)
+      })
+  }
+
+  componentDidMount() {
+    this.loggedIn();
+    this.getInitialDetails();
+    this.getStates()
+  }
+
   render() {
     const { jobDetails, loggedInUser } = this.state;
     return (
       <div>
-        <Navigation onLogout={this.handleLogout} /> 
+        <Navigation user={loggedInUser} onLogout={this.handleLogout} /> 
         {
           <Switch>
             <Route exact path="/" render={(routeProps) => {
@@ -177,25 +216,26 @@ class App extends Component {
               path="/home"
               render={(routeProps) => {
                 return (
-                  <MainPage user={this.state.loggedInUser} {...routeProps} />
+                  <MainPage user={loggedInUser} {...routeProps} />
                 );
               }}
             />
             <Route path="/home/:jobId" render={(routeProps) => {
-            return <JobDescription user={this.state.loggedInUser} {...routeProps} />
+            return <JobDescription handleSubmitStep={this.handleSubmitStep} steps={this.state.steps} user={loggedInUser} {...routeProps} />
           }}/>
           <Route path="/home/:jobId/edit" render={(routeProps) => {
             return <EditJob />
           }} />
           <Route path="/home/:jobId/steps" render={(routeProps) => {
-            return <ShowSteps  {...routeProps}/>
+            return <ShowSteps user={loggedInUser} {...routeProps}/>
           }} />
           <Route path="/home/:jobId/create-steps" render={(routeProps) => {
-            return <CreateStep  {...routeProps} />
+            return <CreateStep user={loggedInUser}  {...routeProps} />
           }} />
             <Route exact path="/dashboard" render={(routeProps) => {
                 return (
-                  <Landing jobDetails={jobDetails} loggedInUser={loggedInUser} onAdd={this.addJobDetails} {...routeProps}/>
+                  <Landing steps={this.state.steps}
+                    jobDetails={jobDetails} loggedInUser={loggedInUser} onAdd={this.addJobDetails} {...routeProps}/>
                 );
               }}
             />
@@ -205,6 +245,8 @@ class App extends Component {
               render={(routeProps) => {
                 return (
                   <Landing
+                    steps={this.state.steps}
+                    handleSubmitStep = {this.handleSubmitStep}
                     jobDetails={jobDetails}
                     loggedInUser={loggedInUser}
                     onAdd={this.addJobDetails}
