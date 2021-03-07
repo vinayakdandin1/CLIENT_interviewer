@@ -8,6 +8,10 @@ import '../styles/MainPage.css'
 
 class MainPage extends Component {
 
+    componentDidMount() {
+        this.props.initialDetails()
+    }
+
     render() {
 
         // if(!this.props.user) {
