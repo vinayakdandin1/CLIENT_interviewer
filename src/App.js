@@ -46,6 +46,8 @@ class App extends Component {
       .then((response) => {
         this.setState({
           jobDetails: response.data,
+        }, () => {
+          console.log(this.state.jobDetails)
         });
       })
       .catch((err) => {
@@ -160,6 +162,8 @@ class App extends Component {
         this.setState(
           {
             loggedInUser: null,
+            jobDetails: [],
+            steps: []
           },
           () => {
             this.props.history.push("/");
@@ -198,6 +202,7 @@ class App extends Component {
     this.getStates()
   }
 
+
   render() {
     const { jobDetails, loggedInUser } = this.state;
     return (
@@ -216,7 +221,11 @@ class App extends Component {
               path="/home"
               render={(routeProps) => {
                 return (
-                  <MainPage user={loggedInUser} {...routeProps} />
+                  <MainPage
+                    initialDetails={this.getInitialDetails}
+                    user={loggedInUser}
+                    {...routeProps}
+                  />
                 );
               }}
             />
