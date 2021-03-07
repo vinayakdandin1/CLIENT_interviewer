@@ -47,8 +47,6 @@ class App extends Component {
       .then((response) => {
         this.setState({
           jobDetails: response.data,
-        }, () => {
-          console.log(this.state.jobDetails)
         });
       })
       .catch((err) => {
