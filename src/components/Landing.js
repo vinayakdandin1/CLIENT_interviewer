@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Row, Container, Col } from 'react-bootstrap'
-import { Route, Link } from "react-router-dom";
+import { Row, Container, Col, Spinner } from 'react-bootstrap'
+import { Link, Redirect } from "react-router-dom";
 import '../styles/Landing.css'
 import JobPreview from './JobPreview'
 
@@ -8,7 +8,7 @@ class Landing extends Component {
 
   state = {
     showPrev: false,
-
+    processing: true
   }
 
   showPreview = () => {
@@ -19,6 +19,11 @@ class Landing extends Component {
 
   render() {
     const { jobDetails } = this.props;
+
+    if(!this.props.loggedInUser) {
+      return <Redirect to="/" />
+    }
+
     return (
       <div>
         <Container>
