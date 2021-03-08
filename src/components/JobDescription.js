@@ -1,18 +1,30 @@
-import React, { Component } from 'react'
-import axios from 'axios'
-import '../styles/JobDescription.css'
-import CreateStep from './CreateStep'
-import ShowSteps from './ShowSteps'
-import config from '../config'
-
+import React, { Component } from "react";
+import axios from "axios";
+import "../styles/JobDescription.css";
+import CreateStep from "./CreateStep";
+import ShowSteps from "./ShowSteps";
+import config from "../config";
 class JobDescription extends Component {
   state = {
-    oneJob: {},
-    showEdit: false,
+    // oneJob: {}
+    id: "",
+    jobTitle: "",
+    companyName: "",
+    applicationDate: "",
+    contactPerson: "",
+    contactDetail: "",
+    jobDescription: "",
+    companyRating: "",
+    applicationLink: "",
+    sourceOfApplication: "",
+    salary: "",
+    interviewDate: "",
+    jobLocation: "",
+    editForm: false,
   };
 
   showForm = () => {
-    this.setState({ showEdit: true });
+    this.setState({ editForm: true });
   };
 
   getOneJob = () => {
@@ -21,68 +33,136 @@ class JobDescription extends Component {
       .get(`${config.API_URL}/api/home/${jobId}`, { withCredentials: true })
       .then((response) => {
         this.setState({
-          oneJob: response.data,
+          // oneJob: response.data
+          id: response.data._id,
+          jobTitle: response.data.jobTitle,
+          companyName: response.data.companyName,
+          applicationDate: response.data.applicationDate,
+          contactPerson: response.data.contactPerson,
+          contactDetail: response.data.contactDetail,
+          jobDescription: response.data.jobDescription,
+          companyRating: response.data.companyRating,
+          applicationLink: response.data.applicationLink,
+          sourceOfApplication: response.data.sourceOfApplication,
+          salary: response.data.salary,
+          interviewDate: response.data.interviewDate,
+          jobLocation: response.data.jobLocation,
         });
       })
       .catch((err) => {
         console.log("Fetching data failed", err);
       });
-    };
-    
-    handleEditChange = (event) => {
-    console.log(event.target.value);
-    let text = event.target.value;
-    let clonedText = JSON.parse(JSON.stringify(this.state.oneJob));
-    clonedText = text;
+  };
 
-    this.setState({
-      oneJob: clonedText,
-    });
-    };
-    
-//     handleSubmit = (event) => {
-//         event.preventDefault()
-//         let jobTitle = event.target.jobTitle.value
-//         let companyName = event.target.companyName.value;
-//         let applicationDate = event.target.applicationDate.value;
-//         let contactPerson = event.target.contactPerson.value;
-//         let contactDetail = event.target.contactDetail.value;
-//         let jobDescription = event.target.jobDescription.value;
-//         let applicationLink = event.target.jobTitle.value;
-//         let jobTitle = event.target.jobTitle.value;
-//     }
+  handleEditChange = (event) => {
+    this.setState(
+      {
+        [event.target.name]: event.target.value,
+        // editForm: false
+      },
+      () => {
+        // console.log(this.state.jobTitle);
+      }
+    );
+  };
 
-//   componentDidMount() {
-//     this.getOneJob();
-//   }
+  handleEditSubmit = (event) => {
+    event.preventDefault();
+    let jobId = this.state.id;
 
-  // componentDidUpdate() {
-  //     if (this.state.showEdit === true) {
-  //         this.setState({
-  //             showEdit: false
-  //         })
-  //     }
-  // }
+    let jobTitle = this.state.jobTitle;
+    let companyName = this.state.companyName;
+    let applicationDate = this.state.applicationDate;
+    let contactPerson = this.state.contactPerson;
+    let contactDetail = this.state.contactDetail;
+    let jobDescription = this.state.jobDescription;
+    let companyRating = this.state.companyRating;
+    let applicationLink = this.state.applicationLink;
+    let sourceOfApplication = this.state.sourceOfApplication;
+    let salary = this.state.salary;
+    let interviewDate = this.state.interviewDate;
+    let jobLocation = this.state.jobLocation;
+
+    // console.log(editedJob, jobId);
+    axios
+      .patch(
+        `${config.API_URL}/api/home/${jobId}`,
+        {
+          jobTitle,
+          companyName,
+          applicationDate,
+          contactPerson,
+          contactDetail,
+          jobDescription,
+          companyRating,
+          applicationLink,
+          sourceOfApplication,
+          salary,
+          interviewDate,
+          jobLocation,
+        },
+        { withCredentials: true }
+      )
+      .then((response) => {
+        this.setState({
+          jobTitle: response.data.jobTitle,
+          companyName: response.data.companyName,
+          applicationDate: response.data.applicationDate,
+          contactPerson: response.data.contactPerson,
+          contactDetail: response.data.contactDetail,
+          jobDescription: response.data.jobDescription,
+          companyRating: response.data.companyRating,
+          applicationLink: response.data.applicationLink,
+          sourceOfApplication: response.data.sourceOfApplication,
+          salary: response.data.salary,
+          interviewDate: response.data.interviewDate,
+          jobLocation: response.data.jobLocation,
+          editForm: false,
+        });
+      })
+      .catch((err) => {
+        console.log("Fetching data failed", err);
+      });
+  };
+
+  componentDidMount() {
+    this.getOneJob();
+  }
 
   render() {
-    const { oneJob, steps, showEdit } = this.state;
+    const {
+      id,
+      jobTitle,
+      companyName,
+      applicationDate,
+      contactPerson,
+      contactDetail,
+      jobDescription,
+      companyRating,
+      applicationLink,
+      sourceOfApplication,
+      salary,
+      interviewDate,
+      jobLocation,
+    } = this.state;
+
     return (
       <div>
         <div className="topLeft">
           <div className="mainContainer">
-            {showEdit ? (
-              <form onSubmit={this.props.onAdd}>
+            {this.state.editForm ? (
+              <form onSubmit={this.handleEditSubmit}>
                 <input
+                  onChange={this.handleEditChange}
+                  value={jobTitle}
                   name="jobTitle"
                   type="text"
-                  onChange={this.handleEditChange}
-                  value={oneJob.jobTitle}
                   placeholder="Job Title"
                 />
                 <input
-                  name="companyName"
                   onChange={this.handleEditChange}
-                  value={oneJob.companyName}
+                  value={companyName}
+                  name="companyName"
                   type="text"
                   placeholder="Company"
                 />
@@ -91,55 +171,55 @@ class JobDescription extends Component {
                   <strong>Application Date</strong>
                 </label>
                 <input
+                  onChange={this.handleEditChange}
+                  value={applicationDate}
                   type="date"
                   id="start"
                   name="applicationDate"
-                  onChange={this.handleEditChange}
-                  value={oneJob.applicationDate}
                 />
                 <br></br>
                 <input
+                  value={contactPerson}
+                  onChange={this.handleEditChange}
                   name="contactPerson"
                   type="text"
                   placeholder="Contact Person"
-                  onChange={this.handleEditChange}
-                  value={oneJob.contactPerson}
                 />
                 <input
+                  value={contactDetail}
+                  onChange={this.handleEditChange}
                   name="contactDetail"
                   type="text"
                   placeholder="Contact detail"
-                  onChange={this.handleEditChange}
-                  value={oneJob.contactDetail}
                 />
                 <input
+                  value={jobDescription}
+                  onChange={this.handleEditChange}
                   name="jobDescription"
                   type="text"
                   placeholder="Job Description"
-                  onChange={this.handleEditChange}
-                  value={oneJob.jobDescription}
                 />
                 {/* <input name="companyRating" type="text" placeholder="Company Rating"/> */}
                 <input
+                  value={applicationLink}
+                  onChange={this.handleEditChange}
                   name="applicationLink"
                   type="text"
                   placeholder="Application Link"
-                  onChange={this.handleEditChange}
-                  value={oneJob.applicationLink}
                 />
                 <input
+                  value={sourceOfApplication}
+                  onChange={this.handleEditChange}
                   name="sourceOfApplication"
                   type="text"
                   placeholder="Source of Application"
-                  onChange={this.handleEditChange}
-                  value={oneJob.sourceOfApplication}
                 />
                 <input
+                  value={salary}
+                  onChange={this.handleEditChange}
                   name="salary"
                   type="number"
                   placeholder="Salary"
-                  onChange={this.handleEditChange}
-                  value={oneJob.salary}
                 />
                 <br></br>
                 <label>
@@ -148,11 +228,11 @@ class JobDescription extends Component {
                 {/* <input type="date" id="start" name="interviewDate"/> */}
                 <br></br>
                 <input
+                  value={jobLocation}
+                  onChange={this.handleEditChange}
                   name="jobLocation"
                   type="text"
                   placeholder="Job Location"
-                  onChange={this.handleEditChange}
-                  value={oneJob.jobLocation}
                 />
                 <br></br>
                 <button type="submit">Submit</button>
@@ -160,43 +240,44 @@ class JobDescription extends Component {
             ) : (
               <div className="leftSide">
                 <div>
-                  <h1>{oneJob.jobTitle}</h1>
-                  <h3>{oneJob.companyName}</h3>
-                  <h6>{oneJob.applicationDate}</h6>
+                  <h1>{jobTitle}</h1>
+                  <h3>{companyName}</h3>
+                  <h6>{applicationDate}</h6>
                 </div>
                 <div>
                   <h6>Job description:</h6>
-                  <p>{oneJob.jobDescription}</p>
+                  <p>{jobDescription}</p>
                 </div>
                 <div>
                   <h6>Point of contact:</h6>
-                  <p>{oneJob.contactPerson}</p>
+                  <p>{contactPerson}</p>
                 </div>
                 <div>
                   <h6>Contact Detail:</h6>
-                  <p>{oneJob.contactDetail}</p>
+                  <p>{contactDetail}</p>
                 </div>
                 <div>
                   <h6>Rate your interview process:</h6>
                 </div>
                 <div>
                   <h6>Application link:</h6>
-                  <p>{oneJob.jobTitle}</p>
+                  <p>{jobTitle}</p>
                 </div>
                 <div>
                   <h6>Salary:</h6>
-                  <p>{oneJob.jobTitle}</p>
+                  <p>{jobTitle}</p>
                 </div>
               </div>
             )}
+
             <div className="rightSide">
               <div>
                 <h6>Interview date:</h6>
-                <p>{oneJob.interviewDate}</p>
+                <p>{interviewDate}</p>
               </div>
               <div>
                 <h6>Job location:</h6>
-                <p>{oneJob.jobLocation}</p>
+                <p>{jobLocation}</p>
               </div>
               <div>
                 <h6>Satus:</h6>
@@ -207,13 +288,13 @@ class JobDescription extends Component {
               </div>
               <CreateStep
                 handleSubmitStep={this.props.handleSubmitStep}
-                jobId={this.state.oneJob._id}
+                jobId={id}
               />
               <div>
                 <ShowSteps
                   handleDeleteStep={this.props.handleDeleteStep}
                   steps={this.props.steps}
-                  jobId={this.state.oneJob._id}
+                  jobId={id}
                 />
               </div>
             </div>
@@ -229,8 +310,8 @@ class JobDescription extends Component {
             </button>
             <button
               onClick={() => {
-                this.props.handleDeleteAllJobSteps(oneJob._id);
-                this.props.handleDeleteJob(oneJob._id);
+                this.props.handleDeleteAllJobSteps(id);
+                this.props.handleDeleteJob(id);
               }}
               className="submit1"
             >
@@ -243,4 +324,4 @@ class JobDescription extends Component {
   }
 }
 
-export default JobDescription
+export default JobDescription;
