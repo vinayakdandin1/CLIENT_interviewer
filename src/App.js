@@ -265,6 +265,10 @@ class App extends Component {
 
   render() {
     const { jobDetails, loggedInUser, logoutUser } = this.state;
+
+    //hqndle conditionqlly here, to put loqder
+
+
     return (
       <div>
         <Navigation user={loggedInUser} onLogout={this.handleLogout} /> 
