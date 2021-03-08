@@ -47,8 +47,6 @@ class App extends Component {
       .then((response) => {
         this.setState({
           jobDetails: response.data,
-        }, () => {
-          console.log(this.state.jobDetails)
         });
       })
       .catch((err) => {
@@ -283,7 +281,10 @@ class App extends Component {
         jobDetails
       })
     })
+  }
 
+  handleEditJobDesc = (jobId) => {
+    axios.patch(`${config.API_URL}/api/home/steps/${jobId}`)
   }
 
 

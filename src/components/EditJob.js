@@ -10,8 +10,8 @@ class EditJob extends Component {
     }
 
     componentDidMount(){
-        let jobDescriptionId = this.props.match.params.jobDescriptionId
-        axios.get(`${config.API_URL}/api/home/${jobDescriptionId}`)
+        let jobDescriptionId = this.props.match.params.jobId
+        axios.get(`${config.API_URL}/api/home/${jobId}`)
           .then((response) => {
               this.setState ({
                   jobDescription: response.data
@@ -21,6 +21,8 @@ class EditJob extends Component {
               console.log('Detail fetch failed')
           })
     }
+
+    
 
 
     render() {
