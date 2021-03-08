@@ -13,16 +13,11 @@ class MainPage extends Component {
     }
 
     render() {
-        const {logoutUser} = this.props
+        
         if(!this.props.user){
-            return 
-            <Redirect to={{
-                pathname: '/',
-                message: 'Please sign in' 
-              }}
-        />
+            return <Redirect to={'/'}/>
         }
-
+        // const { logoutUser } = this.props;
         const {jobDetails, user} = this.props
         console.log(user)
 

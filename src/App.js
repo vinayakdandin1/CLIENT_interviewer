@@ -20,7 +20,7 @@ class App extends Component {
     jobDetails: [],
     loggedInUser: null,
     steps: [],
-    logoutUser: false
+    fetching: false
   };
 
   clearValues = () => {
@@ -54,6 +54,7 @@ class App extends Component {
       .catch((err) => {
         console.log("Fetching data failed", err);
       });
+
   };
 
   getStates = () => {
@@ -253,9 +254,12 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.loggedIn();
-    this.getStates()
-    this.getInitialDetails()
+    this.getStates();
+    this.getInitialDetails();
+    if (!this.state.loggedInUser) {
+      this.loggedIn();
+    }
+    
   }
 
   handleEditJobDesc = (jobId) => {
@@ -265,6 +269,9 @@ class App extends Component {
 
   render() {
     const { jobDetails, loggedInUser, logoutUser } = this.state;
+    // if (!loggedInUser) {
+    //   return <Redirect to={"/"}/>
+    // }
     return (
       <div>
         <Navigation user={loggedInUser} onLogout={this.handleLogout} /> 
@@ -307,7 +314,7 @@ class App extends Component {
             <Route exact path="/dashboard" render={(routeProps) => {
                 return (
                   <Landing steps={this.state.steps}
-                    jobDetails={jobDetails} loggedInUser={loggedInUser} onAdd={this.addJobDetails} {...routeProps}/>
+                    jobDetails={jobDetails} loggedInUser={loggedInUser} toLogIn={this.loggedIn} onAdd={this.addJobDetails} {...routeProps}/>
                 );
               }}
             />

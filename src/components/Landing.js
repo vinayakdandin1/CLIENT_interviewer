@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Row, Container, Col } from 'react-bootstrap'
-import { Route, Link } from "react-router-dom";
+import { Route, Link, Redirect } from "react-router-dom";
 import '../styles/Landing.css'
 import JobPreview from './JobPreview'
 
@@ -18,6 +18,9 @@ class Landing extends Component {
   }
 
   render() {
+    if (!this.props.loggedInUser) {
+      return <Redirect to={"/"} />;
+    }
     const { jobDetails } = this.props;
     return (
       <div>
