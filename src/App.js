@@ -15,6 +15,7 @@ import Landing from "./components/Landing";
 import JobPreview from './components/JobPreview';
 import {Redirect} from 'react-router-dom'
 import { Spinner } from 'react-bootstrap'
+import Profile from "./components/Profile";
 
 class App extends Component {
   state = {
@@ -22,7 +23,8 @@ class App extends Component {
     loggedInUser: null,
     steps: [],
     logoutUser: false,
-    fetchingUser: false
+    fetchingUser: false,
+    unloggedUser: false
   };
 
   clearValues = () => {
@@ -273,9 +275,15 @@ class App extends Component {
     axios.patch(`${config.API_URL}/api/home/steps/${jobId}`)
   }
 
+  handleUnloggedUser = () => {
+    this.setState({
+      unloggedUser: true
+    })
+  }
+
 
   render() {
-    const { jobDetails, loggedInUser, logoutUser } = this.state;
+    const { jobDetails, loggedInUser, logoutUser, unloggedUser } = this.state;
 
  
       if(!this.state.fetchingUser) {
@@ -293,8 +301,21 @@ class App extends Component {
         {
           <Switch>
             <Route exact path="/" render={(routeProps) => {
-                return (
-                  <LoadPage onSignIn={this.handleSignIn} onSignUp={this.handleSignUp} {...routeProps} />
+                return !loggedInUser ? (
+                  <LoadPage
+                    onSignIn={this.handleSignIn}
+                    onSignUp={this.handleSignUp}
+                    {...routeProps}
+                    unloggedUser={unloggedUser}
+                  />
+                ) : (
+                  <MainPage
+                    jobDetails={jobDetails}
+                    initialDetails={this.getInitialDetails}
+                    user={loggedInUser}
+                    logoutUser={logoutUser}
+                    {...routeProps}
+                  />
                 );
               }}
             />
@@ -309,6 +330,7 @@ class App extends Component {
                     user={loggedInUser}
                     logoutUser={logoutUser}
                     {...routeProps}
+                    onUnlogged={this.handleUnloggedUser}
                   />
                 );
               }}
@@ -350,6 +372,9 @@ class App extends Component {
                 );
               }}
             />
+            <Route path="/profile" render={(routeProps) => {
+              return <Profile user={loggedInUser} {...routeProps} />;
+            }}/>
           </Switch>
         }
       </div>
