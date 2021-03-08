@@ -14,13 +14,15 @@ import Footer from './components/Footer';
 import Landing from "./components/Landing";
 import JobPreview from './components/JobPreview';
 import {Redirect} from 'react-router-dom'
+import { Spinner } from 'react-bootstrap'
 
 class App extends Component {
   state = {
     jobDetails: [],
     loggedInUser: null,
     steps: [],
-    fetching: false
+    logoutUser: false,
+    fetchingUser: false
   };
 
   clearValues = () => {
@@ -38,9 +40,14 @@ class App extends Component {
       .then((response) => {
         this.setState({
           loggedInUser: response.data,
+          fetchingUser: true
         });
       })
-      .catch(() => {});
+      .catch(() => {
+        this.setState({
+          fetchingUser: true
+        })
+      });
   };
 
   getInitialDetails = () => {
@@ -269,9 +276,17 @@ class App extends Component {
 
   render() {
     const { jobDetails, loggedInUser, logoutUser } = this.state;
-    // if (!loggedInUser) {
-    //   return <Redirect to={"/"}/>
-    // }
+
+ 
+      if(!this.state.fetchingUser) {
+        return <div>
+          <Spinner animation="border" role="status">
+            <span className="sr-only">Loading...</span>
+          </Spinner>
+        </div>
+      }
+    
+
     return (
       <div>
         <Navigation user={loggedInUser} onLogout={this.handleLogout} /> 
