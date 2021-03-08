@@ -4,6 +4,7 @@ import '../styles/LoadPage.scss'
 
 class LoadPage extends Component {
 
+    
     state = {
         hasClass: true,
         classes: "cont"
@@ -14,7 +15,7 @@ class LoadPage extends Component {
     }
 
     render() {
-
+        console.log(this.props.message)
         return (
             <div className="landing-main">
                 <div className={this.state.classes}>

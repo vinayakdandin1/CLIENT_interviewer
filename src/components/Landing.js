@@ -84,7 +84,7 @@ class Landing extends Component {
                 <label>
                   <strong>Interview Date</strong>
                 </label>
-                {/* <input type="date" id="start" name="interviewDate"/> */}
+                <input type="date" id="start" name="interviewDate"/>
                 <br></br>
                 <input
                   name="jobLocation"

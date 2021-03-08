@@ -13,15 +13,44 @@ class MainPage extends Component {
     }
 
     render() {
+        const {logoutUser} = this.props
+        if(!this.props.user){
+            return 
+            <Redirect to={{
+                pathname: '/',
+                message: 'Please sign in' 
+              }}
+        />
+        }
 
-        // if(!this.props.user) {
-        //     return <Redirect to={'/'} />
-        // }
+        const {jobDetails, user} = this.props
+        console.log(user)
+
+        let interviewCount = 0
+        let todayDate = new Date()
+        todayDate = JSON.stringify(todayDate)
 
         return (
-            
-            <div className="home-page-main">
-                Main page works
+            <div>
+                <div>
+                    <h1>welcome {user.firstName}</h1>
+                    <h3>You have applied to {jobDetails.length} jobs</h3>
+                    {
+                        jobDetails.map((single) => {
+                            if(single.interviewDate){
+                                if(single.interviewDate >= todayDate){
+                                    interviewCount++
+                                }
+                            }
+                        })
+                    }
+                    <h3>You have {interviewCount} upcoming interviews</h3>
+                </div>
+                <div>
+                    <button></button>
+                    <button></button>
+                </div>
+
             </div>
         )
     }

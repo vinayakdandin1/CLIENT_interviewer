@@ -13,12 +13,14 @@ import MainPage from './components/MainPage';
 import Footer from './components/Footer';
 import Landing from "./components/Landing";
 import JobPreview from './components/JobPreview';
+import {Redirect} from 'react-router-dom'
 
 class App extends Component {
   state = {
     jobDetails: [],
     loggedInUser: null,
-    steps: []
+    steps: [],
+    logoutUser: false
   };
 
   clearValues = () => {
@@ -79,7 +81,7 @@ class App extends Component {
       applicationLink: event.target.applicationLink.value,
       sourceOfApplication: event.target.sourceOfApplication.value,
       salary: event.target.salary.value,
-      // interviewDate: event.target.interviewDate.value,
+      interviewDate: event.target.interviewDate.value,
       jobLocation: event.target.jobLocation.value,
     };
     // console.log(event.target.applicationDate.value);
@@ -256,40 +258,13 @@ class App extends Component {
     this.getInitialDetails()
   }
 
-  handleEditForm = (oneJob) => {
-    axios.path(`${config.API_URL}/api/home/$${jobId._id}`, {
-      jobTitle: oneJOb.jobTitle,
-      companyName: oneJob.companyName,
-      applicationDate: oneJob.applicationDate,
-      jobDescription: oneJob.jobDescription,
-      contactPerson: oneJob.contactPerson,
-      contactDetail: oneJob.contactDetail,
-      applicationLink: oneJob.applicationLink,
-      salary: oneJob.salary,
-      sourceOfApplication: oneJob.sourceOfApplication,
-      interviewDate: oneJob.interviewDate,
-      jobLocation: oneJob.jobLocation
-    })
-    .then(() => {
-      let cloneJobDetails = JSON.parse(JSON.stringify(this.state.jobDetails))
-      cloneJobDetails.forEach((oneJob) => {
-        if (jobId._id === oneJob._id) {
-          oneJob.jobTitle = jodDetails.jobTitle
-        }
-      })
-      this.setState({
-        jobDetails
-      })
-    })
-  }
-
   handleEditJobDesc = (jobId) => {
     axios.patch(`${config.API_URL}/api/home/steps/${jobId}`)
   }
 
 
   render() {
-    const { jobDetails, loggedInUser } = this.state;
+    const { jobDetails, loggedInUser, logoutUser } = this.state;
     return (
       <div>
         <Navigation user={loggedInUser} onLogout={this.handleLogout} /> 
@@ -307,8 +282,10 @@ class App extends Component {
               render={(routeProps) => {
                 return (
                   <MainPage
+                    jobDetails={jobDetails}
                     initialDetails={this.getInitialDetails}
                     user={loggedInUser}
+                    logoutUser={logoutUser}
                     {...routeProps}
                   />
                 );
