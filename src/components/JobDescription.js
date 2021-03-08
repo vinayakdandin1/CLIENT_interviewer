@@ -28,6 +28,117 @@ class JobDescription extends Component {
         this.getOneJob()
     }
 
+    handleJobTitleChange = (event) => {
+        let text = event.target.value 
+        let cloneOneJob = JSON.parse(JSON.stringify(this.state.oneJob))
+        cloneOneJob.jobTitle = text
+
+        this.setState({
+            oneJob : cloneOneJob
+        })
+    }
+
+    handleCompanyNameChange = (event) => {
+        let text = event.target.value 
+        let cloneOneJob = JSON.parse(JSON.stringify(this.state.oneJob))
+        cloneOneJob.companyName = text
+
+        this.setState({
+            oneJob : cloneOneJob
+        })
+    }
+
+    handleApplicationDateChange = (event) => {
+        let text = event.target.value 
+        let cloneOneJob = JSON.parse(JSON.stringify(this.state.oneJob))
+        cloneOneJob.applicationDate = text
+
+        this.setState({
+            oneJob : cloneOneJob
+        })
+    }
+
+    handleJobDescriptionChange = (event) => {
+        let text = event.target.value 
+        let cloneOneJob = JSON.parse(JSON.stringify(this.state.oneJob))
+        cloneOneJob.jobDescription = text
+
+        this.setState({
+            oneJob : cloneOneJob
+        })
+    }
+
+    handleContactPersonChange = (event) => {
+        let text = event.target.value 
+        let cloneOneJob = JSON.parse(JSON.stringify(this.state.oneJob))
+        cloneOneJob.contactPerson= text
+
+        this.setState({
+            oneJob : cloneOneJob
+        })
+    }
+
+    handleContactDetailChange = (event) => {
+        let text = event.target.value 
+        let cloneOneJob = JSON.parse(JSON.stringify(this.state.oneJob))
+        cloneOneJob.contactDetail = text
+
+        this.setState({
+            oneJob : cloneOneJob
+        })
+    }
+
+    handleApplicationLinkChange = (event) => {
+        let text = event.target.value 
+        let cloneOneJob = JSON.parse(JSON.stringify(this.state.oneJob))
+        cloneOneJob.applicationLink = text
+
+        this.setState({
+            oneJob : cloneOneJob
+        })
+    }
+
+    handleSalaryChange = (event) => {
+        let text = event.target.value 
+        let cloneOneJob = JSON.parse(JSON.stringify(this.state.oneJob))
+        cloneOneJob.salary = text
+
+        this.setState({
+            oneJob : cloneOneJob
+        })
+    }
+
+    handleSourceOfApplicationChange = (event) => {
+        let text = event.target.value 
+        let cloneOneJob = JSON.parse(JSON.stringify(this.state.oneJob))
+        cloneOneJob.sourceOfApplication = text
+
+        this.setState({
+            oneJob : cloneOneJob
+        })
+    }
+
+    handleInterviewDateChange = (event) => {
+        let text = event.target.value 
+        let cloneOneJob = JSON.parse(JSON.stringify(this.state.oneJob))
+        cloneOneJob.interviewDate= text
+
+        this.setState({
+            oneJob : cloneOneJob
+        })
+    }
+
+    handleJobLocationChange = (event) => {
+        let text = event.target.value 
+        let cloneOneJob = JSON.parse(JSON.stringify(this.state.oneJob))
+        cloneOneJob.jobLocation = text
+
+        this.setState({
+            oneJob : cloneOneJob
+        })
+    }
+
+
 
     render() {
         const {oneJob, steps} = this.state
@@ -59,11 +170,11 @@ class JobDescription extends Component {
                   </div>
                   <div>
                       <h6>Application link:</h6>
-                      <p>{oneJob.jobTitle}</p>
+                      <p>{oneJob.applicationLink}</p>
                   </div>
                   <div>
                       <h6>Salary:</h6>
-                      <p>{oneJob.jobTitle}</p>
+                      <p>{oneJob.salary}</p>
                   </div>
                 </div>
                 <div className="rightSide">
