@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Container, Col, Spinner } from 'react-bootstrap'
+import { Row, Container, Col } from 'react-bootstrap'
 import { Link, Redirect } from "react-router-dom";
 import '../styles/Landing.css'
 import JobPreview from './JobPreview'
@@ -29,28 +29,37 @@ class Landing extends Component {
 
     return (
       <div>
-        <Container>
+       <div className="mainContainer">
+        <div className="leftSide">
           <Row>
             <Col>
-              Job Offers
-              <div>
+             <div className="card2">
+             <h1>Job Offers</h1>
+             <div className="scrollDown1">
                 {jobDetails.map((detail) => {
                   if (detail.userId == this.props.loggedInUser?._id) {
                     return (
                       <div key={detail._id}>
                         <Link to={`/dashboard/${detail._id}`}>
-                          <div className="job-details">
+                          <div className="un">
                             {detail.jobTitle}
                             <br></br>
-                            {detail.companyName}
+                            {detail.companyName.toUpperCase()}
                           </div>
                         </Link>
                       </div>
                     );
                   }
                 })}
-              </div>
+             </div>
+             </div>
             </Col>
+          </Row>
+          <div>
+            {this.props.isJobPreview && <JobPreview {...this.props}/>}
+          </div>
+        </div>
+        <div className="rightSide">
             <Col>
               <form onSubmit={this.props.onAdd}>
                 <input name="jobTitle" type="text" placeholder="Job Title" />
@@ -100,17 +109,14 @@ class Landing extends Component {
                   placeholder="Job Location"
                 />
                 <br></br>
-                <button type="submit">Submit</button>
+                <div className="formSubmit">
+                <button className="submit2" type="submit">SUBMIT</button>
+                </div>
+                
               </form>
             </Col>
-            <br></br>
-          </Row>
-        </Container>
-        <Container>
-          <div>
-            {this.props.isJobPreview && <JobPreview {...this.props}/>}
-          </div>
-        </Container>
+        </div>
+       </div>
       </div>
     );
   }

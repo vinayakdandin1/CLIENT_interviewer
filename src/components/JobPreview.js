@@ -45,20 +45,23 @@ class JobPreview extends Component {
           },
         } = this.state;
         return (
-          <div>
+          <div className="card3">
             <div>
+             <div>
               <h2>{companyName}</h2>
-              <h3>{applicationDate}</h3>
               <h3>{jobTitle}</h3>
-            </div>
-            <div>
+              <h5>{applicationDate}</h5>
+              <h5>{contactPerson}</h5>
+              <h5>{contactDetail}</h5>
+             </div>
+            </div> 
+            <div className="detailsButton">
               <Link to={`/home/${_id}`}>
-                <button className="submit">Details/Update</button>
+                <button className="submit2">DETAILS / UPDATE</button>
               </Link>
-              {contactPerson}
-              {contactDetail}
             </div>
           </div>
+          
         );
     }
 }

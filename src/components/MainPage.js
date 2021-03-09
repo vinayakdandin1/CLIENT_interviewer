@@ -1,6 +1,6 @@
 import { Navbar, Nav  } from 'react-bootstrap';
 import React, { Component } from 'react'
-import {Redirect} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import '../styles/MainPage.css'
 
 //import axios from 'axios';
@@ -32,10 +32,16 @@ class MainPage extends Component {
         console.log(todayDate);
         return (
             <div>
-                <div>
-                    <h1>welcome {user.firstName}</h1>
+              <div className="mainContainer">
+                <div className="centralCard">
+                  <div className="welcome">
+                    <h1>Welcome {user.firstName} !</h1>
+                  </div>
+                  <div className="welcome">
                     <h3>You have applied to {jobDetails.length} jobs</h3>
-                    {
+                  </div>  
+                  <div className="welcome">
+                  {
                         jobDetails.map((single) => {
                             if(single.interviewDate){
                                 if(single.interviewDate >= todayDate){
@@ -46,12 +52,17 @@ class MainPage extends Component {
                         })
                     }
                     <h3>You have {interviewCount} upcoming interviews</h3>
+                  </div>
                 </div>
-                <div>
-                    <button></button>
-                    <button></button>
-                </div>
-
+              </div>
+                 <div className="linkButton">
+                   <Link to="/dashboard">
+                    <button className="goTo">Dashboard</button>
+                   </Link>
+                   <Link to="/profil">
+                    <button className="goTo">Profil</button>
+                   </Link>
+              </div>
             </div>
         )
     }
