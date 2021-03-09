@@ -110,6 +110,7 @@ class JobDescription extends Component {
 
             {
                 this.state.editForm ? (
+               <div className="leftSide">
                 <form onSubmit={this.handleEditSubmit} >
                 <input onChange={this.handleEditChange} value={jobTitle} name="jobTitle" type="text" placeholder="Job Title" />
                 <input onChange={this.handleEditChange} value={companyName} name="companyName" type="text" placeholder="Company" />
@@ -170,8 +171,9 @@ class JobDescription extends Component {
                   placeholder="Job Location"
                 />
                 <br></br>
-                <button type="submit">Submit</button>
-              </form>
+                <button className="stepButton" type="submit">Submit</button>
+               </form>
+              </div>
                 ) : (
                     <div className="leftSide">
                   <div>
