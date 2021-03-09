@@ -248,7 +248,7 @@ class JobDescription extends Component {
                   />
                   <br></br>
                   <button className="stepButton" type="submit">
-                    Submit
+                    SUBMIT
                   </button>
                 </form>
               </div>
@@ -259,28 +259,9 @@ class JobDescription extends Component {
                   <h3>{companyName}</h3>
                   <h6>{applicationDate ? this.dateFormatChange(applicationDate):null}</h6>
                 </div>
-<<<<<<< HEAD
-                )
-            }
-        
-                <div className="rightSide">
-                  <div>
-                      <h6>Interview date:</h6>
-                      <p>{interviewDate}</p>
-                  </div>
-                  <div>
-                      <h6>Job location:</h6>
-                      <p>{jobLocation}</p>
-                  </div>
-                    <CreateStep handleSubmitStep={this.props.handleSubmitStep} jobId={id} />
-                  <div>
-                    <ShowSteps handleDeleteStep={this.props.handleDeleteStep} steps={this.props.steps} jobId={id}/>
-                  </div>
-=======
                 <div>
                   <h6>Job description:</h6>
                   <p>{jobDescription}</p>
->>>>>>> origin/zelimhan
                 </div>
                 <div>
                   <h6>Point of contact:</h6>
@@ -317,13 +298,6 @@ class JobDescription extends Component {
                 <h6>Job location:</h6>
                 <p>{jobLocation}</p>
               </div>
-              <div>
-                <h6>Satus:</h6>
-                <p>
-                  applied / in interview process/ negotiations / received offer
-                  / not received
-                </p>
-              </div>
               <CreateStep
                 handleSubmitStep={this.props.handleSubmitStep}
                 jobId={id}
@@ -346,7 +320,7 @@ class JobDescription extends Component {
               }}
               className="submit1"
             >
-              Edit
+              EDIT
             </button>
             <button
               onClick={() => {
@@ -355,7 +329,7 @@ class JobDescription extends Component {
               }}
               className="submit1"
             >
-              Delete
+              DELETE
             </button>
           </div>
         </div>

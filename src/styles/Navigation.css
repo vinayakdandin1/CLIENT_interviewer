@@ -2,7 +2,10 @@
     margin-left: 1em;
     font-size: 1.5em;
     font-family: Copperplate;
-    
+}
+
+.navigation-brand.navbar-brand:hover {
+    color: #d4af7a;;
 }
 
 .navigation-links {

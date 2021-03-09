@@ -44,18 +44,22 @@
 .submit1 {
     cursor: pointer;
     border-radius: 5em;
+    border: solid 1px #457B9D;
     color: white;
     background-color: #457B9D;
-    border: 0;
     padding-left: 40px;
     padding-right: 40px;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
     padding-top: 10px;
     font-family: 'Ubuntu', sans-serif;
     font-weight: bold;
     margin: 10px;
     font-size: 14px;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04)
+}
+
+.submit1:hover {
+    background-color: #d4af7a;
 }
 
 
@@ -104,12 +108,18 @@
     font-weight: bold;
     margin-top: 20px;
     font-size: 14px;
-    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04)
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+    border: solid 1px #457B9D;
+}
+
+.stepButton:hover {
+    background-color: #d4af7a;
 }
 
 .deleteStep {
     cursor: pointer;
     border-radius: 5em;
+    border: solid 1px #457B9D;
     color: white;
     background-color: #457B9D;
     border: 0;
@@ -122,6 +132,10 @@
     font-size: 14px;
     font-weight: bold;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04)
+}
+
+.deleteStep:hover {
+    background-color: #d4af7a;
 }
 
 .card1 {
@@ -192,4 +206,8 @@
         padding-right: 10px;
         margin-top: 10px;
     }
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-weight: bold;
 }

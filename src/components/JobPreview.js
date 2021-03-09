@@ -39,35 +39,6 @@ class JobPreview extends Component {
     return newDate;
   };
 
-<<<<<<< HEAD
-    render() {
-        const {
-          singleJob: {
-            companyName,
-            applicationDate,
-            jobTitle,
-            contactPerson,
-            contactDetail,
-            _id,
-          },
-        } = this.state;
-        return (
-          <div className="card3">
-            <div>
-             <div>
-              <h2>{companyName}</h2>
-              <h3>{jobTitle}</h3>
-              <h5>{applicationDate}</h5>
-              <h5>{contactPerson}</h5>
-              <h5>{contactDetail}</h5>
-             </div>
-            </div> 
-            <div className="detailsButton">
-              <Link style={{ textDecoration: 'none' }} to={`/home/${_id}`}>
-                <button className="submit2">DETAILS / UPDATE</button>
-              </Link>
-            </div>
-=======
   render() {
     const {
       singleJob: {
@@ -88,14 +59,13 @@ class JobPreview extends Component {
             <h5>{applicationDate ?this.dateFormatChange(applicationDate):null}</h5>
             <h5>{contactPerson}</h5>
             <h5>{contactDetail}</h5>
->>>>>>> origin/zelimhan
           </div>
         </div>
         <div className="detailsButton">
-          <Link to={`/home/${_id}`}>
-            <button className="submit2">DETAILS / UPDATE</button>
-          </Link>
-        </div>
+              <Link style={{ textDecoration: 'none' }} to={`/home/${_id}`}>
+                <button className="submit2">DETAILS / UPDATE</button>
+              </Link>
+            </div>
       </div>
     );
   }

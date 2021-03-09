@@ -1,0 +1,13 @@
+.notFound {
+    height: auto;
+    width: auto;
+    margin: 4em 5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.surprise {
+    height: auto;
+    width: auto;
+}

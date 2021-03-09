@@ -17,6 +17,7 @@ import {Redirect} from 'react-router-dom'
 import { Spinner } from 'react-bootstrap'
 import Profile from "./components/Profile";
 import SearchJob from "./components/SearchJob";
+import NotFound from "./components/NotFound"
 
 class App extends Component {
   state = {
@@ -476,6 +477,7 @@ class App extends Component {
                 return <Profile user={loggedInUser} {...routeProps} />;
               }}
             />
+            <Route component={NotFound} />
           </Switch>
         }
       </div>

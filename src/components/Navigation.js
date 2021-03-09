@@ -8,7 +8,9 @@ class Navigation extends Component {
         return (
             <div >
                 <Navbar id="navBar" bg="dark" variant="dark" expand="lg">
-                    <Navbar.Brand className="navigation-brand" to="/">interVIEWER</Navbar.Brand>
+                    <Link to="/">
+                    <Navbar.Brand className="navigation-brand">interVIEWER</Navbar.Brand>
+                    </Link>
                         <Form className="searchBar" onSubmit={this.props.onSearch}>
                             <FormControl type="text" name="s" placeholder="Search for job" className="mr-sm-2" />
                             <Button className="searchButton" type="submit" variant="outline-info">Search</Button>
