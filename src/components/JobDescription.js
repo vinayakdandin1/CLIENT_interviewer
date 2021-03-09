@@ -221,10 +221,6 @@ class JobDescription extends Component {
                       <h6>Job location:</h6>
                       <p>{jobLocation}</p>
                   </div>
-                  <div>
-                      <h6>Satus:</h6>
-                      <p>applied / in interview process/ negotiations / received offer / not received</p>
-                  </div>
                     <CreateStep handleSubmitStep={this.props.handleSubmitStep} jobId={id} />
                   <div>
                     <ShowSteps handleDeleteStep={this.props.handleDeleteStep} steps={this.props.steps} jobId={id}/>

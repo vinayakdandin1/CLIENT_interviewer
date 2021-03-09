@@ -8,7 +8,7 @@ class CreateStep extends Component {
 
         return (
             <div>
-                <div className="card">
+                <div className="card1">
                   <form onSubmit={this.props.handleSubmitStep} className="addStep">
                     <input className="un" name="date" type="date" />
                     <input className="un" name="description" type="text" placeholder="Enter a step" />

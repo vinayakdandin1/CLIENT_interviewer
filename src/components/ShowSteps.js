@@ -42,10 +42,13 @@ class ShowSteps extends Component {
                       return (
                         (ele.jobId === jobId) ?
                           (<div>
-                        <p className="un">{ele.description} </p>
-                        <p className="un">{ele.date}</p>
-                        <button onClick={() => {handleDeleteStep(ele._id, jobId)}} className="deleteStep">Delete</button>
-                        </div>) : null
+                             <div className="un">
+                               <h5>Step</h5>
+                               <p>{ele.description} </p>
+                               <p>{ele.date}</p>
+                             </div>
+                               <button onClick={() => {handleDeleteStep(ele._id, jobId)}} className="deleteStep">Delete</button>
+                           </div>) : null
                       )                                       
                     })
                      

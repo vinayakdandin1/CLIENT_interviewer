@@ -56,11 +56,11 @@ class MainPage extends Component {
                 </div>
               </div>
                  <div className="linkButton">
-                   <Link to="/dashboard">
-                    <button className="goTo">Dashboard</button>
+                   <Link style={{ textDecoration: 'none' }} to="/dashboard">
+                    <button className="goTo">DASHBOARD</button>
                    </Link>
-                   <Link to="/profil">
-                    <button className="goTo">Profil</button>
+                   <Link style={{ textDecoration: 'none' }} to="/profil">
+                    <button className="goTo">PROFIL</button>
                    </Link>
               </div>
             </div>
