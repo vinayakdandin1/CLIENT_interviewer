@@ -26,17 +26,23 @@ class ShowSteps extends Component {
         stepsArray: [...this.props.steps]
       })
     }
- }
+  }
+  
+  dateFormatChange = (date) => {
+    let newDate = date.split("T", 1).reverse();
+    return newDate
+  }
   
   render() {
     const {stepsArray} = this.state 
     const {handleDeleteStep, jobId} = this.props
     
       return (
-          <div>
-              <div className="card1">
+        <div>
+          
+            <div className="card1">
               <div className="scrollDown">
-                  {
+                {
                     
                     stepsArray.map((ele) => {  
                       return (
@@ -52,9 +58,10 @@ class ShowSteps extends Component {
                       )                                       
                     })
                      
-                  }
-                  </div>
+                }
               </div>
+            </div>
+          
           </div>
       )
   }
