@@ -102,7 +102,7 @@ class JobDescription extends Component {
     render() {
         const {id, jobTitle, companyName, applicationDate, contactPerson, contactDetail, jobDescription, 
         companyRating, applicationLink, sourceOfApplication, salary, interviewDate, jobLocation} = this.state
-        
+        console.log(interviewDate);
         return (
         <div>
          <div className="topLeft">

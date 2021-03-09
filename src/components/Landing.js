@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Container, Col, Spinner } from 'react-bootstrap'
+import { Row, Container, Col, DropdownButton, Dropdown } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
 import '../styles/Landing.css'
 import JobPreview from './JobPreview'
@@ -27,6 +27,8 @@ class Landing extends Component {
       return <Redirect to="/" />
     }
 
+    const { onDateFilter, oninterviewFilter, onSalarySort } = this.props;
+    
     return (
       <div>
         <Container>
@@ -34,6 +36,11 @@ class Landing extends Component {
             <Col>
               Job Offers
               <div>
+                <DropdownButton id="dropdown-basic-button" title="Sort By">
+                  <Dropdown.Item onClick={onDateFilter}>Application Date</Dropdown.Item>
+                  <Dropdown.Item onClick={oninterviewFilter}>Interview Date</Dropdown.Item>
+                  <Dropdown.Item onClick={onSalarySort}>Salary</Dropdown.Item>
+                </DropdownButton>
                 {jobDetails.map((detail) => {
                   if (detail.userId == this.props.loggedInUser?._id) {
                     return (
@@ -92,7 +99,7 @@ class Landing extends Component {
                 <label>
                   <strong>Interview Date</strong>
                 </label>
-                <input type="date" id="start" name="interviewDate"/>
+                <input type="date" id="start" name="interviewDate" />
                 <br></br>
                 <input
                   name="jobLocation"
@@ -107,9 +114,7 @@ class Landing extends Component {
           </Row>
         </Container>
         <Container>
-          <div>
-            {this.props.isJobPreview && <JobPreview {...this.props}/>}
-          </div>
+          <div>{this.props.isJobPreview && <JobPreview {...this.props} />}</div>
         </Container>
       </div>
     );
