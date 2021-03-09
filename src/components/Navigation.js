@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Navbar, Nav  } from 'react-bootstrap';
+import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import {Link} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -11,6 +11,10 @@ class Navigation extends Component {
                     <Navbar.Brand className="navigation-brand" to="/">interVIEWER</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
+                        <Form inline onSubmit={this.props.onSearch}>
+                            <FormControl type="text" name="s" placeholder="Search for Job" className="mr-sm-2" />
+                            <Button type="submit" variant="outline-info">Search</Button>
+                        </Form>
                         <Nav className="ml-auto navigation-links">
                             <Link to="/about">About</Link>
                             {

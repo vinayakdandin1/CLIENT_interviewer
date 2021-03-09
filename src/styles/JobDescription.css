@@ -54,7 +54,7 @@
     font-family: 'Ubuntu', sans-serif;
     font-weight: bold;
     margin: 10px;
-    font-size: 13px;
+    font-size: 14px;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04)
 }
 
@@ -103,7 +103,7 @@
     font-family: 'Ubuntu', sans-serif;
     font-weight: bold;
     margin-top: 20px;
-    font-size: 13px;
+    font-size: 14px;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04)
 }
 
@@ -119,7 +119,7 @@
     padding-top: 10px;
     font-family: 'Ubuntu', sans-serif;
     margin-top: 20px;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: bold;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04)
 }
@@ -140,6 +140,14 @@
 .scrollDown {
     max-height: 180px;
     overflow-y: scroll;
+}
+
+#dropdown-basic-button {
+    border-radius: 5em;
+    background-color: #457B9D;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
 }
 
 @media screen and (max-width : 1000px){

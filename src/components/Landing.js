@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Container, Col } from 'react-bootstrap'
+import { Row, Container, Col, DropdownButton, Dropdown } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
 import '../styles/Landing.css'
 import JobPreview from './JobPreview'
@@ -27,6 +27,8 @@ class Landing extends Component {
       return <Redirect to="/" />
     }
 
+    const { onDateFilter, oninterviewFilter, onSalarySort } = this.props;
+    
     return (
       <div>
        <div className="mainContainer">
@@ -34,7 +36,16 @@ class Landing extends Component {
           <Row>
             <Col>
              <div className="card2">
-             <h1>Job Offers</h1>
+               <div className="topTitle">
+               <h1>Job Offers</h1>
+                <div>
+                 <DropdownButton id="dropdown-basic-button" title="SORT BY">
+                  <Dropdown.Item onClick={onDateFilter}>Application Date</Dropdown.Item>
+                  <Dropdown.Item onClick={oninterviewFilter}>Interview Date</Dropdown.Item>
+                  <Dropdown.Item onClick={onSalarySort}>Salary</Dropdown.Item>
+                 </DropdownButton>
+                </div>
+               </div>
              <div className="scrollDown1">
                 {jobDetails.map((detail) => {
                   if (detail.userId == this.props.loggedInUser?._id) {
@@ -101,7 +112,7 @@ class Landing extends Component {
                 <label>
                   <strong>Interview Date</strong>
                 </label>
-                <input type="date" id="start" name="interviewDate"/>
+                <input type="date" id="start" name="interviewDate" />
                 <br></br>
                 <input
                   name="jobLocation"
