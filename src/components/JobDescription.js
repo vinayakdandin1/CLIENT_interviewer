@@ -196,11 +196,15 @@ class JobDescription extends Component {
                   </div>
                   <div>
                       <h6>Application link:</h6>
-                      <p>{jobTitle}</p>
+                      <p>{applicationLink}</p>
+                  </div>
+                  <div>
+                      <h6>Source of application:</h6>
+                      <p>{sourceOfApplication}</p>
                   </div>
                   <div>
                       <h6>Salary:</h6>
-                      <p>{jobTitle}</p>
+                      <p>{salary}</p>
                   </div>
                 </div>
                 )
