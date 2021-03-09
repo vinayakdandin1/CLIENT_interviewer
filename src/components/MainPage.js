@@ -12,24 +12,24 @@ class MainPage extends Component {
         this.props.initialDetails()
     }
 
-    render() {
-        const {logoutUser} = this.props
-        if(!this.props.user){
-            return 
-            <Redirect to={{
-                pathname: '/',
-                message: 'Please sign in' 
-              }}
-        />
-        }
 
+
+    render() {
+        
+
+
+        if (!this.props.user) {
+            this.props.onUnlogged()
+            return <Redirect to={'/'}  />
+        }
+        // const { logoutUser } = this.props;
         const {jobDetails, user} = this.props
-        console.log(user)
+        
 
         let interviewCount = 0
         let todayDate = new Date()
-        todayDate = JSON.stringify(todayDate)
-
+        todayDate = JSON.parse(JSON.stringify(todayDate))
+        console.log(todayDate);
         return (
             <div>
                 <div>
@@ -40,6 +40,7 @@ class MainPage extends Component {
                             if(single.interviewDate){
                                 if(single.interviewDate >= todayDate){
                                     interviewCount++
+                                    console.log(single.interviewDate)
                                 }
                             }
                         })

@@ -18,6 +18,9 @@ class Landing extends Component {
   }
 
   render() {
+    if (!this.props.loggedInUser) {
+      return <Redirect to={"/"} />;
+    }
     const { jobDetails } = this.props;
 
     if(!this.props.loggedInUser) {

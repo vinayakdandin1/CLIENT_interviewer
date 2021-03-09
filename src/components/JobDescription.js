@@ -160,7 +160,7 @@ class JobDescription extends Component {
                 <label>
                   <strong>Interview Date</strong>
                 </label>
-                <input type="date" id="start" name="interviewDate"/> 
+                <input type="date" id="start" value={interviewDate} onChange={this.handleEditChange} name="interviewDate"/> 
                 <br></br>
                 <input
                   value={jobLocation}
