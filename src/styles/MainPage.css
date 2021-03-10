@@ -1,14 +1,4 @@
-/*
-.container{
-    height: auto;
-    width: auto;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-*/
+
 
 .home-page-buttons {
     height: 100%;
@@ -44,7 +34,7 @@
 .welcome {
     display: flex;
     align-items: center;
-    margin: 7em auto;
+    margin: 6em auto;
 }
 
 .goTo {

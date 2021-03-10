@@ -15,7 +15,7 @@ export default class SearchJob extends Component {
                     filteredJobs.map((e) => {
                         return  (
                           <div>
-                            <div>
+                            <div className="card3">
                               <Link className="searchResult" style={{ textDecoration: 'none' }} to={`/home/${e._id}`}>
                                 <h3>{e.companyName}</h3>
                                 <h3>{e.jobTitle}</h3>
@@ -28,7 +28,12 @@ export default class SearchJob extends Component {
                           
                         )
                     }):<div className="searchResult">
+                    
+                         <div className="card3">
+                         <Link className="searchResult" style={{ textDecoration: 'none' }} to="/home">
                           <h3>No Jobs exist with your given Input</h3>
+                         </Link>
+                         </div>
                           <div className="emptyImg">
                             <img src={Empty} alt="remembrall" />
                           </div>
