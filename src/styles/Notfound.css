@@ -11,3 +11,18 @@
     height: auto;
     width: auto;
 }
+
+@media screen and (max-width : 1100px){
+    .notFound {
+        height: 200px;
+        width: 400px;
+        margin: 1em 65px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .surprise {
+        height: 200px;
+        width: 400px;
+    }
+}

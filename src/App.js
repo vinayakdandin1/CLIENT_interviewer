@@ -86,7 +86,6 @@ class App extends Component {
       itemvalues: [{}],
     });
   };
-
   googleSignUp = (event) => {
     let user = {
       emailId: event.profileObj.email,
@@ -112,12 +111,10 @@ class App extends Component {
           error: err.response.data,
         });
       });
-  }
-
+  };
   errorGoogleSignIn = (event) => {
 
-  }
-
+  };
   googleSignIn = (event) => {
     
     // axios
@@ -140,8 +137,8 @@ class App extends Component {
     axios({
       method: "POST",
       url: `${config.API_URL}/api/google/signin`,
-      data: {tokenId: event.tokenId},
-      withCredentials: true 
+      data: { tokenId: event.tokenId },
+      withCredentials: true
     }).then((response) => {
       
       this.setState(
@@ -156,8 +153,7 @@ class App extends Component {
     }).catch(() => {
       console.log("Something went wrong", err);
     })
-  }
-
+  };
   loggedIn = () => {
     axios
       .get(`${config.API_URL}/api/user`, { withCredentials: true })
@@ -406,7 +402,6 @@ class App extends Component {
       unloggedUser: true,
     });
   };
-
   render() {
     const { jobDetails, loggedInUser, logoutUser, unloggedUser,filteredJobs } = this.state;
     if (!this.state.fetchingUser) {

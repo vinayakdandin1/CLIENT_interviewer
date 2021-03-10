@@ -284,7 +284,7 @@ class JobDescription extends Component {
                 </div>
                 <div>
                   <h6>Salary:</h6>
-                  <p>{salary}</p>
+                  <p>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(salary)}</p>
                 </div>
               </div>
             )}
