@@ -1,0 +1,17 @@
+.card5 {
+    height: auto;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    flex-direction: column;
+    padding: 1em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.jobOverview {
+    text-align: start;
+}

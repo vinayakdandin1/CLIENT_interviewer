@@ -1,0 +1,22 @@
+.referrals-flex {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2rem;
+}
+
+.centralCard {
+    padding: 1em 2em;
+    margin-right: 1em;
+    width: 70%;
+    background-color: #A8DADC;
+    border: solid 5px white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.jobCard {
+    display: flex;
+    flex-direction: row;
+}

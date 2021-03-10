@@ -19,6 +19,7 @@ import Profile from "./components/Profile";
 import SearchJob from "./components/SearchJob";
 import NotFound from "./components/NotFound"
 import About from "./components/About.js"
+import Referrals from './components/Referrals'
 
 
 class App extends Component {
@@ -87,6 +88,7 @@ class App extends Component {
       itemvalues: [{}],
     });
   };
+
   googleSignUp = (event) => {
     let user = {
       emailId: event.profileObj.email,
@@ -117,24 +119,6 @@ class App extends Component {
 
   };
   googleSignIn = (event) => {
-    
-    // axios
-    //   .post(`${config.API_URL}/api/google/signin`, user, { withCredentials: true })
-    //   .then((response) => {
-      
-    //     this.setState(
-    //       {
-    //         loggedInUser: response.data,
-    //       },
-    //       () => {
-    //         this.props.history.push("/home");
-    //       }
-    //     );
-    //   })
-    //   .catch((err) => {
-    //     console.log("Something went wrong", err);
-    //   });
-
     axios({
       method: "POST",
       url: `${config.API_URL}/api/google/signin`,
@@ -155,6 +139,8 @@ class App extends Component {
       console.log("Something went wrong", err);
     })
   };
+
+
   loggedIn = () => {
     axios
       .get(`${config.API_URL}/api/user`, { withCredentials: true })
@@ -352,6 +338,7 @@ class App extends Component {
         console.log("delete failed", err);
       });
   };
+  
   handleDeleteAllJobSteps = (jobId) => {
     axios.delete(`${config.API_URL}/api/home/steps/${jobId}`, { withCredentials: true })
       .then(() => {
@@ -391,6 +378,7 @@ class App extends Component {
   componentDidMount() {
     this.getStates();
     this.getInitialDetails();
+    
     if (!this.state.loggedInUser) {
       this.loggedIn();
     }
@@ -404,7 +392,7 @@ class App extends Component {
     });
   };
   render() {
-    const { jobDetails, loggedInUser, logoutUser, unloggedUser,filteredJobs } = this.state;
+    const { jobDetails, loggedInUser, logoutUser, unloggedUser,filteredJobs, referrals } = this.state;
     if (!this.state.fetchingUser) {
       return (
         <div>
@@ -546,6 +534,15 @@ class App extends Component {
               }}
             />
             <Route path="/about" component={About} />
+            <Route
+            
+              path="/referrals"
+              render={(routeProps) => {
+                return <Referrals 
+                clearValues={this.clearValues}
+                  user={loggedInUser} {...routeProps} />;
+              }}
+            />
             <Route component={NotFound} />
           </Switch>
         }

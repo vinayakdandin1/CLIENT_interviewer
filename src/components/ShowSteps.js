@@ -27,6 +27,12 @@ class ShowSteps extends Component {
       })
     }
   }
+
+  dateFormatChange = (date) => {
+    let newDate = date.split("T", 1).reverse();
+    return newDate;
+  };
+
   
   dateFormatChange = (date) => {
     let newDate = date.split("T", 1).reverse();
@@ -39,25 +45,25 @@ class ShowSteps extends Component {
     
       return (
         <div>
-            <div className="scrollDown">
-              {stepsArray.map((ele) => {
-                return ele.jobId === jobId ? (
-                  <div className="card1">
-                    <div className="un">
-                      <p>{ele.description} </p>
-                      <p>{ele.date}</p>
-                    </div>
-                    <button
-                      onClick={() => {
-                        handleDeleteStep(ele._id, jobId);
-                      }}
-                      className="deleteStep"
-                    >
-                      DELETE
-                    </button>
-                  </div>
-                ) : null;
-              })}
+          
+            <div className="card1">
+              <div className="scrollDown">
+                { 
+                    stepsArray.map((ele) => {  
+                      return (
+                        (ele.jobId === jobId) ?
+                          (<div>
+                             <div className="un">
+                               <h6>{ele.description} </h6>
+                               <h6>{ele.date ? this.dateFormatChange(ele.date):null}</h6>
+                             </div>
+                               <button onClick={() => {handleDeleteStep(ele._id, jobId)}} className="deleteStep">DELETE</button>
+                           </div>) : null
+                      )                                       
+                    })
+                     
+                }
+              </div>
             </div>
           </div>
       );

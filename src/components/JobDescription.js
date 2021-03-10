@@ -256,62 +256,58 @@ class JobDescription extends Component {
                 <div>
                   <h1>{jobTitle}</h1>
                   <h3>{companyName}</h3>
+                  <h5>{applicationDate ? this.dateFormatChange(applicationDate):null}</h5>
+                </div>
+                <div>
+                  <h5>Job description:</h5>
+                  <h6>{jobDescription}</h6>
+                </div>
+                <div>
+                  <h5>Point of contact:</h5>
+                  <h6>{contactPerson}</h6>
+                </div>
+                <div>
+                  <h5>Contact Detail:</h5>
+                  <h6>{contactDetail}</h6>
+                </div>
+                <div>
+                  <h5>Rate your interview process:</h5>
+                </div>
+                <div>
+                  <h5>Application link:</h5>
+                  <h6>{applicationLink}</h6>
+                </div>
+                <div>
+                  <h5>Source of application:</h5>
+                  <h6>{sourceOfApplication}</h6>
+                </div>
+                <div>
+                  <h5>Salary:</h5>
                   <h6>
-                    {applicationDate
-                      ? this.dateFormatChange(applicationDate)
-                      : null}
-                  </h6>
-                </div>
-                <div>
-                  <h6>Job description:</h6>
-                  <p>{jobDescription}</p>
-                </div>
-                <div>
-                  <h6>Point of contact:</h6>
-                  <p>{contactPerson}</p>
-                </div>
-                <div>
-                  <h6>Contact Detail:</h6>
-                  <p>{contactDetail}</p>
-                </div>
-                <div>
-                  <h6>Rate your interview process:</h6>
-                </div>
-                <div>
-                  <h6>Application link:</h6>
-                  <p>{applicationLink}</p>
-                </div>
-                <div>
-                  <h6>Source of application:</h6>
-                  <p>{sourceOfApplication}</p>
-                </div>
-                <div>
-                  <h6>Salary:</h6>
-                  <p>
                     {new Intl.NumberFormat("de-DE", {
                       style: "currency",
                       currency: "EUR",
                     }).format(salary)}
-                  </p>
+                  </h6>
                 </div>
               </div>
             )}
 
             <div className="rightSide">
               <div>
-                {!editForm ? <h6>Interview date:</h6> : null}
+                {!editForm ? <h5>Interview date:</h5> : null}
                 {!editForm ? (
-                  <p>
+                  <h6>
                     {interviewDate
                       ? this.dateFormatChange(interviewDate)
                       : null}
-                  </p>
+                  </h6>
                 ) : null}
               </div>
               <div>
-                {!editForm ? <h6>Job location:</h6>:null}
+                {!editForm ? <h5>Job location:</h5>:null}
 
-                {!editForm ? <p>{jobLocation}</p> : null}
+                {!editForm ? <h6>{jobLocation}</h6> : null}
               </div>
               <CreateStep
                 handleSubmitStep={this.props.handleSubmitStep}
