@@ -43,11 +43,12 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin-left: 12em;
+    margin-left: 14em;
+    margin-right: 10em;
 }
 
 .navbar-collapse {
-    margin-left: 1em;
+    width: auto;
 }
 
 .searchButton {
