@@ -83,7 +83,6 @@ class JobDescription extends Component {
     let interviewDate = this.state.interviewDate;
     let jobLocation = this.state.jobLocation;
 
-    // console.log(editedJob, jobId);
     axios
       .patch(
         `${config.API_URL}/api/home/${jobId}`,
@@ -135,6 +134,7 @@ class JobDescription extends Component {
   };
 
   render() {
+    const {editForm} = this.state
     const {
       id,
       jobTitle,
@@ -150,12 +150,11 @@ class JobDescription extends Component {
       interviewDate,
       jobLocation,
     } = this.state;
-    console.log(interviewDate);
     return (
       <div>
         <div className="topLeft">
           <div className="mainContainer">
-            {this.state.editForm ? (
+            {editForm ? (
               <div className="leftSide">
                 <form onSubmit={this.handleEditSubmit}>
                   <input
@@ -257,7 +256,11 @@ class JobDescription extends Component {
                 <div>
                   <h1>{jobTitle}</h1>
                   <h3>{companyName}</h3>
-                  <h6>{applicationDate ? this.dateFormatChange(applicationDate):null}</h6>
+                  <h6>
+                    {applicationDate
+                      ? this.dateFormatChange(applicationDate)
+                      : null}
+                  </h6>
                 </div>
                 <div>
                   <h6>Job description:</h6>
@@ -284,19 +287,31 @@ class JobDescription extends Component {
                 </div>
                 <div>
                   <h6>Salary:</h6>
-                  <p>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(salary)}</p>
+                  <p>
+                    {new Intl.NumberFormat("de-DE", {
+                      style: "currency",
+                      currency: "EUR",
+                    }).format(salary)}
+                  </p>
                 </div>
               </div>
             )}
 
             <div className="rightSide">
               <div>
-                <h6>Interview date:</h6>
-                <p>{interviewDate ? this.dateFormatChange(interviewDate): null}</p>
+                {!editForm ? <h6>Interview date:</h6> : null}
+                {!editForm ? (
+                  <p>
+                    {interviewDate
+                      ? this.dateFormatChange(interviewDate)
+                      : null}
+                  </p>
+                ) : null}
               </div>
               <div>
-                <h6>Job location:</h6>
-                <p>{jobLocation}</p>
+                {!editForm ? <h6>Job location:</h6>:null}
+
+                {!editForm ? <p>{jobLocation}</p> : null}
               </div>
               <CreateStep
                 handleSubmitStep={this.props.handleSubmitStep}
