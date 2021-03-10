@@ -11,9 +11,6 @@ class NotFound extends Component {
                     <div className="surprise">
                     <img src={Surprise} alt="You know who"/>
                     </div>
-                    <div className="surprise">
-                    <img src={notfound} alt="You know who"/>
-                    </div>
                 </div>
             </div>
         )

@@ -11,3 +11,10 @@
     height: auto;
     width: auto;
 }
+
+@media screen and (max-width : 1100px){
+    .surprise {
+        height: 200px;
+        width: 400px;
+    }
+}
