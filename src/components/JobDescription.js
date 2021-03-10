@@ -257,46 +257,46 @@ class JobDescription extends Component {
                 <div>
                   <h1>{jobTitle}</h1>
                   <h3>{companyName}</h3>
-                  <h6>{applicationDate ? this.dateFormatChange(applicationDate):null}</h6>
+                  <h5>{applicationDate ? this.dateFormatChange(applicationDate):null}</h5>
                 </div>
                 <div>
-                  <h6>Job description:</h6>
-                  <p>{jobDescription}</p>
+                  <h5>Job description:</h5>
+                  <h6>{jobDescription}</h6>
                 </div>
                 <div>
-                  <h6>Point of contact:</h6>
-                  <p>{contactPerson}</p>
+                  <h5>Point of contact:</h5>
+                  <h6>{contactPerson}</h6>
                 </div>
                 <div>
-                  <h6>Contact Detail:</h6>
-                  <p>{contactDetail}</p>
+                  <h5>Contact Detail:</h5>
+                  <h6>{contactDetail}</h6>
                 </div>
                 <div>
-                  <h6>Rate your interview process:</h6>
+                  <h5>Rate your interview process:</h5>
                 </div>
                 <div>
-                  <h6>Application link:</h6>
-                  <p>{applicationLink}</p>
+                  <h5>Application link:</h5>
+                  <h6>{applicationLink}</h6>
                 </div>
                 <div>
-                  <h6>Source of application:</h6>
-                  <p>{sourceOfApplication}</p>
+                  <h5>Source of application:</h5>
+                  <h6>{sourceOfApplication}</h6>
                 </div>
                 <div>
-                  <h6>Salary:</h6>
-                  <p>{salary}</p>
+                  <h5>Salary:</h5>
+                  <h6>{salary}</h6>
                 </div>
               </div>
             )}
 
             <div className="rightSide">
               <div>
-                <h6>Interview date:</h6>
-                <p>{interviewDate ? this.dateFormatChange(interviewDate): null}</p>
+                <h5>Interview date:</h5>
+                <h6>{interviewDate ? this.dateFormatChange(interviewDate): null}</h6>
               </div>
               <div>
-                <h6>Job location:</h6>
-                <p>{jobLocation}</p>
+                <h5>Job location:</h5>
+                <h6>{jobLocation}</h6>
               </div>
               <CreateStep
                 handleSubmitStep={this.props.handleSubmitStep}

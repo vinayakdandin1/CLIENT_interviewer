@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { Component } from 'react'
 import config from "../config";
 import { Route, Link } from "react-router-dom";
+import "../styles/JobPreview.css"
 
 
 class JobPreview extends Component {
@@ -51,14 +52,14 @@ class JobPreview extends Component {
       },
     } = this.state;
     return (
-      <div className="card3">
+      <div className="card5">
         <div>
-          <div>
-            <h2>{companyName}</h2>
-            <h3>{jobTitle}</h3>
-            <h5>{applicationDate ?this.dateFormatChange(applicationDate):null}</h5>
-            <h5>{contactPerson}</h5>
-            <h5>{contactDetail}</h5>
+          <div className="jobOverview">
+            <h3>Company Name: {companyName}</h3>
+            <h4>Job Position: {jobTitle}</h4>
+            <h5>Application Date: {applicationDate ?this.dateFormatChange(applicationDate):null}</h5>
+            <h5>Contact person: {contactPerson}</h5>
+            <h5>Contact details: {contactDetail}</h5>
           </div>
         </div>
         <div className="detailsButton">

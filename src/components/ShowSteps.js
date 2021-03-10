@@ -27,6 +27,12 @@ class ShowSteps extends Component {
       })
     }
   }
+
+  dateFormatChange = (date) => {
+    let newDate = date.split("T", 1).reverse();
+    return newDate;
+  };
+
   
   dateFormatChange = (date) => {
     let newDate = date.split("T", 1).reverse();
@@ -48,8 +54,8 @@ class ShowSteps extends Component {
                         (ele.jobId === jobId) ?
                           (<div>
                              <div className="un">
-                               <p>{ele.description} </p>
-                               <p>{ele.date}</p>
+                               <h6>{ele.description} </h6>
+                               <h6>{ele.date ? this.dateFormatChange(ele.date):null}</h6>
                              </div>
                                <button onClick={() => {handleDeleteStep(ele._id, jobId)}} className="deleteStep">DELETE</button>
                            </div>) : null
