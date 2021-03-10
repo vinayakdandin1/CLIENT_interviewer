@@ -18,6 +18,7 @@ import { Spinner } from 'react-bootstrap'
 import Profile from "./components/Profile";
 import SearchJob from "./components/SearchJob";
 import NotFound from "./components/NotFound"
+import Referrals from './components/Referrals'
 
 
 class App extends Component {
@@ -29,6 +30,38 @@ class App extends Component {
     fetchingUser: false,
     unloggedUser: false,
     filteredJobs: []
+  };
+
+  handleReferral = (event) => {
+    event.preventDefault();
+    let date = event.target.date.value;
+    let description = event.target.description.value;
+    let jobId = event.target.jobId.value;
+
+    axios
+      .post(
+        `${config.API_URL}/api/home/create-steps`,
+        {
+          date: date,
+          description: description,
+          jobId: jobId,
+        },
+        { withCredentials: true }
+      )
+      .then((response) => {
+        this.setState(
+          {
+            steps: [response.data, ...this.state.steps],
+          },
+          () => {
+            this.clearValues();
+            this.props.history.push(`/home/${response.data.jobId}`);
+          }
+        );
+      })
+      .catch((err) => {
+        console.log("create failed", err);
+      });
   };
 
   handleSearch = (event) => {
@@ -551,6 +584,12 @@ class App extends Component {
               path="/profile"
               render={(routeProps) => {
                 return <Profile user={loggedInUser} {...routeProps} />;
+              }}
+            />
+            <Route
+              path="/referrals"
+              render={(routeProps) => {
+                return <Referrals user={loggedInUser} {...routeProps} />;
               }}
             />
             <Route component={NotFound} />
