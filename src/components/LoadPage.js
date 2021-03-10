@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import '../styles/LoadPage.scss'
-import {Link} from 'react-router-dom'
 import GoogleLogin from 'react-google-login';
 
 
@@ -25,24 +24,24 @@ class LoadPage extends Component {
                 <form onSubmit={this.props.onSignIn}>
                   <label className="inLabels">
                     <span>Email</span>
-                    <input name="emailId" type="email" />
+                    <input name="emailId" type="email"/>
                   </label>
                   <label className="inLabels">
                     <span>Password</span>
-                    <input name="password" type="password" />
+                    <input name="password" type="password" autocomplete="off" />
                   </label>
                   <button type="submit" className="submit">
                     Sign In
                   </button>
                 </form>
                 {/* <button type="button" className="fb-btn">Connect with <span>Google</span></button> */}
-                <GoogleLogin 
-                      clientId={`${process.env.CLIENT_ID}`}
-                      buttonText="Login"
-                      onSuccess={this.props.googleSignIn}
-                      onFailure={this.props.errorGoogleSignIn}
-                      cookiePolicy={'single_host_origin'}
-                  />
+                <GoogleLogin
+                  clientId={`${process.env.CLIENT_ID}`}
+                  buttonText="Login"
+                  onSuccess={this.props.googleSignIn}
+                  onFailure={this.props.errorGoogleSignIn}
+                  cookiePolicy={"single_host_origin"}
+                />
               </div>
 
               <div className="sub-cont">
@@ -84,15 +83,14 @@ class LoadPage extends Component {
                     </button>
                   </form>
                   {/* <button type="button" className="fb-btn">Join with <span>Google</span></button> */}
-                  
-                  <GoogleLogin 
-                      clientId={`${process.env.CLIENT_ID}`}
-                      buttonText="SignUp"
-                      onSuccess={this.props.googleSignUp}
-                      onFailure={this.props.googleSignUp}
-                      cookiePolicy={'single_host_origin'}
+
+                  <GoogleLogin
+                    clientId={`${process.env.CLIENT_ID}`}
+                    buttonText="SignUp"
+                    onSuccess={this.props.googleSignUp}
+                    onFailure={this.props.googleSignUp}
+                    cookiePolicy={"single_host_origin"}
                   />
-                 
                 </div>
               </div>
             </div>

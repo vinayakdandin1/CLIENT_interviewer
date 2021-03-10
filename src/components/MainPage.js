@@ -45,7 +45,6 @@ class MainPage extends Component {
                             if(single.interviewDate){
                                 if(single.interviewDate >= todayDate){
                                     interviewCount++
-                                    console.log(single.interviewDate)
                                 }
                             }
                         })
