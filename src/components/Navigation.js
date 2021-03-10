@@ -22,6 +22,13 @@ class Navigation extends Component {
                             {
                                 this.props.user ? (
                                     <div className="conditionalNav">
+                                    <Link className="linkTo" to="/referrals">Referrals</Link>
+                                    </div>
+                                    ) : null
+                            } 
+                            {
+                                this.props.user ? (
+                                    <div className="conditionalNav">
                                     <Link className="linkTo" to="/dashboard">Dashboard</Link>
                                     </div>
                                     ) : null

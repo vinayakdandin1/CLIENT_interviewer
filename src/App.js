@@ -19,6 +19,8 @@ import Profile from "./components/Profile";
 import SearchJob from "./components/SearchJob";
 import NotFound from "./components/NotFound"
 import About from "./components/About.js"
+import Referrals from './components/Referrals'
+
 
 class App extends Component {
   state = {
@@ -86,6 +88,60 @@ class App extends Component {
       itemvalues: [{}],
     });
   };
+
+  googleSignUp = (event) => {
+    let user = {
+      emailId: event.profileObj.email,
+      firstName: event.profileObj.givenName,
+      lastName: event.profileObj.familyName,
+    };
+  
+    axios
+      .post(`${config.API_URL}/api/google/auth`, user, { withCredentials: true })
+      .then((response) => {
+       
+        this.setState(
+          {
+            loggedInUser: response.data,
+          },
+          () => {
+            this.props.history.push("/home");
+          }
+        );
+      })
+      .catch((err) => {
+        this.setState({
+          error: err.response.data,
+        });
+      });
+  }
+
+  errorGoogleSignIn = (event) => {
+
+  }
+
+  googleSignIn = (event) => {
+    axios({
+      method: "POST",
+      url: `${config.API_URL}/api/google/signin`,
+      data: {tokenId: event.tokenId},
+      withCredentials: true 
+    }).then((response) => {
+      
+      this.setState(
+        {
+          loggedInUser: response.data,
+        },
+        () => {
+          this.props.history.push("/home");
+        }
+      );
+
+    }).catch(() => {
+      console.log("Something went wrong", err);
+    })
+  }
+
   loggedIn = () => {
     axios
       .get(`${config.API_URL}/api/user`, { withCredentials: true })
@@ -284,7 +340,7 @@ class App extends Component {
       });
   };
   handleDeleteAllJobSteps = (jobId) => {
-    console.log(jobId);
+
     axios
       .delete(`${config.API_URL}/api/home/steps/${jobId}`, {
         withCredentials: true,
@@ -326,6 +382,7 @@ class App extends Component {
   componentDidMount() {
     this.getStates();
     this.getInitialDetails();
+    
     if (!this.state.loggedInUser) {
       this.loggedIn();
     }
@@ -340,7 +397,7 @@ class App extends Component {
   };
 
   render() {
-    const { jobDetails, loggedInUser, logoutUser, unloggedUser,filteredJobs } = this.state;
+    const { jobDetails, loggedInUser, logoutUser, unloggedUser,filteredJobs, referrals } = this.state;
     if (!this.state.fetchingUser) {
       return (
         <div>
@@ -362,6 +419,9 @@ class App extends Component {
               render={(routeProps) => {
                 return !loggedInUser ? (
                   <LoadPage
+                    errorGoogleSignIn={this.errorGoogleSignIn}
+                    googleSignUp={this.googleSignUp}
+                    googleSignIn={this.googleSignIn}
                     onSignIn={this.handleSignIn}
                     onSignUp={this.handleSignUp}
                     {...routeProps}
@@ -479,6 +539,15 @@ class App extends Component {
               }}
             />
             <Route path="/about" component={About} />
+            <Route
+            
+              path="/referrals"
+              render={(routeProps) => {
+                return <Referrals 
+                clearValues={this.clearValues}
+                  user={loggedInUser} {...routeProps} />;
+              }}
+            />
             <Route component={NotFound} />
           </Switch>
         }

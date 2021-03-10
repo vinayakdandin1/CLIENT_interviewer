@@ -29,7 +29,6 @@ class MainPage extends Component {
         let interviewCount = 0
         let todayDate = new Date()
         todayDate = JSON.parse(JSON.stringify(todayDate))
-        console.log(todayDate);
         return (
             <div>
               <div className="mainContainer">
