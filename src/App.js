@@ -16,6 +16,8 @@ import JobPreview from './components/JobPreview';
 import {Redirect} from 'react-router-dom'
 import { Spinner } from 'react-bootstrap'
 import Profile from "./components/Profile";
+import SearchJob from "./components/SearchJob";
+import NotFound from "./components/NotFound"
 
 
 class App extends Component {
@@ -25,9 +27,57 @@ class App extends Component {
     steps: [],
     logoutUser: false,
     fetchingUser: false,
-    unloggedUser: false
+    unloggedUser: false,
+    filteredJobs: []
   };
 
+  handleSearch = (event) => {
+    event.preventDefault()
+    const {jobDetails}=this.state
+    let searchText = event.target.s.value.toLowerCase()
+    let filteredList = jobDetails.filter((single) => {
+      return (
+        single.companyName.toLowerCase().includes(searchText) ||
+        single.jobTitle.toLowerCase().includes(searchText)
+      );
+    })
+    this.setState({
+      filteredJobs: filteredList,
+    }, () => {
+      this.props.history.push("/search");
+    });
+  }
+  handleDateFilter = () => {
+    const { jobDetails } = this.state;
+    let clonedJobs = jobDetails.reverse();
+    let dateFilterJobs = clonedJobs.sort(
+      (a, b) => new Date(b.applicationDate) - new Date(a.applicationDate)
+    );
+    this.setState({
+      jobDetails: dateFilterJobs,
+    });
+  };
+  handleInterviewDate = () => {
+    const { jobDetails } = this.state;
+    let clonedJobs = jobDetails.reverse();
+    let interviewFilter = clonedJobs.sort((a, b) =>
+      !a.interviewDate
+        ? 999999
+        : new Date(a.interviewDate) - new Date(b.interviewDate)
+    );
+    this.setState({
+      jobDetails: interviewFilter,
+    });
+  };
+  handleSalarySort = () => {
+    const { jobDetails } = this.state;
+    let clonedJobs = jobDetails
+    let dateFilterJobs = clonedJobs.sort((a, b) => b.salary - a.salary
+    );
+    this.setState({
+      jobDetails: dateFilterJobs,
+    });
+  };
   clearValues = () => {
     Array.from(document.querySelectorAll("input")).forEach(
       (input) => (input.value = "")
@@ -114,16 +164,15 @@ class App extends Component {
       .then((response) => {
         this.setState({
           loggedInUser: response.data,
-          fetchingUser: true
+          fetchingUser: true,
         });
       })
       .catch(() => {
         this.setState({
-          fetchingUser: true
-        })
+          fetchingUser: true,
+        });
       });
   };
-
   getInitialDetails = () => {
     axios
       .get(`${config.API_URL}/api/dashboard`, { withCredentials: true })
@@ -135,21 +184,19 @@ class App extends Component {
       .catch((err) => {
         console.log("Fetching data failed", err);
       });
-
   };
-
   getStates = () => {
-    axios.get(`${config.API_URL}/api/home/steps`, {withCredentials: true})
-          .then((response) => {
-              this.setState({
-                steps: [...response.data]
-              })
-          })
-          .catch((err) => {
-              console.log('Fetching data failed', err)
-          })
-  }
-
+    axios
+      .get(`${config.API_URL}/api/home/steps`, { withCredentials: true })
+      .then((response) => {
+        this.setState({
+          steps: [...response.data],
+        });
+      })
+      .catch((err) => {
+        console.log("Fetching data failed", err);
+      });
+  };
   addJobDetails = (event) => {
     event.preventDefault();
     let newJobDetails = {
@@ -172,17 +219,19 @@ class App extends Component {
         withCredentials: true,
       })
       .then((response) => {
-        this.setState({
-          jobDetails: [...this.state.jobDetails, response.data],
-        }, () => {
-          this.clearValues()
-        });
+        this.setState(
+          {
+            jobDetails: [...this.state.jobDetails, response.data],
+          },
+          () => {
+            this.clearValues();
+          }
+        );
       })
       .catch(() => {
         console.log("Fetching Failed!!!");
       });
   };
-
   handleSignUp = (event) => {
     event.preventDefault();
     let user = {
@@ -211,7 +260,6 @@ class App extends Component {
         });
       });
   };
-
   handleSignIn = (event) => {
     event.preventDefault();
     let user = {
@@ -237,7 +285,6 @@ class App extends Component {
         console.log("Something went wrong", err);
       });
   };
-
   handleLogout = () => {
     axios
       .post(`${config.API_URL}/api/logout`, {}, { withCredentials: true })
@@ -246,7 +293,7 @@ class App extends Component {
           {
             loggedInUser: null,
             jobDetails: [],
-            steps: []
+            steps: [],
           },
           () => {
             this.props.history.push("/");
@@ -255,123 +302,136 @@ class App extends Component {
       })
       .catch(() => {});
   };
-
   handleSubmitStep = (event) => {
-    event.preventDefault()
-    let date = event.target.date.value
-    let description = event.target.description.value
-    let jobId = event.target.jobId.value
+    event.preventDefault();
+    let date = event.target.date.value;
+    let description = event.target.description.value;
+    let jobId = event.target.jobId.value;
 
-    axios.post(`${config.API_URL}/api/home/create-steps`, {
-      date: date,
-      description: description,
-      jobId: jobId
-    }, {withCredentials:true})
+    axios
+      .post(
+        `${config.API_URL}/api/home/create-steps`,
+        {
+          date: date,
+          description: description,
+          jobId: jobId,
+        },
+        { withCredentials: true }
+      )
       .then((response) => {
-        this.setState({
-          steps: [response.data, ...this.state.steps]
-        }, () => {
-          this.clearValues()
-          this.props.history.push(`/home/${response.data.jobId}`)
-        })
+        this.setState(
+          {
+            steps: [response.data, ...this.state.steps],
+          },
+          () => {
+            this.clearValues();
+            this.props.history.push(`/home/${response.data.jobId}`);
+          }
+        );
       })
       .catch((err) => {
-        console.log('create failed', err)
-      })
-  }
-
+        console.log("create failed", err);
+      });
+  };
   handleDeleteStep = (stepsId, jobId) => {
-    axios.delete(`${config.API_URL}/api/home/${stepsId}`, { withCredentials: true })
+    axios
+      .delete(`${config.API_URL}/api/home/${stepsId}`, {
+        withCredentials: true,
+      })
       .then(() => {
         let filteredSteps = this.state.steps.filter((step) => {
-          return step._id !== stepsId
-        })
-        this.setState({
-          steps: filteredSteps
-        }, () => {
-          this.props.history.push(`/home/${jobId}`)
-        })
-
+          return step._id !== stepsId;
+        });
+        this.setState(
+          {
+            steps: filteredSteps,
+          },
+          () => {
+            this.props.history.push(`/home/${jobId}`);
+          }
+        );
       })
       .catch((err) => {
-        console.log('delete failed', err)
-      })
-  }
-
+        console.log("delete failed", err);
+      });
+  };
   handleDeleteAllJobSteps = (jobId) => {
-    axios.delete(`${config.API_URL}/api/home/steps/${jobId}`, { withCredentials: true })
+
+    axios
+      .delete(`${config.API_URL}/api/home/steps/${jobId}`, {
+        withCredentials: true,
+      })
       .then(() => {
         let filteredSteps = this.state.steps.filter((step) => {
-          return step.jobId !== jobId
-        })
+          return step.jobId !== jobId;
+        });
         this.setState({
-          steps: filteredSteps
-        })
+          steps: filteredSteps,
+        });
       })
       .catch((err) => {
-        console.log('delete failed', err)
-      })
-  
-  }
-
+        console.log("delete failed", err);
+      });
+  };
   handleDeleteJob = (jobId) => {
-    
-    axios.delete(`${config.API_URL}/api/home/job/${jobId}`, { withCredentials: true })
+    axios
+      .delete(`${config.API_URL}/api/home/job/${jobId}`, {
+        withCredentials: true,
+      })
       .then(() => {
         let filteredJobs = this.state.jobDetails.filter((job) => {
-          return job._id !== jobId
-        })
-        this.setState({
-          jobDetails: filteredJobs
-        }, () => {
-          this.props.history.push(`/dashboard`)
-        })
-
+          return job._id !== jobId;
+        });
+        this.setState(
+          {
+            jobDetails: filteredJobs,
+          },
+          () => {
+            this.props.history.push(`/dashboard`);
+          }
+        );
       })
       .catch((err) => {
-        console.log('delete failed', err)
-      })
-  }
-
+        console.log("delete failed", err);
+      });
+  };
   componentDidMount() {
     this.getStates();
     this.getInitialDetails();
     if (!this.state.loggedInUser) {
       this.loggedIn();
     }
-    
   }
-
   handleEditJobDesc = (jobId) => {
-    axios.patch(`${config.API_URL}/api/home/steps/${jobId}`)
-  }
-
+    axios.patch(`${config.API_URL}/api/home/steps/${jobId}`);
+  };
   handleUnloggedUser = () => {
     this.setState({
-      unloggedUser: true
-    })
-  }
-
+      unloggedUser: true,
+    });
+  };
 
   render() {
-    const { jobDetails, loggedInUser, logoutUser, unloggedUser } = this.state;
-
- 
-      if(!this.state.fetchingUser) {
-        return <div>
+    const { jobDetails, loggedInUser, logoutUser, unloggedUser,filteredJobs } = this.state;
+    if (!this.state.fetchingUser) {
+      return (
+        <div>
           <Spinner animation="border" role="status">
             <span className="sr-only">Loading...</span>
           </Spinner>
         </div>
-      }
-    
+      );
+    }
 
     return (
       <div>
-        <Navigation user={loggedInUser} onLogout={this.handleLogout} /> 
+        <Navigation user={loggedInUser} directToSearch={this.directToSearch} onSearch={this.handleSearch} onLogout={this.handleLogout} />
         {
           <Switch>
-            <Route exact path="/" render={(routeProps) => {
+            <Route
+              exact
+              path="/"
+              render={(routeProps) => {
                 return !loggedInUser ? (
                   <LoadPage
                     errorGoogleSignIn={this.errorGoogleSignIn}
@@ -395,6 +455,15 @@ class App extends Component {
             />
             <Route
               exact
+              path="/search"
+              render={(routeProps) => {
+                return (
+                  <SearchJob filteredJobs={filteredJobs} {...routeProps} />
+                );
+              }}
+            />
+            <Route
+              exact
               path="/home"
               render={(routeProps) => {
                 return (
@@ -409,34 +478,66 @@ class App extends Component {
                 );
               }}
             />
-            <Route path="/home/:jobId" render={(routeProps) => {
-            return <JobDescription handleDeleteAllJobSteps={this.handleDeleteAllJobSteps}  handleDeleteJob={this.handleDeleteJob} handleDeleteStep={this.handleDeleteStep} 
-            handleSubmitStep={this.handleSubmitStep} steps={this.state.steps} user={loggedInUser} {...routeProps} />
-          }}/>
-          <Route path="/home/:jobId/edit" render={(routeProps) => {
-            return <EditJob />
-          }} />
-          <Route path="/home/:jobId/steps" render={(routeProps) => {
-            return <ShowSteps user={loggedInUser} {...routeProps}/>
-          }} />
-          <Route path="/home/:jobId/create-steps" render={(routeProps) => {
-            return <CreateStep user={loggedInUser}  {...routeProps} />
-          }} />
-            <Route exact path="/dashboard" render={(routeProps) => {
+            <Route
+              path="/home/:jobId"
+              render={(routeProps) => {
                 return (
-                  <Landing steps={this.state.steps}
-                    jobDetails={jobDetails} loggedInUser={loggedInUser} toLogIn={this.loggedIn} onAdd={this.addJobDetails} {...routeProps}/>
+                  <JobDescription
+                    handleDeleteAllJobSteps={this.handleDeleteAllJobSteps}
+                    handleDeleteJob={this.handleDeleteJob}
+                    handleDeleteStep={this.handleDeleteStep}
+                    handleSubmitStep={this.handleSubmitStep}
+                    steps={this.state.steps}
+                    user={loggedInUser}
+                    {...routeProps}
+                  />
                 );
               }}
             />
             <Route
-              
+              path="/home/:jobId/edit"
+              render={(routeProps) => {
+                return <EditJob />;
+              }}
+            />
+            <Route
+              path="/home/:jobId/steps"
+              render={(routeProps) => {
+                return <ShowSteps user={loggedInUser} {...routeProps} />;
+              }}
+            />
+            <Route
+              path="/home/:jobId/create-steps"
+              render={(routeProps) => {
+                return <CreateStep user={loggedInUser} {...routeProps} />;
+              }}
+            />
+            <Route
+              exact
+              path="/dashboard"
+              render={(routeProps) => {
+                return (
+                  <Landing
+                    steps={this.state.steps}
+                    onDateFilter={this.handleDateFilter}
+                    oninterviewFilter={this.handleInterviewDate}
+                    onSalarySort={this.handleSalarySort}
+                    jobDetails={jobDetails}
+                    loggedInUser={loggedInUser}
+                    toLogIn={this.loggedIn}
+                    onAdd={this.addJobDetails}
+                    {...routeProps}
+                  />
+                );
+              }}
+            />
+            <Route
               path={"/dashboard/:jobId"}
               render={(routeProps) => {
                 return (
                   <Landing
                     steps={this.state.steps}
-                    handleSubmitStep = {this.handleSubmitStep}
+                    handleSubmitStep={this.handleSubmitStep}
                     jobDetails={jobDetails}
                     loggedInUser={loggedInUser}
                     onAdd={this.addJobDetails}
@@ -446,9 +547,13 @@ class App extends Component {
                 );
               }}
             />
-            <Route path="/profile" render={(routeProps) => {
-              return <Profile user={loggedInUser} {...routeProps} />;
-            }}/>
+            <Route
+              path="/profile"
+              render={(routeProps) => {
+                return <Profile user={loggedInUser} {...routeProps} />;
+              }}
+            />
+            <Route component={NotFound} />
           </Switch>
         }
       </div>
@@ -457,5 +562,3 @@ class App extends Component {
 }
 
 export default withRouter(App)
-
-

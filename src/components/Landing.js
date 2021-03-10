@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Container, Col, Spinner } from 'react-bootstrap'
+import { Row, Container, Col, DropdownButton, Dropdown } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
 import '../styles/Landing.css'
 import JobPreview from './JobPreview'
@@ -27,30 +27,50 @@ class Landing extends Component {
       return <Redirect to="/" />
     }
 
+    const { onDateFilter, oninterviewFilter, onSalarySort } = this.props;
+    
     return (
       <div>
-        <Container>
+       <div className="mainContainer">
+        <div className="leftSide">
           <Row>
             <Col>
-              Job Offers
-              <div>
+             <div className="card2">
+               <div className="topTitle">
+               <h1>Job Offers</h1>
+                <div>
+                 <DropdownButton id="dropdown-basic-button" title="SORT BY">
+                  <Dropdown.Item onClick={onDateFilter}>Application Date</Dropdown.Item>
+                  <Dropdown.Item onClick={oninterviewFilter}>Interview Date</Dropdown.Item>
+                  <Dropdown.Item onClick={onSalarySort}>Salary</Dropdown.Item>
+                 </DropdownButton>
+                </div>
+               </div>
+             <div className="scrollDown1">
                 {jobDetails.map((detail) => {
                   if (detail.userId == this.props.loggedInUser?._id) {
                     return (
                       <div key={detail._id}>
                         <Link to={`/dashboard/${detail._id}`}>
-                          <div className="job-details">
+                          <div className="un">
                             {detail.jobTitle}
                             <br></br>
-                            {detail.companyName}
+                            {detail.companyName.toUpperCase()}
                           </div>
                         </Link>
                       </div>
                     );
                   }
                 })}
-              </div>
+             </div>
+             </div>
             </Col>
+          </Row>
+          <div>
+            {this.props.isJobPreview && <JobPreview {...this.props}/>}
+          </div>
+        </div>
+        <div className="rightSide">
             <Col>
               <form onSubmit={this.props.onAdd}>
                 <input name="jobTitle" type="text" placeholder="Job Title" />
@@ -92,7 +112,7 @@ class Landing extends Component {
                 <label>
                   <strong>Interview Date</strong>
                 </label>
-                <input type="date" id="start" name="interviewDate"/>
+                <input type="date" id="start" name="interviewDate" />
                 <br></br>
                 <input
                   name="jobLocation"
@@ -100,17 +120,14 @@ class Landing extends Component {
                   placeholder="Job Location"
                 />
                 <br></br>
-                <button type="submit">Submit</button>
+                <div className="formSubmit">
+                <button className="submit2" type="submit">SUBMIT</button>
+                </div>
+                
               </form>
             </Col>
-            <br></br>
-          </Row>
-        </Container>
-        <Container>
-          <div>
-            {this.props.isJobPreview && <JobPreview {...this.props}/>}
-          </div>
-        </Container>
+        </div>
+       </div>
       </div>
     );
   }

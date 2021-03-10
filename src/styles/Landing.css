@@ -1,3 +1,95 @@
-.job-details{
-    border: solid 1px black;
+.mainContainer {
+    width: auto;
+    height: auto;
+    margin: 0 1em;
+    margin-top: 2em;
+    padding: 10px 5px;
+    background: linear-gradient(to bottom right, #fff 0%, #fff 50%,  #457B9D 50%,  #457B9D 100%);
+}
+
+.submit2 {
+    cursor: pointer;
+    border-radius: 5em;
+    color: white;
+    background-color: #457B9D;
+    border: 0;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    margin: 10px;
+    font-size: 14px;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+    border: solid 1px #457B9D;
+}
+
+.submit2:hover {
+    background-color: #d4af7a;
+
+}
+
+
+.formSubmit {
+    display: flex;
+    justify-content: center;
+}
+
+.detailsButton {
+    display: flex;
+    justify-content: center;
+    margin-top:1em;
+    border-radius: 5em;
+}
+
+#dropdown-basic-button {
+    border-radius: 5em;
+    background-color: #457B9D;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#dropdown-basic-button:hover {
+    background-color: #d4af7a;
+}
+
+.card2 {
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    flex-direction: column;
+    padding: 1em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.topTitle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card3 {
+    height: auto;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    flex-direction: column;
+    padding: 1em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.scrollDown1 {
+    max-height: 220px;
+    overflow-y: scroll;
+}
+
+@media screen and (max-width : 1000px){
+    
 }

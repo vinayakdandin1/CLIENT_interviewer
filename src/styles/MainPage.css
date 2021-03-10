@@ -1,3 +1,14 @@
+/*
+.container{
+    height: auto;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+*/
 
 .home-page-buttons {
     height: 100%;
@@ -19,4 +30,96 @@
     color: white;
     font-weight: bold;
     line-height: 25px;
+}
+
+.mainContainer {
+    width: auto;
+    height: auto;
+    margin: 0 1em;
+    margin-top: 2em;
+    padding: 10px 5px;
+    background: linear-gradient(to bottom right, #fff 0%, #fff 50%,  #457B9D 50%,  #457B9D 100%);
+}
+
+.welcome {
+    display: flex;
+    align-items: center;
+    margin: 4em auto;
+}
+
+.goTo {
+    cursor: pointer;
+    border-radius: 5em;
+    color: white;
+    background-color: #457B9D;
+    border: 0;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    margin: 10px;
+    font-size: 14px;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+    border: solid 1px #457B9D;
+}
+
+.goTo:hover {
+    background-color: #d4af7a;
+}
+
+.linkButton {
+    display: flex;
+    justify-content: center;
+    width: auto;
+    height: 4em;
+    margin-top: 4em;
+}
+
+.centralCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1em 2em;
+    margin-right: 1em;
+    width: 40%;
+    background-color: #A8DADC;
+    border: solid 5px white;
+    border-radius: 5% 5%;
+}
+
+@media screen and (max-width : 1000px){
+    .mainContainer {
+        width: auto;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0 1em;
+        margin-top: 4em;
+        padding: 10px 5px;
+        background: linear-gradient(to bottom right, #fff 0%, #fff 50%,  #457B9D 50%,  #457B9D 100%);
+    }
+    .centralCard {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 1em auto;
+        margin: auto;
+        width: 85%;
+        background-color: #A8DADC;
+        border: solid 5px white;
+        border-radius: 7% 7%;
+        text-align: center;
+    }
+    .linkButton {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: auto;
+        height: 4em;
+        margin-top: 2em;
+    }
 }

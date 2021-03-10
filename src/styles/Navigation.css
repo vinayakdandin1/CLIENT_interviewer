@@ -1,6 +1,11 @@
 .navigation-brand {
-    margin-left: 2rem;
-    font-size: 1.5rem;  
+    margin-left: 1em;
+    font-size: 1.5em;
+    font-family: Copperplate;
+}
+
+.navigation-brand.navbar-brand:hover {
+    color: #d4af7a;;
 }
 
 .navigation-links {
@@ -9,5 +14,63 @@
 }
 
 .conditionalNav {
-    display: inline-block
+    display: inline-block;
+    font-family: Copperplate;
+    margin-left: 10px;
+    text-decoration: none;
+    color: blanchedalmond;
+}
+
+.ml-auto, .navigation-links {
+    font-family: Copperplate;
+    margin-right: 0;
+    text-decoration: none;
+    color: blanchedalmond;
+}
+
+.linkTo {
+    text-decoration: none;
+    color: white;
+}
+
+.linkTo:hover {
+    text-decoration: none;
+    color: #d4af7a;
+}
+
+.searchBar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-left: 12em;
+}
+
+.navbar-collapse {
+    margin-left: 1em;
+}
+
+.searchButton {
+    margin-top: 5px;
+    border-radius: 5em;
+    font-family: Copperplate;
+}
+
+.mr-sm-2 {
+    border-radius: 5em;
+    font-family: Copperplate;
+}
+
+@media screen and (max-width : 1050px){
+    .searchBar {
+        margin-left: 0;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1em;
+    }
+    #navBar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }

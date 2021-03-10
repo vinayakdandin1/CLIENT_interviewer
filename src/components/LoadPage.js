@@ -37,7 +37,7 @@ class LoadPage extends Component {
                 </form>
                 {/* <button type="button" className="fb-btn">Connect with <span>Google</span></button> */}
                 <GoogleLogin 
-                      clientId={`${process.env.CLIENT_ID}`}
+                      clientId={`${process.env.REACT_APP_CLIENT_ID}`}
                       buttonText="Login"
                       onSuccess={this.props.googleSignIn}
                       onFailure={this.props.errorGoogleSignIn}
@@ -86,7 +86,7 @@ class LoadPage extends Component {
                   {/* <button type="button" className="fb-btn">Join with <span>Google</span></button> */}
                   
                   <GoogleLogin 
-                      clientId={`${process.env.CLIENT_ID}`}
+                      clientId={`${process.env.REACT_APP_CLIENT_ID}`}
                       buttonText="SignUp"
                       onSuccess={this.props.googleSignUp}
                       onFailure={this.props.googleSignUp}
