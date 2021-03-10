@@ -311,3 +311,19 @@ input {
     right: 5px;
   }
 }
+
+@media screen and (min-width: 1000px) {
+
+  .landing-mobile {
+    display: none;
+  }
+
+}
+
+@media screen and (max-width : 1000px) {
+  
+  .landing-responsive {
+    display: none;
+  }
+
+}
