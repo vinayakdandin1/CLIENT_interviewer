@@ -35,7 +35,6 @@ class LoadPage extends Component {
                   </button>
                 </form>
                 {/* <button type="button" className="fb-btn">Connect with <span>Google</span></button> */}
-<<<<<<< HEAD
                 <GoogleLogin
                   clientId={`${process.env.CLIENT_ID}`}
                   buttonText="Login"
@@ -43,15 +42,6 @@ class LoadPage extends Component {
                   onFailure={this.props.errorGoogleSignIn}
                   cookiePolicy={"single_host_origin"}
                 />
-=======
-                <GoogleLogin 
-                      clientId={`${process.env.REACT_APP_CLIENT_ID}`}
-                      buttonText="Login"
-                      onSuccess={this.props.googleSignIn}
-                      onFailure={this.props.errorGoogleSignIn}
-                      cookiePolicy={'single_host_origin'}
-                  />
->>>>>>> origin/ben-branch
               </div>
 
               <div className="sub-cont">
@@ -93,7 +83,6 @@ class LoadPage extends Component {
                     </button>
                   </form>
                   {/* <button type="button" className="fb-btn">Join with <span>Google</span></button> */}
-<<<<<<< HEAD
 
                   <GoogleLogin
                     clientId={`${process.env.CLIENT_ID}`}
@@ -101,15 +90,6 @@ class LoadPage extends Component {
                     onSuccess={this.props.googleSignUp}
                     onFailure={this.props.googleSignUp}
                     cookiePolicy={"single_host_origin"}
-=======
-                  
-                  <GoogleLogin 
-                      clientId={`${process.env.REACT_APP_CLIENT_ID}`}
-                      buttonText="SignUp"
-                      onSuccess={this.props.googleSignUp}
-                      onFailure={this.props.googleSignUp}
-                      cookiePolicy={'single_host_origin'}
->>>>>>> origin/ben-branch
                   />
                 </div>
               </div>
