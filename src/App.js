@@ -18,6 +18,7 @@ import { Spinner } from 'react-bootstrap'
 import Profile from "./components/Profile";
 import SearchJob from "./components/SearchJob";
 
+
 class App extends Component {
   state = {
     jobDetails: [],
@@ -84,6 +85,78 @@ class App extends Component {
       itemvalues: [{}],
     });
   };
+
+  googleSignUp = (event) => {
+    let user = {
+      emailId: event.profileObj.email,
+      firstName: event.profileObj.givenName,
+      lastName: event.profileObj.familyName,
+    };
+  
+    axios
+      .post(`${config.API_URL}/api/google/auth`, user, { withCredentials: true })
+      .then((response) => {
+       
+        this.setState(
+          {
+            loggedInUser: response.data,
+          },
+          () => {
+            this.props.history.push("/home");
+          }
+        );
+      })
+      .catch((err) => {
+        this.setState({
+          error: err.response.data,
+        });
+      });
+  }
+
+  errorGoogleSignIn = (event) => {
+
+  }
+
+  googleSignIn = (event) => {
+    
+    // axios
+    //   .post(`${config.API_URL}/api/google/signin`, user, { withCredentials: true })
+    //   .then((response) => {
+      
+    //     this.setState(
+    //       {
+    //         loggedInUser: response.data,
+    //       },
+    //       () => {
+    //         this.props.history.push("/home");
+    //       }
+    //     );
+    //   })
+    //   .catch((err) => {
+    //     console.log("Something went wrong", err);
+    //   });
+
+    axios({
+      method: "POST",
+      url: `${config.API_URL}/api/google/signin`,
+      data: {tokenId: event.tokenId},
+      withCredentials: true 
+    }).then((response) => {
+      
+      this.setState(
+        {
+          loggedInUser: response.data,
+        },
+        () => {
+          this.props.history.push("/home");
+        }
+      );
+
+    }).catch(() => {
+      console.log("Something went wrong", err);
+    })
+  }
+
   loggedIn = () => {
     axios
       .get(`${config.API_URL}/api/user`, { withCredentials: true })
@@ -282,11 +355,7 @@ class App extends Component {
       });
   };
   handleDeleteAllJobSteps = (jobId) => {
-    console.log(jobId);
-    axios
-      .delete(`${config.API_URL}/api/home/steps/${jobId}`, {
-        withCredentials: true,
-      })
+    axios.delete(`${config.API_URL}/api/home/steps/${jobId}`, { withCredentials: true })
       .then(() => {
         let filteredSteps = this.state.steps.filter((step) => {
           return step.jobId !== jobId;
@@ -360,6 +429,9 @@ class App extends Component {
               render={(routeProps) => {
                 return !loggedInUser ? (
                   <LoadPage
+                    errorGoogleSignIn={this.errorGoogleSignIn}
+                    googleSignUp={this.googleSignUp}
+                    googleSignIn={this.googleSignIn}
                     onSignIn={this.handleSignIn}
                     onSignUp={this.handleSignUp}
                     {...routeProps}
