@@ -8,8 +8,8 @@ class NotFound extends Component {
         return (
             <div>
                 <div className="notFound">
-                    <div className="surprise">
-                    <img src={Surprise} alt="You know who"/>
+                    <div>
+                    <img className="surprise" src={Surprise} alt="You know who"/>
                     </div>
                 </div>
             </div>
