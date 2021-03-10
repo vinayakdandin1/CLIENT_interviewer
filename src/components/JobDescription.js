@@ -248,7 +248,7 @@ class JobDescription extends Component {
                   />
                   <br></br>
                   <button className="stepButton" type="submit">
-                    Submit
+                    SUBMIT
                   </button>
                 </form>
               </div>
@@ -298,13 +298,6 @@ class JobDescription extends Component {
                 <h6>Job location:</h6>
                 <p>{jobLocation}</p>
               </div>
-              <div>
-                <h6>Satus:</h6>
-                <p>
-                  applied / in interview process/ negotiations / received offer
-                  / not received
-                </p>
-              </div>
               <CreateStep
                 handleSubmitStep={this.props.handleSubmitStep}
                 jobId={id}
@@ -327,7 +320,7 @@ class JobDescription extends Component {
               }}
               className="submit1"
             >
-              Edit
+              EDIT
             </button>
             <button
               onClick={() => {
@@ -336,7 +329,7 @@ class JobDescription extends Component {
               }}
               className="submit1"
             >
-              Delete
+              DELETE
             </button>
           </div>
         </div>

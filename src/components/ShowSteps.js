@@ -42,18 +42,19 @@ class ShowSteps extends Component {
           
             <div className="card1">
               <div className="scrollDown">
-                {
-                    
-                  stepsArray.map((ele) => {
-                    return (
-                      (ele.jobId === jobId) ?
-                        (<div>
-                          <p className="un">{ele.description} </p>
-                          <p className="un">{this.dateFormatChange(ele.date)}</p>
-                          <button onClick={() => { handleDeleteStep(ele._id, jobId) }} className="deleteStep">Delete</button>
-                        </div>) : null
-                    )
-                  })
+                { 
+                    stepsArray.map((ele) => {  
+                      return (
+                        (ele.jobId === jobId) ?
+                          (<div>
+                             <div className="un">
+                               <p>{ele.description} </p>
+                               <p>{ele.date}</p>
+                             </div>
+                               <button onClick={() => {handleDeleteStep(ele._id, jobId)}} className="deleteStep">DELETE</button>
+                           </div>) : null
+                      )                                       
+                    })
                      
                 }
               </div>

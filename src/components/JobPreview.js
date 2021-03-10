@@ -62,10 +62,10 @@ class JobPreview extends Component {
           </div>
         </div>
         <div className="detailsButton">
-          <Link to={`/home/${_id}`}>
-            <button className="submit2">DETAILS / UPDATE</button>
-          </Link>
-        </div>
+              <Link style={{ textDecoration: 'none' }} to={`/home/${_id}`}>
+                <button className="submit2">DETAILS / UPDATE</button>
+              </Link>
+            </div>
       </div>
     );
   }

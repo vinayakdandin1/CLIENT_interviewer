@@ -1,5 +1,3 @@
-
-
 .mainContainer {
     width: auto;
     height: auto;
@@ -19,7 +17,13 @@
     font-weight: bold;
     margin: 10px;
     font-size: 14px;
-    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04)
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+    border: solid 1px #457B9D;
+}
+
+.submit2:hover {
+    background-color: #d4af7a;
+
 }
 
 
@@ -32,6 +36,19 @@
     display: flex;
     justify-content: center;
     margin-top:1em;
+    border-radius: 5em;
+}
+
+#dropdown-basic-button {
+    border-radius: 5em;
+    background-color: #457B9D;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#dropdown-basic-button:hover {
+    background-color: #d4af7a;
 }
 
 .card2 {
