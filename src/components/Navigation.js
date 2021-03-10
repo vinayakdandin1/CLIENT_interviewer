@@ -36,7 +36,7 @@ class Navigation extends Component {
                             {
                                 this.props.user ? (
                                     <div className="conditionalNav">
-                                    <Link className="linkTo" onClick={this.props.onLogout}>Logout</Link>
+                                    <Link className="linkTo" to="/" onClick={this.props.onLogout}>Logout</Link>
                                     </div>
                                     ) : null
                             }  

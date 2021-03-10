@@ -43,12 +43,8 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin-left: 14em;
-    margin-right: 10em;
-}
-
-.navbar-collapse {
-    width: auto;
+    margin-left: 20em;
+    margin-right: 15em;
 }
 
 .searchButton {
@@ -64,7 +60,7 @@
 
 @media screen and (max-width : 1050px){
     .searchBar {
-        margin-left: 0;
+        margin: 0 auto;
         display: flex;
         flex-direction: column;
         margin-bottom: 1em;

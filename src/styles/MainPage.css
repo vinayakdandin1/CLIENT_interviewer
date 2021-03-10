@@ -1,15 +1,3 @@
-/*
-.container{
-    height: auto;
-    width: auto;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-*/
-
 .home-page-buttons {
     height: 100%;
     display: flex;
