@@ -243,6 +243,7 @@ class App extends Component {
         });
       });
   };
+  
   handleSignIn = (event) => {
     event.preventDefault();
     let user = {
@@ -338,7 +339,7 @@ class App extends Component {
         console.log("delete failed", err);
       });
   };
-  
+
   handleDeleteAllJobSteps = (jobId) => {
     axios.delete(`${config.API_URL}/api/home/steps/${jobId}`, { withCredentials: true })
       .then(() => {
