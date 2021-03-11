@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import '../styles/LoadPage.scss'
-import {Link} from 'react-router-dom'
 import GoogleLogin from 'react-google-login';
 
 

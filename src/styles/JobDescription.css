@@ -17,7 +17,7 @@
     width: 40%;
     background-color: #A8DADC;
     border: solid 5px white;
-    border-radius: 5% 5%;
+    border-radius: 20px;
 }
 
 .rightSide {
@@ -26,7 +26,7 @@
     width: 40%;
     background-color: #F1FAEE;
     border: solid 5px white;
-    border-radius: 5% 5%;
+    border-radius: 20px;
     box-shadow: black;
 
 }

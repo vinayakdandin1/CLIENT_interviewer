@@ -18,6 +18,7 @@ import { Spinner } from 'react-bootstrap'
 import Profile from "./components/Profile";
 import SearchJob from "./components/SearchJob";
 import NotFound from "./components/NotFound"
+import About from "./components/About.js"
 import Referrals from './components/Referrals'
 
 
@@ -113,18 +114,16 @@ class App extends Component {
           error: err.response.data,
         });
       });
-  }
-
+  };
   errorGoogleSignIn = (event) => {
 
-  }
-
+  };
   googleSignIn = (event) => {
     axios({
       method: "POST",
       url: `${config.API_URL}/api/google/signin`,
-      data: {tokenId: event.tokenId},
-      withCredentials: true 
+      data: { tokenId: event.tokenId },
+      withCredentials: true
     }).then((response) => {
       
       this.setState(
@@ -139,7 +138,8 @@ class App extends Component {
     }).catch(() => {
       console.log("Something went wrong", err);
     })
-  }
+  };
+
 
   loggedIn = () => {
     axios
@@ -243,6 +243,7 @@ class App extends Component {
         });
       });
   };
+  
   handleSignIn = (event) => {
     event.preventDefault();
     let user = {
@@ -338,12 +339,9 @@ class App extends Component {
         console.log("delete failed", err);
       });
   };
-  handleDeleteAllJobSteps = (jobId) => {
 
-    axios
-      .delete(`${config.API_URL}/api/home/steps/${jobId}`, {
-        withCredentials: true,
-      })
+  handleDeleteAllJobSteps = (jobId) => {
+    axios.delete(`${config.API_URL}/api/home/steps/${jobId}`, { withCredentials: true })
       .then(() => {
         let filteredSteps = this.state.steps.filter((step) => {
           return step.jobId !== jobId;
@@ -394,7 +392,6 @@ class App extends Component {
       unloggedUser: true,
     });
   };
-
   render() {
     const { jobDetails, loggedInUser, logoutUser, unloggedUser,filteredJobs, referrals } = this.state;
     if (!this.state.fetchingUser) {
@@ -537,6 +534,7 @@ class App extends Component {
                 return <Profile user={loggedInUser} {...routeProps} />;
               }}
             />
+            <Route path="/about" component={About} />
             <Route
             
               path="/referrals"

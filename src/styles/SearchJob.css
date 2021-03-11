@@ -1,6 +1,34 @@
-.searchLoupe {
-    height: 450px;
-    width: 900px;
-    position: absolute;
-    margin: auto;
+.searchDiv {
+    height: 500px;
+    width: 400px;
+    margin: 6em auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.searchResult {
+    color: black;
+    text-align: center;
+}
+
+.searchResult:hover {
+    color: #d4af7a;
+}
+
+.emptyImg {
+    margin-top: 7em;
+}
+
+.card3 {
+    display: flex;
+    justify-content: center;
+    background-color: #457B9D ;
+    flex-direction: column;
+    padding: 1em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 20px;
+    text-align: center;
 }

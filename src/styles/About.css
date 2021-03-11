@@ -1,0 +1,60 @@
+.aboutUs {
+    padding: 1em 1em;
+    margin: 2em 2em;
+    height: 90%;
+    width: 80%;
+    background-color: #A8DADC;
+    border: solid 5px white;
+    border-radius: 7% 7%;
+}
+
+.card3 {
+    display: flex;
+    background-color: white;
+    flex-direction: column;
+    padding: 1em;
+    margin-top: 2em;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 20px;
+    text-align: start;
+}
+
+.card4 {
+    height: 300px;
+    width: 95%;
+    display: flex;
+    background-color: white;
+    flex-direction: column;
+    padding: 1em;
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-top: 2em;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 20px;
+    text-align: start;
+}
+
+.ourProfil {
+    display: flex;
+    flex-direction: row;
+}
+
+@media screen and (max-width : 1000px){
+    .ourProfil {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .aboutUs {
+        padding: 1em 1em;
+        margin: 2em 1em;
+        height: 90%;
+        width: 95%;
+        background-color: #A8DADC;
+        border: solid 5px white;
+        border-radius: 20px;
+        align-items: center;
+    }
+}

@@ -11,10 +11,12 @@ class Navigation extends Component {
                     <Link to="/">
                     <Navbar.Brand className="navigation-brand">interVIEWER</Navbar.Brand>
                     </Link>
+                    {   this.props.user ?
                         <Form className="searchBar" onSubmit={this.props.onSearch}>
                             <FormControl type="text" name="s" placeholder="Search for job" className="mr-sm-2" />
                             <Button className="searchButton" type="submit" variant="outline-info">Search</Button>
-                        </Form>
+                        </Form>:null
+                    }
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse>
                         <Nav className="ml-auto navigation-links"> 
@@ -43,7 +45,7 @@ class Navigation extends Component {
                             {
                                 this.props.user ? (
                                     <div className="conditionalNav">
-                                    <Link className="linkTo" onClick={this.props.onLogout}>Logout</Link>
+                                    <Link className="linkTo" to="/" onClick={this.props.onLogout}>Logout</Link>
                                     </div>
                                     ) : null
                             }  
