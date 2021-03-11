@@ -15,14 +15,11 @@ class MainPage extends Component {
 
 
     render() {
-        
-
-
-        if (!this.props.user) {
-            this.props.onUnlogged()
-            return <Redirect to={'/'}  />
+      if (!this.props.user) {
+          this.props.onProtRoute();
+          this.props.onUnlogged();
+          return <Redirect to={'/'}  />
         }
-        // const { logoutUser } = this.props;
         const {jobDetails, user} = this.props
         
 

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import JobDescription from './components/JobDescription'
-import EditJob from './components/EditJob'
 import CreateStep from './components/CreateStep'
 import ShowSteps from './components/ShowSteps'
 import config from './config'
@@ -12,8 +11,6 @@ import axios from 'axios';
 import MainPage from './components/MainPage';
 import Footer from './components/Footer';
 import Landing from "./components/Landing";
-import JobPreview from './components/JobPreview';
-import {Redirect} from 'react-router-dom'
 import { Spinner } from 'react-bootstrap'
 import Profile from "./components/Profile";
 import SearchJob from "./components/SearchJob";
@@ -28,25 +25,34 @@ class App extends Component {
     logoutUser: false,
     fetchingUser: false,
     unloggedUser: false,
-    filteredJobs: []
+    filteredJobs: [],
+    protRoute: true,
   };
 
+  handleProtRoute = () => {
+    this.setState({
+      protRoute: false,
+    });
+  };
   handleSearch = (event) => {
-    event.preventDefault()
-    const {jobDetails}=this.state
-    let searchText = event.target.s.value.toLowerCase()
+    event.preventDefault();
+    const { jobDetails } = this.state;
+    let searchText = event.target.s.value.toLowerCase();
     let filteredList = jobDetails.filter((single) => {
       return (
         single.companyName.toLowerCase().includes(searchText) ||
         single.jobTitle.toLowerCase().includes(searchText)
       );
-    })
-    this.setState({
-      filteredJobs: filteredList,
-    }, () => {
-      this.props.history.push("/search");
     });
-  }
+    this.setState(
+      {
+        filteredJobs: filteredList,
+      },
+      () => {
+        this.props.history.push("/search");
+      }
+    );
+  };
   handleDateFilter = () => {
     const { jobDetails } = this.state;
     let clonedJobs = jobDetails.reverse();
@@ -71,9 +77,8 @@ class App extends Component {
   };
   handleSalarySort = () => {
     const { jobDetails } = this.state;
-    let clonedJobs = jobDetails
-    let dateFilterJobs = clonedJobs.sort((a, b) => b.salary - a.salary
-    );
+    let clonedJobs = jobDetails;
+    let dateFilterJobs = clonedJobs.sort((a, b) => b.salary - a.salary);
     this.setState({
       jobDetails: dateFilterJobs,
     });
@@ -92,11 +97,12 @@ class App extends Component {
       firstName: event.profileObj.givenName,
       lastName: event.profileObj.familyName,
     };
-  
+
     axios
-      .post(`${config.API_URL}/api/google/auth`, user, { withCredentials: true })
+      .post(`${config.API_URL}/api/google/auth`, user, {
+        withCredentials: true,
+      })
       .then((response) => {
-       
         this.setState(
           {
             loggedInUser: response.data,
@@ -112,47 +118,26 @@ class App extends Component {
         });
       });
   };
-  errorGoogleSignIn = (event) => {
-
-  };
   googleSignIn = (event) => {
-    
-    // axios
-    //   .post(`${config.API_URL}/api/google/signin`, user, { withCredentials: true })
-    //   .then((response) => {
-      
-    //     this.setState(
-    //       {
-    //         loggedInUser: response.data,
-    //       },
-    //       () => {
-    //         this.props.history.push("/home");
-    //       }
-    //     );
-    //   })
-    //   .catch((err) => {
-    //     console.log("Something went wrong", err);
-    //   });
-
     axios({
       method: "POST",
       url: `${config.API_URL}/api/google/signin`,
       data: { tokenId: event.tokenId },
-      withCredentials: true
-    }).then((response) => {
-      
-      this.setState(
-        {
-          loggedInUser: response.data,
-        },
-        () => {
-          this.props.history.push("/home");
-        }
-      );
-
-    }).catch(() => {
-      console.log("Something went wrong", err);
+      withCredentials: true,
     })
+      .then((response) => {
+        this.setState(
+          {
+            loggedInUser: response.data,
+          },
+          () => {
+            this.props.history.push("/home");
+          }
+        );
+      })
+      .catch(() => {
+        console.log("Something went wrong", err);
+      });
   };
   loggedIn = () => {
     axios
@@ -202,14 +187,12 @@ class App extends Component {
       contactPerson: event.target.contactPerson.value,
       contactDetail: event.target.contactDetail.value,
       jobDescription: event.target.jobDescription.value,
-      // companyRating: event.target.companyRating.value,
       applicationLink: event.target.applicationLink.value,
       sourceOfApplication: event.target.sourceOfApplication.value,
       salary: event.target.salary.value,
       interviewDate: event.target.interviewDate.value,
       jobLocation: event.target.jobLocation.value,
     };
-    // console.log(event.target.applicationDate.value);
     axios
       .post(`${config.API_URL}/api/create`, newJobDetails, {
         withCredentials: true,
@@ -266,8 +249,6 @@ class App extends Component {
     axios
       .post(`${config.API_URL}/api/signin`, user, { withCredentials: true })
       .then((response) => {
-        // console.log(response.data);
-
         this.setState(
           {
             loggedInUser: response.data,
@@ -352,7 +333,10 @@ class App extends Component {
       });
   };
   handleDeleteAllJobSteps = (jobId) => {
-    axios.delete(`${config.API_URL}/api/home/steps/${jobId}`, { withCredentials: true })
+    axios
+      .delete(`${config.API_URL}/api/home/steps/${jobId}`, {
+        withCredentials: true,
+      })
       .then(() => {
         let filteredSteps = this.state.steps.filter((step) => {
           return step.jobId !== jobId;
@@ -403,7 +387,14 @@ class App extends Component {
     });
   };
   render() {
-    const { jobDetails, loggedInUser, logoutUser, unloggedUser,filteredJobs } = this.state;
+    const {
+      jobDetails,
+      loggedInUser,
+      logoutUser,
+      unloggedUser,
+      filteredJobs,
+      protRoute,
+    } = this.state;
     if (!this.state.fetchingUser) {
       return (
         <div>
@@ -416,7 +407,12 @@ class App extends Component {
 
     return (
       <div>
-        <Navigation user={loggedInUser} directToSearch={this.directToSearch} onSearch={this.handleSearch} onLogout={this.handleLogout} />
+        <Navigation
+          user={loggedInUser}
+          directToSearch={this.directToSearch}
+          onSearch={this.handleSearch}
+          onLogout={this.handleLogout}
+        />
         {
           <Switch>
             <Route
@@ -426,12 +422,14 @@ class App extends Component {
                 return !loggedInUser ? (
                   <LoadPage
                     errorGoogleSignIn={this.errorGoogleSignIn}
+                    loggedInUser={loggedInUser}
                     googleSignUp={this.googleSignUp}
                     googleSignIn={this.googleSignIn}
                     onSignIn={this.handleSignIn}
                     onSignUp={this.handleSignUp}
                     {...routeProps}
                     unloggedUser={unloggedUser}
+                    protRoute={protRoute}
                   />
                 ) : (
                   <MainPage
@@ -440,6 +438,8 @@ class App extends Component {
                     user={loggedInUser}
                     logoutUser={logoutUser}
                     {...routeProps}
+                    onProtRoute={this.handleProtRoute}
+                    unloggedUser={unloggedUser}
                   />
                 );
               }}
@@ -449,7 +449,12 @@ class App extends Component {
               path="/search"
               render={(routeProps) => {
                 return (
-                  <SearchJob filteredJobs={filteredJobs} {...routeProps} />
+                  <SearchJob
+                    filteredJobs={filteredJobs}
+                    {...routeProps}
+                    protRoute={protRoute}
+                    user={loggedInUser}
+                  />
                 );
               }}
             />
@@ -465,6 +470,7 @@ class App extends Component {
                     logoutUser={logoutUser}
                     {...routeProps}
                     onUnlogged={this.handleUnloggedUser}
+                    onProtRoute={this.handleProtRoute}
                   />
                 );
               }}
@@ -478,6 +484,7 @@ class App extends Component {
                     handleDeleteJob={this.handleDeleteJob}
                     handleDeleteStep={this.handleDeleteStep}
                     handleSubmitStep={this.handleSubmitStep}
+                    onProtRoute={this.handleProtRoute}
                     steps={this.state.steps}
                     user={loggedInUser}
                     {...routeProps}
@@ -485,22 +492,34 @@ class App extends Component {
                 );
               }}
             />
-            <Route
+            {/* <Route
               path="/home/:jobId/edit"
               render={(routeProps) => {
                 return <EditJob />;
               }}
-            />
+            /> */}
             <Route
               path="/home/:jobId/steps"
               render={(routeProps) => {
-                return <ShowSteps user={loggedInUser} {...routeProps} />;
+                return (
+                  <ShowSteps
+                    user={loggedInUser}
+                    {...routeProps}
+                    onProtRoute={this.handleProtRoute}
+                  />
+                );
               }}
             />
             <Route
               path="/home/:jobId/create-steps"
               render={(routeProps) => {
-                return <CreateStep user={loggedInUser} {...routeProps} />;
+                return (
+                  <CreateStep
+                    user={loggedInUser}
+                    onProtRoute={this.handleProtRoute}
+                    {...routeProps}
+                  />
+                );
               }}
             />
             <Route
@@ -517,6 +536,7 @@ class App extends Component {
                     loggedInUser={loggedInUser}
                     toLogIn={this.loggedIn}
                     onAdd={this.addJobDetails}
+                    onProtRoute={this.handleProtRoute}
                     {...routeProps}
                   />
                 );
@@ -532,6 +552,7 @@ class App extends Component {
                     jobDetails={jobDetails}
                     loggedInUser={loggedInUser}
                     onAdd={this.addJobDetails}
+                    onProtRoute={this.handleProtRoute}
                     {...routeProps}
                     isJobPreview
                   />
@@ -541,7 +562,13 @@ class App extends Component {
             <Route
               path="/profile"
               render={(routeProps) => {
-                return <Profile user={loggedInUser} {...routeProps} />;
+                return (
+                  <Profile
+                    user={loggedInUser}
+                    {...routeProps}
+                    onProtRoute={this.handleProtRoute}
+                  />
+                );
               }}
             />
             <Route component={NotFound} />
