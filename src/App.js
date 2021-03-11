@@ -15,6 +15,8 @@ import { Spinner } from 'react-bootstrap'
 import Profile from "./components/Profile";
 import SearchJob from "./components/SearchJob";
 import NotFound from "./components/NotFound"
+import About from "./components/About.js"
+import Referrals from './components/Referrals'
 
 
 class App extends Component {
@@ -374,6 +376,7 @@ class App extends Component {
   componentDidMount() {
     this.getStates();
     this.getInitialDetails();
+    
     if (!this.state.loggedInUser) {
       this.loggedIn();
     }
@@ -569,6 +572,16 @@ class App extends Component {
                     onProtRoute={this.handleProtRoute}
                   />
                 );
+              }}
+            />
+            <Route path="/about" component={About} />
+            <Route
+            
+              path="/referrals"
+              render={(routeProps) => {
+                return <Referrals 
+                clearValues={this.clearValues}
+                  user={loggedInUser} {...routeProps} />;
               }}
             />
             <Route component={NotFound} />

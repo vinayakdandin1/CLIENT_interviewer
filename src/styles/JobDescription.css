@@ -17,7 +17,7 @@
     width: 40%;
     background-color: #A8DADC;
     border: solid 5px white;
-    border-radius: 5% 5%;
+    border-radius: 20px;
 }
 
 .rightSide {
@@ -26,9 +26,8 @@
     width: 40%;
     background-color: #F1FAEE;
     border: solid 5px white;
-    border-radius: 5% 5%;
+    border-radius: 20px;
     box-shadow: black;
-
 }
 
 .addStep {
@@ -144,7 +143,7 @@
     background-color: white;
     flex-direction: column;
     padding: 1em;
-    margin-top: 10px;
+    margin-top: 2em;
     margin-bottom: 10px;
     border: none;
     border-radius: 20px;
@@ -152,7 +151,7 @@
 }
 
 .scrollDown {
-    max-height: 180px;
+    max-height: 280px;
     overflow-y: scroll;
 }
 
@@ -205,6 +204,11 @@
         padding-left: 10px;
         padding-right: 10px;
         margin-top: 10px;
+    }
+
+    .scrollDown {
+        max-height: 260px;
+        overflow-y: scroll;
     }
 }
 
