@@ -38,10 +38,11 @@ class ShowSteps extends Component {
 
   checkStepsEmpty = () => {
     let cloned = this.state.stepsArray;
-    const {classes} = this.state
     cloned.forEach((e) => {
       if (e._id === this.props.jobId) {
-        classes = "card1";
+        this.setState({
+          classes: "card1"
+        })
       }
     });
   };
