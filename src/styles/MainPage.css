@@ -65,16 +65,30 @@
     margin-top: 4em;
 }
 
-.centralCard {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.leftSide2 {
     padding: 1em 2em;
     margin-right: 1em;
-    width: 40%;
+    width: 60%;
     background-color: #A8DADC;
     border: solid 5px white;
-    border-radius: 5% 5%;
+    border-radius: 20px;
+}
+
+
+.card6 {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    flex-direction: column;
+    margin: auto;
+    padding: 1em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 20px;
+    text-align: center;
+    align-items: center;
 }
 
 @media screen and (max-width : 1000px){
@@ -86,20 +100,23 @@
         justify-content: center;
         margin: 0 1em;
         margin-top: 4em;
-        padding: 10px 5px;
         background: linear-gradient(to bottom right, #fff 0%, #fff 50%,  #457B9D 50%,  #457B9D 100%);
     }
-    .centralCard {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 1em auto;
-        margin: auto;
-        width: 85%;
+
+    .card6 {
+        width: 100%;
+    }
+    .welcome {
+        margin: 2em 1em;
+    }
+
+    .leftSide2 {
+        padding: 1em 2em;
+        margin-right: 1em;
+        width: 95%;
         background-color: #A8DADC;
         border: solid 5px white;
-        border-radius: 7% 7%;
-        text-align: center;
+        border-radius: 20px;
     }
     .linkButton {
         display: flex;
@@ -109,5 +126,6 @@
         width: auto;
         height: 4em;
         margin-top: 2em;
+        margin-bottom: 2em;
     }
 }

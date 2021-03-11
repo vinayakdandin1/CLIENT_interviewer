@@ -92,7 +92,7 @@ class Referrals extends Component {
           <div className="centralCard">
             <h1>Job Referrals from our Users</h1>
             <div className="referrals-flex">
-            <div>     
+            <div className="formReferral">     
                     <form onSubmit={this.handleReferral}>
                         <input name="jobTitle" type="text" placeholder="Job Title" />
                         <input name="companyName" type="text" placeholder="Company" />
@@ -111,7 +111,6 @@ class Referrals extends Component {
                         type="text"
                         placeholder="Job Description"
                         />
-                        {/* <input name="companyRating" type="text" placeholder="Company Rating"/> */}
                         <input
                         name="applicationLink"
                         type="text"
@@ -133,12 +132,15 @@ class Referrals extends Component {
                         </div>
                     </form>
                 </div>
-                <div className="jobCard">
+                <div className="referrals">
+                <h2>All Referrals available</h2>
+                 <div className="scrollDown">
                     {this.state.referrals.map((detail) => {
                             return (   
-                            <div key={detail._id}>
+                         <div key={detail._id} className="jobCard">
+                            <div >
                                 
-                                <div className="card">
+                                <div className="cardReferral">
                                     {detail.jobTitle}
                                     <br></br>
                                     {detail.companyName.toUpperCase()}
@@ -158,13 +160,15 @@ class Referrals extends Component {
                                         : null) : null
                                     }
                                 </div>
-                            </div>
+                             </div>
+                           </div>
                             ); 
                     })}
-                </div>
+                  </div>
+                 </div>
             </div>
           </div>
-        </div> 
+         </div> 
         )
     }
 }

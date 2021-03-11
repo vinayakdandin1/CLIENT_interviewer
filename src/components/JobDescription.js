@@ -271,9 +271,6 @@ class JobDescription extends Component {
                   <h6>{contactDetail}</h6>
                 </div>
                 <div>
-                  <h5>Rate your interview process:</h5>
-                </div>
-                <div>
                   <h5>Application link:</h5>
                   <h6>{applicationLink}</h6>
                 </div>
@@ -290,25 +287,19 @@ class JobDescription extends Component {
                     }).format(salary)}
                   </h6>
                 </div>
-              </div>
-            )}
-
-            <div className="rightSide">
-              <div>
-                {!editForm ? <h5>Interview date:</h5> : null}
-                {!editForm ? (
-                  <h6>
-                    {interviewDate
-                      ? this.dateFormatChange(interviewDate)
-                      : null}
-                  </h6>
-                ) : null}
+                <div>
+                <h5>Interview date:</h5>
+                <h6>{interviewDate ? this.dateFormatChange(interviewDate): null}</h6>
               </div>
               <div>
                 {!editForm ? <h5>Job location:</h5>:null}
 
                 {!editForm ? <h6>{jobLocation}</h6> : null}
               </div>
+              </div>
+            )}
+
+            <div className="rightSide">
               <CreateStep
                 handleSubmitStep={this.props.handleSubmitStep}
                 jobId={id}

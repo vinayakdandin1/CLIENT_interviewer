@@ -52,7 +52,7 @@ class ShowSteps extends Component {
                     stepsArray.map((ele) => {  
                       return (
                         (ele.jobId === jobId) ?
-                          (<div>
+                          (<div key={ele._id}>
                              <div className="un">
                                <h6>{ele.description} </h6>
                                <h6>{ele.date ? this.dateFormatChange(ele.date):null}</h6>
