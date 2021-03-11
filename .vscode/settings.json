@@ -1,7 +1,13 @@
 {
     "workbench.colorCustomizations": {
+<<<<<<< HEAD
+        "activityBar.background": "#03333C",
+        "titleBar.activeBackground": "#044753",
+        "titleBar.activeForeground": "#F0FCFE"
+=======
         "activityBar.background": "#133414",
         "titleBar.activeBackground": "#1A491D",
         "titleBar.activeForeground": "#F7FCF7"
+>>>>>>> origin/ben-branch
     }
 }

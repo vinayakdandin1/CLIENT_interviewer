@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
-
 class CreateStep extends Component {
 
 
     render() {
       let jobId = this.props.jobId
-
         return (
             <div>
                 <div className="card1">

@@ -1,22 +1,29 @@
 import React, { Component } from 'react'
 import '../styles/LoadPage.scss'
-import {Link} from 'react-router-dom'
 import GoogleLogin from 'react-google-login';
+import { Alert } from "react-bootstrap";
 
 
 class LoadPage extends Component {
 
     
     state = {
-        hasClass: true,
-        classes: "cont"
+      hasClass: true,
+      classes: "cont", 
     }
 
     classToggle = () => {    
         this.state.hasClass ? this.setState({ classes: "cont s--signup", hasClass: false}) : this.setState({ classes: "cont", hasClass: true})
-    }
+  }
+  
+  unLoggedUser = () => {
+    this.setState({
+      isUser: false,
+    });
+  }
 
-    render() {
+  render() {
+    const {protRoute} = this.props;
         return (
           <div className="landing-main">
             <div className={this.state.classes}>
@@ -29,20 +36,20 @@ class LoadPage extends Component {
                   </label>
                   <label className="inLabels">
                     <span>Password</span>
-                    <input name="password" type="password" />
+                    <input name="password" type="password" autocomplete="off" />
                   </label>
                   <button type="submit" className="submit">
                     Sign In
                   </button>
                 </form>
                 {/* <button type="button" className="fb-btn">Connect with <span>Google</span></button> */}
-                <GoogleLogin 
-                      clientId={`${process.env.REACT_APP_CLIENT_ID}`}
-                      buttonText="Login"
-                      onSuccess={this.props.googleSignIn}
-                      onFailure={this.props.errorGoogleSignIn}
-                      cookiePolicy={'single_host_origin'}
-                  />
+                {/* <GoogleLogin
+                  clientId={`${process.env.CLIENT_ID}`}
+                  buttonText="Login"
+                  onSuccess={this.props.googleSignIn}
+                  onFailure={this.props.errorGoogleSignIn}
+                  cookiePolicy={"single_host_origin"}
+                /> */}
               </div>
 
               <div className="sub-cont">
@@ -83,28 +90,22 @@ class LoadPage extends Component {
                       Sign Up
                     </button>
                   </form>
-                  {/* <button type="button" className="fb-btn">Join with <span>Google</span></button> */}
-                  
-                  <GoogleLogin 
-                      clientId={`${process.env.REACT_APP_CLIENT_ID}`}
-                      buttonText="SignUp"
-                      onSuccess={this.props.googleSignUp}
-                      onFailure={this.props.googleSignUp}
-                      cookiePolicy={'single_host_origin'}
-                  />
-                 
+                  {/* <GoogleLogin
+                    clientId={`${process.env.CLIENT_ID}`}
+                    buttonText="SignUp"
+                    onSuccess={this.props.googleSignUp}
+                    onFailure={this.props.googleSignUp}
+                    cookiePolicy={"single_host_origin"}
+                  /> */}
                 </div>
               </div>
             </div>
-
-            {/* <a rel="noreferrer" href="https://dribbble.com/shots/3306190-Login-Registration-form" target="_blank" className="icon-link">
-                <img src="http://icons.iconarchive.com/icons/uiconstock/socialmedia/256/Dribbble-icon.png" alt="" />
-                </a>
-                <a rel="noreferrer" href="https://twitter.com/NikolayTalanov" target="_blank" className="icon-link icon-link--twitter">
-                <img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/twitter-128.png" alt="" />
-                </a> */}
             <div>
-              {this.props.unloggedUser ? <h1>Please Log in First</h1> : null}
+              {!this.props.protRoute ? (
+                <Alert variant="danger">
+                  Please Sign in first
+                </Alert>
+              ) : null}
             </div>
           </div>
         );

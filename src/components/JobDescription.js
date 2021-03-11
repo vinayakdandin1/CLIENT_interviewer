@@ -4,9 +4,9 @@ import '../styles/JobDescription.css'
 import CreateStep from './CreateStep'
 import ShowSteps from './ShowSteps'
 import config from '../config'
+import { Redirect } from "react-router-dom";
 class JobDescription extends Component {
   state = {
-    // oneJob: {}
     id: "",
     jobTitle: "",
     companyName: "",
@@ -33,7 +33,6 @@ class JobDescription extends Component {
       .get(`${config.API_URL}/api/home/${jobId}`, { withCredentials: true })
       .then((response) => {
         this.setState({
-          // oneJob: response.data
           id: response.data._id,
           jobTitle: response.data.jobTitle,
           companyName: response.data.companyName,
@@ -83,7 +82,6 @@ class JobDescription extends Component {
     let interviewDate = this.state.interviewDate;
     let jobLocation = this.state.jobLocation;
 
-    // console.log(editedJob, jobId);
     axios
       .patch(
         `${config.API_URL}/api/home/${jobId}`,
@@ -135,6 +133,11 @@ class JobDescription extends Component {
   };
 
   render() {
+     if (!this.props.user) {
+       this.props.onProtRoute();
+       return <Redirect to={"/"} />;
+     }
+    const {editForm} = this.state
     const {
       id,
       jobTitle,
@@ -143,19 +146,17 @@ class JobDescription extends Component {
       contactPerson,
       contactDetail,
       jobDescription,
-      companyRating,
       applicationLink,
       sourceOfApplication,
       salary,
       interviewDate,
       jobLocation,
     } = this.state;
-    console.log(interviewDate);
     return (
       <div>
         <div className="topLeft">
           <div className="mainContainer">
-            {this.state.editForm ? (
+            {editForm ? (
               <div className="leftSide">
                 <form onSubmit={this.handleEditSubmit}>
                   <input
