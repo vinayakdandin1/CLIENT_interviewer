@@ -9,6 +9,7 @@
 }
 
 .card3 {
+    height: 90%;
     display: flex;
     background-color: white;
     flex-direction: column;

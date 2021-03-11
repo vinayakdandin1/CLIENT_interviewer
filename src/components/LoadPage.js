@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import '../styles/LoadPage.scss'
-import GoogleLogin from 'react-google-login';
 import { Alert } from "react-bootstrap";
 
 
@@ -56,14 +55,6 @@ class LoadPage extends Component {
                       Sign In
                     </button>
                   </form>
-                  {/* <button type="button" className="fb-btn">Connect with <span>Google</span></button> */}
-                  {/* <GoogleLogin 
-                        clientId={`${process.env.REACT_APP_CLIENT_ID}`}
-                        buttonText="Login with Google"
-                        onSuccess={this.props.googleSignIn}
-                        onFailure={this.props.errorGoogleSignIn}
-                        cookiePolicy={'single_host_origin'}
-                    /> */}
                 </div>
 
                 <div className="sub-cont">
@@ -104,14 +95,6 @@ class LoadPage extends Component {
                         Sign Up
                       </button>
                     </form>                  
-                    {/* <GoogleLogin 
-                        clientId={`${process.env.REACT_APP_CLIENT_ID}`}
-                        buttonText="SignUp with Google"
-                        onSuccess={this.props.googleSignUp}
-                        onFailure={this.props.googleSignUp}
-                        cookiePolicy={'single_host_origin'}
-                    /> */}
-                  
                   </div>
                 </div>
               </div>
@@ -172,7 +155,7 @@ class LoadPage extends Component {
                     </div>
                   )}
               </div>
-            <div>
+            <div className="alertMessage">
               {!this.props.protRoute ? (
                 <Alert variant="danger">
                   Please Sign in first

@@ -1,4 +1,3 @@
-import { Navbar, Nav  } from 'react-bootstrap';
 import React, { Component } from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import '../styles/MainPage.css'

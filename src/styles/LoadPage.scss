@@ -10,6 +10,14 @@ body {
   
 }
 
+.alertMessage {
+  width: 200px;
+  //margin: 0 auto;
+  position: absolute;
+  bottom: 5em;
+  left: 34%;
+}
+
 .landing-main {
   margin-top: 3.5rem;
   height: 75vh;
@@ -326,6 +334,13 @@ input {
   
   .landing-responsive {
     display: none;
+  }
+  .alertMessage {
+    width: 200px;
+    //margin: 0 auto;
+    position: absolute;
+    bottom: 5em;
+    left: 25%;
   }
 
 }
