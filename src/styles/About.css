@@ -1,7 +1,7 @@
 .aboutUs {
     padding: 1em 1em;
     margin: 2em 2em;
-    height: 90%;
+    min-height: 75vh;
     width: 80%;
     background-color: #A8DADC;
     border: solid 5px white;
@@ -9,6 +9,7 @@
 }
 
 .card3 {
+    height: 90%;
     display: flex;
     background-color: white;
     flex-direction: column;

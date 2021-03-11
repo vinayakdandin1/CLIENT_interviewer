@@ -1,19 +1,10 @@
-import { Navbar, Nav  } from 'react-bootstrap';
 import React, { Component } from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import '../styles/MainPage.css'
-
-//import axios from 'axios';
-//import config from '../config'
-
 class MainPage extends Component {
-
     componentDidMount() {
         this.props.initialDetails()
     }
-
-
-
     render() {
       if (!this.props.user) {
           this.props.onProtRoute();
@@ -21,8 +12,6 @@ class MainPage extends Component {
           return <Redirect to={'/'}  />
         }
         const {jobDetails, user} = this.props
-        
-
         let interviewCount = 0
         let todayDate = new Date()
         todayDate = JSON.parse(JSON.stringify(todayDate))

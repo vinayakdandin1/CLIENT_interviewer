@@ -41,7 +41,7 @@ class ShowSteps extends Component {
     return (
       <div>
         <div className="card1">
-          <div className="scrollDown">
+          <div className="stepsScroll ">
             {stepsArray.map((ele) => {
               return ele.jobId === jobId ? (
                 <div key={ele._id}>

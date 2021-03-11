@@ -150,7 +150,7 @@
     text-align: center;
 }
 
-.scrollDown {
+.stepsScroll {
     max-height: 280px;
     overflow-y: scroll;
 }
