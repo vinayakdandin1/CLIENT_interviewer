@@ -137,8 +137,8 @@ class Referrals extends Component {
                  <div className="scrollDown">
                     {this.state.referrals.map((detail) => {
                             return (   
-                         <div className="jobCard">
-                            <div key={detail._id}>
+                         <div key={detail._id} className="jobCard">
+                            <div >
                                 
                                 <div className="cardReferral">
                                     {detail.jobTitle}
