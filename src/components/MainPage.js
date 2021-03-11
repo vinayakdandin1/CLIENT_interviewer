@@ -45,9 +45,6 @@ class MainPage extends Component {
                    <Link style={{ textDecoration: 'none' }} to="/dashboard">
                     <button className="goTo">DASHBOARD</button>
                    </Link>
-                   <Link style={{ textDecoration: 'none' }} to="/profil">
-                    <button className="goTo">PROFIL</button>
-                   </Link>
               </div>
             </div>
         )
