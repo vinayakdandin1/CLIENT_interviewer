@@ -95,16 +95,14 @@ class LoadPage extends Component {
                       <button type="submit" className="submit">
                         Sign Up
                       </button>
-                    </form>
-                    {/* <button type="button" className="fb-btn">Join with <span>Google</span></button> */}
-                    
-                    <GoogleLogin 
+                    </form>                  
+                    {/* <GoogleLogin 
                         clientId={`${process.env.REACT_APP_CLIENT_ID}`}
                         buttonText="SignUp with Google"
                         onSuccess={this.props.googleSignUp}
                         onFailure={this.props.googleSignUp}
                         cookiePolicy={'single_host_origin'}
-                    />
+                    /> */}
                   
                   </div>
                 </div>

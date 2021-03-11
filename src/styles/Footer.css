@@ -15,3 +15,9 @@
     padding: .5rem;
 }
 
+.footer-flex {
+    display: flex;
+    justify-content: space-around;
+}
+
+

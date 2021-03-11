@@ -12,8 +12,6 @@ import axios from 'axios';
 import MainPage from './components/MainPage';
 import Footer from './components/Footer';
 import Landing from "./components/Landing";
-import JobPreview from './components/JobPreview';
-import {Redirect} from 'react-router-dom'
 import { Spinner } from 'react-bootstrap'
 import Profile from "./components/Profile";
 import SearchJob from "./components/SearchJob";
