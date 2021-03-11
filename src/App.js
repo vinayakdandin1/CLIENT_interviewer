@@ -497,12 +497,6 @@ class App extends Component {
                 );
               }}
             />
-            {/* <Route
-              path="/home/:jobId/edit"
-              render={(routeProps) => {
-                return <EditJob />;
-              }}
-            /> */}
             <Route
               path="/home/:jobId/steps"
               render={(routeProps) => {
