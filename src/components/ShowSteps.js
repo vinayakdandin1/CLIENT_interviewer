@@ -3,7 +3,6 @@ import React, { Component } from "react";
 class ShowSteps extends Component {
   state = {
     stepsArray: [],
-    classes: null
   };
 
   getSteps = () => {
@@ -36,24 +35,12 @@ class ShowSteps extends Component {
     return newDate;
   };
 
-  checkStepsEmpty = () => {
-    let cloned = this.state.stepsArray;
-    cloned.forEach((e) => {
-      if (e._id === this.props.jobId) {
-        this.setState({
-          classes: "card1"
-        })
-      }
-    });
-  };
-
   render() {
-    const { stepsArray,classes } = this.state;
+    const { stepsArray} = this.state;
     const { handleDeleteStep, jobId } = this.props;
-    this.checkStepsEmpty()
     return (
       <div>
-        <div className={classes}>
+        <div className="card1">
           <div className="scrollDown">
             {stepsArray.map((ele) => {
               return ele.jobId === jobId ? (
