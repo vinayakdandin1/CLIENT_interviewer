@@ -22,7 +22,7 @@
 
 .mainContainer {
     width: auto;
-    height: auto;
+    min-height: 90vh;
     margin: 0 1em;
     margin-top: 2em;
     padding: 10px 5px;

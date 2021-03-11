@@ -8,7 +8,6 @@ import Empty from "../picture/remembrall_empty.png"
 export default class SearchJob extends Component {
     render() {
         const { filteredJobs } = this.props
-        console.log(filteredJobs)
         return (
             <div className="searchDiv">
                 {filteredJobs.length ?
