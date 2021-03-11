@@ -11,17 +11,6 @@ class About extends Component {
                   <h6>We had the idea of inventing an application where everyone can register the job offers to which they have responded and thus follow the recruitment process. You can update the job offer as well as create steps (call HR, go to interview, call HR back ...)</h6>
                   <h6>When you login you have a quick reminder of how many jobs you have applied and how many interview are upcoming.</h6>
                   </div>
-                  <div className="ourProfil">
-                      <div className="card4">
-                          <h3>Vinayak</h3>
-                      </div>
-                      <div className="card4">
-                          <h3>Zelimhan</h3>
-                      </div>
-                      <div className="card4">
-                          <h3>Benjamin</h3>
-                      </div>
-                  </div>
                 </div>
             </div>
         )
