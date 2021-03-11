@@ -127,20 +127,9 @@ class App extends Component {
       data: { tokenId: event.tokenId },
       withCredentials: true,
     })
-      .then((response) => {
-        this.setState(
-          {
-            loggedInUser: response.data,
-          },
-          () => {
-            this.props.history.push("/home");
-          }
-        );
-      })
-      .catch(() => {
-        console.log("Something went wrong", err);
-      });
   };
+
+
   loggedIn = () => {
     axios
       .get(`${config.API_URL}/api/user`, { withCredentials: true })
@@ -241,6 +230,7 @@ class App extends Component {
         });
       });
   };
+  
   handleSignIn = (event) => {
     event.preventDefault();
     let user = {
@@ -334,11 +324,9 @@ class App extends Component {
         console.log("delete failed", err);
       });
   };
+
   handleDeleteAllJobSteps = (jobId) => {
-    axios
-      .delete(`${config.API_URL}/api/home/steps/${jobId}`, {
-        withCredentials: true,
-      })
+    axios.delete(`${config.API_URL}/api/home/steps/${jobId}`, { withCredentials: true })
       .then(() => {
         let filteredSteps = this.state.steps.filter((step) => {
           return step.jobId !== jobId;
@@ -587,6 +575,7 @@ class App extends Component {
             <Route component={NotFound} />
           </Switch>
         }
+        <Footer />
       </div>
     );
   }

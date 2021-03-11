@@ -7,11 +7,13 @@
 body {
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
   // background: #ededed;
+  
 }
 
 .landing-main {
   margin-top: 3.5rem;
   height: 75vh;
+  min-height: 80vh;
 }
 
 .inLabels {
@@ -310,4 +312,20 @@ input {
     left: auto;
     right: 5px;
   }
+}
+
+@media screen and (min-width: 1000px) {
+
+  .landing-mobile {
+    display: none;
+  }
+
+}
+
+@media screen and (max-width : 1000px) {
+  
+  .landing-responsive {
+    display: none;
+  }
+
 }
