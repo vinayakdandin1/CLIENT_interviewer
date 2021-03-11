@@ -32,7 +32,8 @@ class MainPage extends Component {
         return (
             <div>
               <div className="mainContainer">
-                <div className="centralCard">
+                <div className="leftSide2">
+                <div className="card6">
                   <div className="welcome">
                     <h1>Welcome {user.firstName} !</h1>
                   </div>
@@ -53,6 +54,7 @@ class MainPage extends Component {
                     <h3>You have {interviewCount} upcoming interviews</h3>
                   </div>
                 </div>
+               </div>
               </div>
                  <div className="linkButton">
                    <Link style={{ textDecoration: 'none' }} to="/dashboard">

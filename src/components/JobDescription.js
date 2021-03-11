@@ -272,9 +272,6 @@ class JobDescription extends Component {
                   <h6>{contactDetail}</h6>
                 </div>
                 <div>
-                  <h5>Rate your interview process:</h5>
-                </div>
-                <div>
                   <h5>Application link:</h5>
                   <h6>{applicationLink}</h6>
                 </div>
@@ -286,11 +283,7 @@ class JobDescription extends Component {
                   <h5>Salary:</h5>
                   <h6>{salary}</h6>
                 </div>
-              </div>
-            )}
-
-            <div className="rightSide">
-              <div>
+                <div>
                 <h5>Interview date:</h5>
                 <h6>{interviewDate ? this.dateFormatChange(interviewDate): null}</h6>
               </div>
@@ -298,6 +291,10 @@ class JobDescription extends Component {
                 <h5>Job location:</h5>
                 <h6>{jobLocation}</h6>
               </div>
+              </div>
+            )}
+
+            <div className="rightSide">
               <CreateStep
                 handleSubmitStep={this.props.handleSubmitStep}
                 jobId={id}
